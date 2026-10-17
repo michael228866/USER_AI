@@ -1,0 +1,1223 @@
+[2026-10-17 00:14:55] log rotated, previous size: 524309 bytes
+[2026-10-17 00:14:55] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:14:55] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:14:55] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:14:55] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:14:55] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:14:55] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:14:55] AI init step 1 start, skills=4
+[2026-10-17 00:14:55] AI init step 1 done
+[2026-10-17 00:15:33] RNAI logger initialized
+[2026-10-17 00:15:33] AI init step 0 start, myid=46605, owner=175687, isHomunculus=true
+[2026-10-17 00:15:33] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:15:33] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:15:33] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:15:33] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:15:33] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:15:33] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:15:33] AI init step 1 start, skills=4
+[2026-10-17 00:15:33] AI init step 1 done
+[2026-10-17 00:16:05] RNAI logger initialized
+[2026-10-17 00:16:05] AI init step 0 start, myid=47206, owner=175687, isHomunculus=true
+[2026-10-17 00:16:05] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:16:05] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:16:05] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:16:05] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:16:05] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:16:05] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:16:05] AI init step 1 start, skills=4
+[2026-10-17 00:16:05] AI init step 1 done
+[2026-10-17 00:16:43] RNAI logger initialized
+[2026-10-17 00:16:43] AI init step 0 start, myid=47155, owner=175687, isHomunculus=true
+[2026-10-17 00:16:43] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:16:43] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:16:43] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:16:43] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:16:43] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:16:43] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:16:43] AI init step 1 start, skills=4
+[2026-10-17 00:16:43] AI init step 1 done
+[2026-10-17 00:17:06] RNAI logger initialized
+[2026-10-17 00:17:06] AI init step 0 start, myid=48015, owner=175687, isHomunculus=true
+[2026-10-17 00:17:06] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:17:06] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:17:06] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:17:06] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:17:06] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:17:06] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:17:06] AI init step 1 start, skills=4
+[2026-10-17 00:17:06] AI init step 1 done
+[2026-10-17 00:18:52] RNAI logger initialized
+[2026-10-17 00:18:52] AI init step 0 start, myid=47277, owner=175687, isHomunculus=true
+[2026-10-17 00:18:52] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:18:52] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:18:52] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:18:52] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:18:52] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:18:52] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:18:52] AI init step 1 start, skills=4
+[2026-10-17 00:18:52] AI init step 1 done
+[2026-10-17 00:19:30] RNAI logger initialized
+[2026-10-17 00:19:30] AI init step 0 start, myid=48812, owner=175687, isHomunculus=true
+[2026-10-17 00:19:30] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:19:30] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:19:30] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:19:30] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:19:30] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:19:30] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:19:30] AI init step 1 start, skills=4
+[2026-10-17 00:19:30] AI init step 1 done
+[2026-10-17 00:20:36] RNAI logger initialized
+[2026-10-17 00:20:36] AI init step 0 start, myid=48419, owner=175687, isHomunculus=true
+[2026-10-17 00:20:36] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:20:36] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:20:36] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:20:36] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:20:36] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:20:36] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:20:36] AI init step 1 start, skills=4
+[2026-10-17 00:20:36] AI init step 1 done
+[2026-10-17 00:23:45] RNAI logger initialized
+[2026-10-17 00:23:45] AI init step 0 start, myid=50205, owner=175687, isHomunculus=true
+[2026-10-17 00:23:45] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:23:45] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:23:45] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:23:45] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:23:45] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:23:45] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:23:45] AI init step 1 start, skills=4
+[2026-10-17 00:23:45] AI init step 1 done
+[2026-10-17 00:25:37] RNAI logger initialized
+[2026-10-17 00:25:37] AI init step 0 start, myid=50792, owner=175687, isHomunculus=true
+[2026-10-17 00:25:37] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:25:37] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:25:37] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:25:37] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:25:37] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:25:37] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:25:37] AI init step 1 start, skills=4
+[2026-10-17 00:25:37] AI init step 1 done
+[2026-10-17 00:26:04] RNAI logger initialized
+[2026-10-17 00:26:04] AI init step 0 start, myid=50792, owner=175687, isHomunculus=true
+[2026-10-17 00:26:04] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:26:04] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:26:04] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:26:04] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:26:04] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:26:04] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:26:04] AI init step 1 start, skills=4
+[2026-10-17 00:26:04] AI init step 1 done
+[2026-10-17 00:26:33] RNAI logger initialized
+[2026-10-17 00:26:33] AI init step 0 start, myid=50082, owner=175687, isHomunculus=true
+[2026-10-17 00:26:33] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:26:33] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:26:33] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:26:33] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:26:33] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:26:33] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:26:33] AI init step 1 start, skills=4
+[2026-10-17 00:26:33] AI init step 1 done
+[2026-10-17 00:27:05] RNAI logger initialized
+[2026-10-17 00:27:05] AI init step 0 start, myid=48762, owner=175687, isHomunculus=true
+[2026-10-17 00:27:05] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:27:05] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:27:05] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:27:05] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:27:05] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:27:05] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:27:05] AI init step 1 start, skills=4
+[2026-10-17 00:27:05] AI init step 1 done
+[2026-10-17 00:27:39] RNAI logger initialized
+[2026-10-17 00:27:39] AI init step 0 start, myid=51447, owner=175687, isHomunculus=true
+[2026-10-17 00:27:39] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:27:39] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:27:39] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:27:39] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:27:39] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:27:39] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:27:39] AI init step 1 start, skills=4
+[2026-10-17 00:27:39] AI init step 1 done
+[2026-10-17 00:28:02] RNAI logger initialized
+[2026-10-17 00:28:02] AI init step 0 start, myid=51514, owner=175687, isHomunculus=true
+[2026-10-17 00:28:02] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:28:02] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:28:02] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:28:02] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:28:02] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:28:02] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:28:02] AI init step 1 start, skills=4
+[2026-10-17 00:28:02] AI init step 1 done
+[2026-10-17 00:30:12] RNAI logger initialized
+[2026-10-17 00:30:12] AI init step 0 start, myid=51938, owner=175687, isHomunculus=true
+[2026-10-17 00:30:12] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:30:12] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:30:12] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:30:12] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:30:12] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:30:12] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:30:12] AI init step 1 start, skills=4
+[2026-10-17 00:30:12] AI init step 1 done
+[2026-10-17 00:30:55] RNAI logger initialized
+[2026-10-17 00:30:55] AI init step 0 start, myid=53153, owner=175687, isHomunculus=true
+[2026-10-17 00:30:55] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:30:55] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:30:55] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:30:55] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:30:55] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:30:55] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:30:55] AI init step 1 start, skills=4
+[2026-10-17 00:30:55] AI init step 1 done
+[2026-10-17 00:34:46] RNAI logger initialized
+[2026-10-17 00:34:46] AI init step 0 start, myid=52979, owner=175687, isHomunculus=true
+[2026-10-17 00:34:46] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:34:46] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:34:46] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:34:46] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:34:46] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:34:46] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:34:46] AI init step 1 start, skills=4
+[2026-10-17 00:34:46] AI init step 1 done
+[2026-10-17 00:35:47] RNAI logger initialized
+[2026-10-17 00:35:47] AI init step 0 start, myid=53391, owner=175687, isHomunculus=true
+[2026-10-17 00:35:47] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:35:47] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:35:47] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:35:47] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:35:47] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:35:47] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:35:48] AI init step 1 start, skills=4
+[2026-10-17 00:35:48] AI init step 1 done
+[2026-10-17 00:36:32] RNAI logger initialized
+[2026-10-17 00:36:32] AI init step 0 start, myid=53488, owner=175687, isHomunculus=true
+[2026-10-17 00:36:32] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:36:32] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:36:32] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:36:32] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:36:32] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:36:32] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:36:32] AI init step 1 start, skills=4
+[2026-10-17 00:36:32] AI init step 1 done
+[2026-10-17 00:37:58] RNAI logger initialized
+[2026-10-17 00:37:58] AI init step 0 start, myid=53569, owner=175687, isHomunculus=true
+[2026-10-17 00:37:58] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:37:58] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:37:58] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:37:58] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:37:58] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:37:58] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:37:58] AI init step 1 start, skills=4
+[2026-10-17 00:37:58] AI init step 1 done
+[2026-10-17 00:38:35] RNAI logger initialized
+[2026-10-17 00:38:35] AI init step 0 start, myid=54524, owner=175687, isHomunculus=true
+[2026-10-17 00:38:35] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:38:35] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:38:35] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:38:35] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:38:35] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:38:35] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:38:35] AI init step 1 start, skills=4
+[2026-10-17 00:38:35] AI init step 1 done
+[2026-10-17 00:39:17] RNAI logger initialized
+[2026-10-17 00:39:17] AI init step 0 start, myid=54265, owner=175687, isHomunculus=true
+[2026-10-17 00:39:17] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:39:17] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:39:17] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:39:17] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:39:17] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:39:17] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:39:17] AI init step 1 start, skills=4
+[2026-10-17 00:39:17] AI init step 1 done
+[2026-10-17 00:40:30] RNAI logger initialized
+[2026-10-17 00:40:30] AI init step 0 start, myid=54580, owner=175687, isHomunculus=true
+[2026-10-17 00:40:30] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:40:30] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:40:30] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:40:30] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:40:30] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:40:30] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:40:30] AI init step 1 start, skills=4
+[2026-10-17 00:40:30] AI init step 1 done
+[2026-10-17 00:40:58] RNAI logger initialized
+[2026-10-17 00:40:58] AI init step 0 start, myid=56295, owner=175687, isHomunculus=true
+[2026-10-17 00:40:58] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:40:58] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:40:58] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:40:58] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:40:58] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:40:58] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:40:58] AI init step 1 start, skills=4
+[2026-10-17 00:40:58] AI init step 1 done
+[2026-10-17 00:41:30] RNAI logger initialized
+[2026-10-17 00:41:30] AI init step 0 start, myid=55055, owner=175687, isHomunculus=true
+[2026-10-17 00:41:30] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:41:30] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:41:30] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:41:30] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:41:30] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:41:30] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:41:31] AI init step 1 start, skills=4
+[2026-10-17 00:41:31] AI init step 1 done
+[2026-10-17 00:42:09] RNAI logger initialized
+[2026-10-17 00:42:09] AI init step 0 start, myid=55321, owner=175687, isHomunculus=true
+[2026-10-17 00:42:09] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:42:09] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:42:09] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:42:09] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:42:09] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:42:09] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:42:09] AI init step 1 start, skills=4
+[2026-10-17 00:42:09] AI init step 1 done
+[2026-10-17 00:43:04] RNAI logger initialized
+[2026-10-17 00:43:04] AI init step 0 start, myid=55585, owner=175687, isHomunculus=true
+[2026-10-17 00:43:04] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:43:04] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:43:04] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:43:04] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:43:04] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:43:04] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:43:04] AI init step 1 start, skills=4
+[2026-10-17 00:43:04] AI init step 1 done
+[2026-10-17 00:43:04] RNAI logger initialized
+[2026-10-17 00:43:04] AI init step 0 start, myid=55585, owner=175687, isHomunculus=true
+[2026-10-17 00:43:04] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:43:04] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:43:04] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:43:04] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:43:04] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:43:04] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:43:05] AI init step 1 start, skills=4
+[2026-10-17 00:43:05] AI init step 1 done
+[2026-10-17 00:44:21] RNAI logger initialized
+[2026-10-17 00:44:21] AI init step 0 start, myid=56681, owner=175687, isHomunculus=true
+[2026-10-17 00:44:21] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:44:21] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:44:21] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:44:21] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:44:21] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:44:21] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:44:21] AI init step 1 start, skills=4
+[2026-10-17 00:44:21] AI init step 1 done
+[2026-10-17 00:45:26] RNAI logger initialized
+[2026-10-17 00:45:26] AI init step 0 start, myid=57510, owner=175687, isHomunculus=true
+[2026-10-17 00:45:26] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:45:26] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:45:26] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:45:26] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:45:26] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:45:26] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:45:26] AI init step 1 start, skills=4
+[2026-10-17 00:45:26] AI init step 1 done
+[2026-10-17 00:46:09] RNAI logger initialized
+[2026-10-17 00:46:09] AI init step 0 start, myid=55745, owner=175687, isHomunculus=true
+[2026-10-17 00:46:09] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:46:09] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:46:09] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:46:09] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:46:09] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:46:09] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:46:09] AI init step 1 start, skills=4
+[2026-10-17 00:46:09] AI init step 1 done
+[2026-10-17 00:47:09] RNAI logger initialized
+[2026-10-17 00:47:09] AI init step 0 start, myid=54482, owner=175687, isHomunculus=true
+[2026-10-17 00:47:09] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:47:09] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:47:09] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:47:09] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:47:09] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:47:09] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:47:09] AI init step 1 start, skills=4
+[2026-10-17 00:47:09] AI init step 1 done
+[2026-10-17 00:48:09] RNAI logger initialized
+[2026-10-17 00:48:09] AI init step 0 start, myid=54482, owner=175687, isHomunculus=true
+[2026-10-17 00:48:09] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:48:09] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:48:09] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:48:09] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:48:09] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:48:09] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:48:09] AI init step 1 start, skills=4
+[2026-10-17 00:48:09] AI init step 1 done
+[2026-10-17 00:48:22] RNAI logger initialized
+[2026-10-17 00:48:22] AI init step 0 start, myid=57137, owner=175687, isHomunculus=true
+[2026-10-17 00:48:22] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:48:22] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:48:22] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:48:22] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:48:22] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:48:22] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:48:22] AI init step 1 start, skills=4
+[2026-10-17 00:48:22] AI init step 1 done
+[2026-10-17 00:50:00] RNAI logger initialized
+[2026-10-17 00:50:00] AI init step 0 start, myid=57745, owner=175687, isHomunculus=true
+[2026-10-17 00:50:00] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:50:00] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:50:00] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:50:00] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:50:00] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:50:00] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:50:00] AI init step 1 start, skills=4
+[2026-10-17 00:50:00] AI init step 1 done
+[2026-10-17 00:50:54] RNAI logger initialized
+[2026-10-17 00:50:54] AI init step 0 start, myid=57889, owner=175687, isHomunculus=true
+[2026-10-17 00:50:54] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:50:54] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:50:54] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:50:54] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:50:54] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:50:54] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:50:54] AI init step 1 start, skills=4
+[2026-10-17 00:50:54] AI init step 1 done
+[2026-10-17 00:51:33] RNAI logger initialized
+[2026-10-17 00:51:33] AI init step 0 start, myid=58791, owner=175687, isHomunculus=true
+[2026-10-17 00:51:33] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:51:33] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:51:33] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:51:33] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:51:33] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:51:33] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:51:33] AI init step 1 start, skills=4
+[2026-10-17 00:51:33] AI init step 1 done
+[2026-10-17 00:52:34] RNAI logger initialized
+[2026-10-17 00:52:34] AI init step 0 start, myid=58104, owner=175687, isHomunculus=true
+[2026-10-17 00:52:34] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:52:34] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:52:34] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:52:34] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:52:34] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:52:34] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:52:34] AI init step 1 start, skills=4
+[2026-10-17 00:52:34] AI init step 1 done
+[2026-10-17 00:53:14] RNAI logger initialized
+[2026-10-17 00:53:14] AI init step 0 start, myid=59343, owner=175687, isHomunculus=true
+[2026-10-17 00:53:14] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:53:14] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:53:14] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:53:14] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:53:14] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:53:14] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:53:14] AI init step 1 start, skills=4
+[2026-10-17 00:53:14] AI init step 1 done
+[2026-10-17 00:57:36] RNAI logger initialized
+[2026-10-17 00:57:36] AI init step 0 start, myid=58979, owner=175687, isHomunculus=true
+[2026-10-17 00:57:36] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:57:36] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:57:36] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:57:36] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:57:36] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:57:36] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:57:36] AI init step 1 start, skills=4
+[2026-10-17 00:57:36] AI init step 1 done
+[2026-10-17 00:58:56] RNAI logger initialized
+[2026-10-17 00:58:56] AI init step 0 start, myid=60100, owner=175687, isHomunculus=true
+[2026-10-17 00:58:56] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:58:56] 【偵錯】生命體類型 ID: 4
+[2026-10-17 00:58:56] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 00:58:56] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 00:58:56] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 00:58:56] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 00:58:56] AI init step 1 start, skills=4
+[2026-10-17 00:58:56] AI init step 1 done
+[2026-10-17 01:00:26] RNAI logger initialized
+[2026-10-17 01:00:26] AI init step 0 start, myid=60100, owner=175687, isHomunculus=true
+[2026-10-17 01:00:26] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:00:26] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:00:26] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:00:26] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:00:26] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:00:26] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:00:26] AI init step 1 start, skills=4
+[2026-10-17 01:00:26] AI init step 1 done
+[2026-10-17 01:01:47] RNAI logger initialized
+[2026-10-17 01:01:47] AI init step 0 start, myid=60100, owner=175687, isHomunculus=true
+[2026-10-17 01:01:47] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:01:47] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:01:47] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:01:47] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:01:47] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:01:47] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:01:48] AI init step 1 start, skills=4
+[2026-10-17 01:01:48] AI init step 1 done
+[2026-10-17 01:02:32] RNAI logger initialized
+[2026-10-17 01:02:32] AI init step 0 start, myid=60100, owner=175687, isHomunculus=true
+[2026-10-17 01:02:32] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:02:32] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:02:32] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:02:32] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:02:32] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:02:32] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:02:32] RNAI logger initialized
+[2026-10-17 01:02:32] AI init step 0 start, myid=60100, owner=175687, isHomunculus=true
+[2026-10-17 01:02:32] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:02:32] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:02:32] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:02:32] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:02:32] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:02:32] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:02:32] RNAI logger initialized
+[2026-10-17 01:02:32] AI init step 0 start, myid=60100, owner=175687, isHomunculus=true
+[2026-10-17 01:02:32] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:02:32] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:02:32] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:02:32] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:02:32] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:02:32] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:02:33] RNAI logger initialized
+[2026-10-17 01:02:33] AI init step 0 start, myid=60100, owner=175687, isHomunculus=true
+[2026-10-17 01:02:33] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:02:33] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:02:33] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:02:33] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:02:33] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:02:33] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:02:33] AI init step 1 start, skills=4
+[2026-10-17 01:02:33] AI init step 1 done
+[2026-10-17 01:03:16] RNAI logger initialized
+[2026-10-17 01:03:16] AI init step 0 start, myid=63096, owner=175687, isHomunculus=true
+[2026-10-17 01:03:16] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:03:16] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:03:16] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:03:16] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:03:17] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:03:17] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:03:17] AI init step 1 start, skills=4
+[2026-10-17 01:03:17] AI init step 1 done
+[2026-10-17 01:04:09] RNAI logger initialized
+[2026-10-17 01:04:09] AI init step 0 start, myid=62557, owner=175687, isHomunculus=true
+[2026-10-17 01:04:09] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:04:09] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:04:09] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:04:09] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:04:09] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:04:09] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:04:09] AI init step 1 start, skills=4
+[2026-10-17 01:04:09] AI init step 1 done
+[2026-10-17 01:04:39] RNAI logger initialized
+[2026-10-17 01:04:39] AI init step 0 start, myid=62557, owner=175687, isHomunculus=true
+[2026-10-17 01:04:39] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:04:39] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:04:39] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:04:39] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:04:39] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:04:39] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:04:39] AI init step 1 start, skills=4
+[2026-10-17 01:04:39] AI init step 1 done
+[2026-10-17 01:05:09] RNAI logger initialized
+[2026-10-17 01:05:09] AI init step 0 start, myid=61227, owner=175687, isHomunculus=true
+[2026-10-17 01:05:09] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:05:09] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:05:09] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:05:09] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:05:09] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:05:09] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:05:09] AI init step 1 start, skills=4
+[2026-10-17 01:05:09] AI init step 1 done
+[2026-10-17 01:05:53] RNAI logger initialized
+[2026-10-17 01:05:53] AI init step 0 start, myid=62181, owner=175687, isHomunculus=true
+[2026-10-17 01:05:53] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:05:53] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:05:53] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:05:53] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:05:53] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:05:53] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:05:53] AI init step 1 start, skills=4
+[2026-10-17 01:05:53] AI init step 1 done
+[2026-10-17 01:06:29] RNAI logger initialized
+[2026-10-17 01:06:29] AI init step 0 start, myid=61360, owner=175687, isHomunculus=true
+[2026-10-17 01:06:29] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:06:29] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:06:29] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:06:29] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:06:29] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:06:29] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:06:29] AI init step 1 start, skills=4
+[2026-10-17 01:06:29] AI init step 1 done
+[2026-10-17 01:07:39] RNAI logger initialized
+[2026-10-17 01:07:39] AI init step 0 start, myid=61099, owner=175687, isHomunculus=true
+[2026-10-17 01:07:39] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:07:39] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:07:39] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:07:39] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:07:39] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:07:39] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:07:40] AI init step 1 start, skills=4
+[2026-10-17 01:07:40] AI init step 1 done
+[2026-10-17 01:08:33] RNAI logger initialized
+[2026-10-17 01:08:33] AI init step 0 start, myid=63297, owner=175687, isHomunculus=true
+[2026-10-17 01:08:33] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:08:33] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:08:33] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:08:33] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:08:33] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:08:33] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:08:34] AI init step 1 start, skills=4
+[2026-10-17 01:08:34] AI init step 1 done
+[2026-10-17 01:09:19] RNAI logger initialized
+[2026-10-17 01:09:19] AI init step 0 start, myid=64748, owner=175687, isHomunculus=true
+[2026-10-17 01:09:19] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:09:19] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:09:19] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:09:19] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:09:19] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:09:19] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:09:19] AI init step 1 start, skills=4
+[2026-10-17 01:09:19] AI init step 1 done
+[2026-10-17 01:10:03] RNAI logger initialized
+[2026-10-17 01:10:03] AI init step 0 start, myid=64408, owner=175687, isHomunculus=true
+[2026-10-17 01:10:03] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:10:03] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:10:03] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:10:04] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:10:04] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:10:04] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:10:04] AI init step 1 start, skills=4
+[2026-10-17 01:10:04] AI init step 1 done
+[2026-10-17 01:10:46] RNAI logger initialized
+[2026-10-17 01:10:46] AI init step 0 start, myid=63970, owner=175687, isHomunculus=true
+[2026-10-17 01:10:46] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:10:46] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:10:46] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:10:46] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:10:46] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:10:46] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:10:46] AI init step 1 start, skills=4
+[2026-10-17 01:10:46] AI init step 1 done
+[2026-10-17 01:11:13] RNAI logger initialized
+[2026-10-17 01:11:13] AI init step 0 start, myid=63970, owner=175687, isHomunculus=true
+[2026-10-17 01:11:13] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:11:13] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:11:13] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:11:13] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:11:13] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:11:13] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:11:13] AI init step 1 start, skills=4
+[2026-10-17 01:11:13] AI init step 1 done
+[2026-10-17 01:11:58] RNAI logger initialized
+[2026-10-17 01:11:58] AI init step 0 start, myid=63594, owner=175687, isHomunculus=true
+[2026-10-17 01:11:58] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:11:58] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:11:58] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:11:58] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:11:58] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:11:58] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:11:58] AI init step 1 start, skills=4
+[2026-10-17 01:11:58] AI init step 1 done
+[2026-10-17 01:12:34] RNAI logger initialized
+[2026-10-17 01:12:34] AI init step 0 start, myid=65174, owner=175687, isHomunculus=true
+[2026-10-17 01:12:34] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:12:34] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:12:34] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:12:34] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:12:34] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:12:34] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:12:34] AI init step 1 start, skills=4
+[2026-10-17 01:12:34] AI init step 1 done
+[2026-10-17 01:13:19] RNAI logger initialized
+[2026-10-17 01:13:19] AI init step 0 start, myid=65002, owner=175687, isHomunculus=true
+[2026-10-17 01:13:19] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:13:19] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:13:19] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:13:19] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:13:19] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:13:19] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:13:19] AI init step 1 start, skills=4
+[2026-10-17 01:13:19] AI init step 1 done
+[2026-10-17 01:15:43] RNAI logger initialized
+[2026-10-17 01:15:43] AI init step 0 start, myid=64879, owner=175687, isHomunculus=true
+[2026-10-17 01:15:43] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:15:43] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:15:43] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:15:43] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:15:43] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:15:43] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:15:44] AI init step 1 start, skills=4
+[2026-10-17 01:15:44] AI init step 1 done
+[2026-10-17 01:16:32] RNAI logger initialized
+[2026-10-17 01:16:32] AI init step 0 start, myid=66190, owner=175687, isHomunculus=true
+[2026-10-17 01:16:32] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:16:32] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:16:32] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:16:32] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:16:32] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:16:32] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:16:32] AI init step 1 start, skills=4
+[2026-10-17 01:16:32] AI init step 1 done
+[2026-10-17 01:17:26] RNAI logger initialized
+[2026-10-17 01:17:26] AI init step 0 start, myid=65282, owner=175687, isHomunculus=true
+[2026-10-17 01:17:26] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:17:26] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:17:26] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:17:26] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:17:26] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:17:26] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:17:26] AI init step 1 start, skills=4
+[2026-10-17 01:17:26] AI init step 1 done
+[2026-10-17 01:18:12] RNAI logger initialized
+[2026-10-17 01:18:12] AI init step 0 start, myid=66621, owner=175687, isHomunculus=true
+[2026-10-17 01:18:12] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:18:12] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:18:12] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:18:12] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:18:12] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:18:12] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:18:12] AI init step 1 start, skills=4
+[2026-10-17 01:18:12] AI init step 1 done
+[2026-10-17 01:19:26] RNAI logger initialized
+[2026-10-17 01:19:26] AI init step 0 start, myid=66343, owner=175687, isHomunculus=true
+[2026-10-17 01:19:26] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:19:26] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:19:26] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:19:26] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:19:26] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:19:26] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:19:26] AI init step 1 start, skills=4
+[2026-10-17 01:19:26] AI init step 1 done
+[2026-10-17 01:20:27] RNAI logger initialized
+[2026-10-17 01:20:27] AI init step 0 start, myid=65402, owner=175687, isHomunculus=true
+[2026-10-17 01:20:27] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:20:27] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:20:27] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:20:27] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:20:27] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:20:27] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:20:27] AI init step 1 start, skills=4
+[2026-10-17 01:20:27] AI init step 1 done
+[2026-10-17 01:21:03] RNAI logger initialized
+[2026-10-17 01:21:03] AI init step 0 start, myid=66639, owner=175687, isHomunculus=true
+[2026-10-17 01:21:03] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:21:03] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:21:03] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:21:03] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:21:03] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:21:03] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:21:03] AI init step 1 start, skills=4
+[2026-10-17 01:21:03] AI init step 1 done
+[2026-10-17 01:22:16] RNAI logger initialized
+[2026-10-17 01:22:16] AI init step 0 start, myid=68719, owner=175687, isHomunculus=true
+[2026-10-17 01:22:16] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:22:16] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:22:16] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:22:16] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:22:16] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:22:16] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:22:16] AI init step 1 start, skills=4
+[2026-10-17 01:22:16] AI init step 1 done
+[2026-10-17 01:23:27] RNAI logger initialized
+[2026-10-17 01:23:27] AI init step 0 start, myid=67024, owner=175687, isHomunculus=true
+[2026-10-17 01:23:27] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:23:27] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:23:27] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:23:27] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:23:27] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:23:27] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:23:27] AI init step 1 start, skills=4
+[2026-10-17 01:23:27] AI init step 1 done
+[2026-10-17 01:24:11] RNAI logger initialized
+[2026-10-17 01:24:11] AI init step 0 start, myid=67603, owner=175687, isHomunculus=true
+[2026-10-17 01:24:11] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:24:11] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:24:11] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:24:11] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:24:11] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:24:11] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:24:11] AI init step 1 start, skills=4
+[2026-10-17 01:24:11] AI init step 1 done
+[2026-10-17 01:25:33] RNAI logger initialized
+[2026-10-17 01:25:33] AI init step 0 start, myid=67603, owner=175687, isHomunculus=true
+[2026-10-17 01:25:33] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:25:33] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:25:33] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:25:33] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:25:33] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:25:33] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:25:33] AI init step 1 start, skills=4
+[2026-10-17 01:25:33] AI init step 1 done
+[2026-10-17 01:27:48] RNAI logger initialized
+[2026-10-17 01:27:48] AI init step 0 start, myid=69891, owner=175687, isHomunculus=true
+[2026-10-17 01:27:48] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:27:48] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:27:48] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:27:48] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:27:48] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:27:48] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:27:48] AI init step 1 start, skills=4
+[2026-10-17 01:27:48] AI init step 1 done
+[2026-10-17 01:30:16] RNAI logger initialized
+[2026-10-17 01:30:16] AI init step 0 start, myid=69891, owner=175687, isHomunculus=true
+[2026-10-17 01:30:16] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:30:16] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:30:16] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:30:16] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:30:16] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:30:16] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:30:16] AI init step 1 start, skills=4
+[2026-10-17 01:30:16] AI init step 1 done
+[2026-10-17 01:32:18] RNAI logger initialized
+[2026-10-17 01:32:18] AI init step 0 start, myid=70168, owner=175687, isHomunculus=true
+[2026-10-17 01:32:18] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:32:18] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:32:18] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:32:18] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:32:18] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:32:18] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:32:18] AI init step 1 start, skills=4
+[2026-10-17 01:32:18] AI init step 1 done
+[2026-10-17 01:32:19] RNAI logger initialized
+[2026-10-17 01:32:19] AI init step 0 start, myid=70168, owner=175687, isHomunculus=true
+[2026-10-17 01:32:19] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:32:19] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:32:19] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:32:19] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:32:19] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:32:19] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:32:19] AI init step 1 start, skills=4
+[2026-10-17 01:32:19] AI init step 1 done
+[2026-10-17 01:33:57] RNAI logger initialized
+[2026-10-17 01:33:57] AI init step 0 start, myid=71610, owner=175687, isHomunculus=true
+[2026-10-17 01:33:57] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:33:57] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:33:57] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:33:57] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:33:57] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:33:57] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:33:57] AI init step 1 start, skills=4
+[2026-10-17 01:33:57] AI init step 1 done
+[2026-10-17 01:34:42] RNAI logger initialized
+[2026-10-17 01:34:42] AI init step 0 start, myid=72543, owner=175687, isHomunculus=true
+[2026-10-17 01:34:42] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:34:42] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:34:42] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:34:42] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:34:42] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:34:42] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:34:42] AI init step 1 start, skills=4
+[2026-10-17 01:34:42] AI init step 1 done
+[2026-10-17 01:35:23] RNAI logger initialized
+[2026-10-17 01:35:23] AI init step 0 start, myid=71936, owner=175687, isHomunculus=true
+[2026-10-17 01:35:23] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:35:23] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:35:23] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:35:23] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:35:23] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:35:23] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:35:24] AI init step 1 start, skills=4
+[2026-10-17 01:35:24] AI init step 1 done
+[2026-10-17 01:35:49] RNAI logger initialized
+[2026-10-17 01:35:49] AI init step 0 start, myid=71936, owner=175687, isHomunculus=true
+[2026-10-17 01:35:49] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:35:49] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:35:49] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:35:49] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:35:49] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:35:49] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:35:49] AI init step 1 start, skills=4
+[2026-10-17 01:35:49] AI init step 1 done
+[2026-10-17 01:37:10] RNAI logger initialized
+[2026-10-17 01:37:10] AI init step 0 start, myid=72314, owner=175687, isHomunculus=true
+[2026-10-17 01:37:10] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:37:10] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:37:10] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:37:10] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:37:10] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:37:10] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:37:10] AI init step 1 start, skills=4
+[2026-10-17 01:37:10] AI init step 1 done
+[2026-10-17 01:37:47] RNAI logger initialized
+[2026-10-17 01:37:47] AI init step 0 start, myid=73859, owner=175687, isHomunculus=true
+[2026-10-17 01:37:47] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:37:47] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:37:47] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:37:47] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:37:47] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:37:47] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:37:47] AI init step 1 start, skills=4
+[2026-10-17 01:37:47] AI init step 1 done
+[2026-10-17 01:38:28] RNAI logger initialized
+[2026-10-17 01:38:28] AI init step 0 start, myid=73859, owner=175687, isHomunculus=true
+[2026-10-17 01:38:28] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:38:28] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:38:28] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:38:28] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:38:28] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:38:28] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:38:28] AI init step 1 start, skills=4
+[2026-10-17 01:38:28] AI init step 1 done
+[2026-10-17 01:38:39] RNAI logger initialized
+[2026-10-17 01:38:39] AI init step 0 start, myid=73594, owner=175687, isHomunculus=true
+[2026-10-17 01:38:39] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:38:39] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:38:39] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:38:39] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:38:39] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:38:39] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:38:39] AI init step 1 start, skills=4
+[2026-10-17 01:38:39] AI init step 1 done
+[2026-10-17 01:39:07] RNAI logger initialized
+[2026-10-17 01:39:07] AI init step 0 start, myid=72956, owner=175687, isHomunculus=true
+[2026-10-17 01:39:07] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:39:07] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:39:07] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:39:07] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:39:07] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:39:07] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:39:07] AI init step 1 start, skills=4
+[2026-10-17 01:39:07] AI init step 1 done
+[2026-10-17 01:39:51] RNAI logger initialized
+[2026-10-17 01:39:51] AI init step 0 start, myid=74248, owner=175687, isHomunculus=true
+[2026-10-17 01:39:51] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:39:51] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:39:51] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:39:51] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:39:51] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:39:51] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:39:52] AI init step 1 start, skills=4
+[2026-10-17 01:39:52] AI init step 1 done
+[2026-10-17 01:41:44] RNAI logger initialized
+[2026-10-17 01:41:44] AI init step 0 start, myid=74732, owner=175687, isHomunculus=true
+[2026-10-17 01:41:44] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:41:44] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:41:44] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:41:44] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:41:44] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:41:44] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:41:44] AI init step 1 start, skills=4
+[2026-10-17 01:41:44] AI init step 1 done
+[2026-10-17 01:42:33] RNAI logger initialized
+[2026-10-17 01:42:33] AI init step 0 start, myid=74589, owner=175687, isHomunculus=true
+[2026-10-17 01:42:33] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:42:33] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:42:33] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:42:33] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:42:33] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:42:33] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:42:33] AI init step 1 start, skills=4
+[2026-10-17 01:42:33] AI init step 1 done
+[2026-10-17 01:42:34] RNAI logger initialized
+[2026-10-17 01:42:34] AI init step 0 start, myid=74589, owner=175687, isHomunculus=true
+[2026-10-17 01:42:34] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:42:34] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:42:34] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:42:34] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:42:34] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:42:34] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:42:34] AI init step 1 start, skills=4
+[2026-10-17 01:42:34] AI init step 1 done
+[2026-10-17 01:43:24] RNAI logger initialized
+[2026-10-17 01:43:24] AI init step 0 start, myid=74827, owner=175687, isHomunculus=true
+[2026-10-17 01:43:24] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:43:24] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:43:24] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:43:24] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:43:24] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:43:24] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:43:24] AI init step 1 start, skills=4
+[2026-10-17 01:43:24] AI init step 1 done
+[2026-10-17 01:45:02] RNAI logger initialized
+[2026-10-17 01:45:02] AI init step 0 start, myid=74827, owner=175687, isHomunculus=true
+[2026-10-17 01:45:02] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:45:02] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:45:02] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:45:02] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:45:02] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:45:02] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:45:02] AI init step 1 start, skills=4
+[2026-10-17 01:45:02] AI init step 1 done
+[2026-10-17 01:45:18] RNAI logger initialized
+[2026-10-17 01:45:18] AI init step 0 start, myid=75555, owner=175687, isHomunculus=true
+[2026-10-17 01:45:18] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:45:18] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:45:18] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:45:18] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:45:18] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:45:18] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:45:18] AI init step 1 start, skills=4
+[2026-10-17 01:45:18] AI init step 1 done
+[2026-10-17 01:46:02] RNAI logger initialized
+[2026-10-17 01:46:02] AI init step 0 start, myid=76226, owner=175687, isHomunculus=true
+[2026-10-17 01:46:02] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:46:02] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:46:02] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:46:02] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:46:02] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:46:02] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:46:03] AI init step 1 start, skills=4
+[2026-10-17 01:46:03] AI init step 1 done
+[2026-10-17 01:47:28] RNAI logger initialized
+[2026-10-17 01:47:28] AI init step 0 start, myid=75234, owner=175687, isHomunculus=true
+[2026-10-17 01:47:28] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:47:28] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:47:28] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:47:28] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:47:28] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:47:28] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:47:28] AI init step 1 start, skills=4
+[2026-10-17 01:47:28] AI init step 1 done
+[2026-10-17 01:48:08] RNAI logger initialized
+[2026-10-17 01:48:08] AI init step 0 start, myid=75471, owner=175687, isHomunculus=true
+[2026-10-17 01:48:08] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:48:08] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:48:08] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:48:08] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:48:08] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:48:08] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:48:08] AI init step 1 start, skills=4
+[2026-10-17 01:48:08] AI init step 1 done
+[2026-10-17 01:48:29] RNAI logger initialized
+[2026-10-17 01:48:29] AI init step 0 start, myid=75471, owner=175687, isHomunculus=true
+[2026-10-17 01:48:29] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:48:29] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:48:29] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:48:29] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:48:29] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:48:29] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:48:29] AI init step 1 start, skills=4
+[2026-10-17 01:48:29] AI init step 1 done
+[2026-10-17 01:49:40] RNAI logger initialized
+[2026-10-17 01:49:40] AI init step 0 start, myid=75411, owner=175687, isHomunculus=true
+[2026-10-17 01:49:40] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:49:40] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:49:40] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:49:40] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:49:40] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:49:40] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:49:40] AI init step 1 start, skills=4
+[2026-10-17 01:49:40] AI init step 1 done
+[2026-10-17 01:50:22] RNAI logger initialized
+[2026-10-17 01:50:22] AI init step 0 start, myid=77258, owner=175687, isHomunculus=true
+[2026-10-17 01:50:22] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:50:22] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:50:22] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:50:22] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:50:22] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:50:22] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:50:22] AI init step 1 start, skills=4
+[2026-10-17 01:50:22] AI init step 1 done
+[2026-10-17 01:51:58] RNAI logger initialized
+[2026-10-17 01:51:58] AI init step 0 start, myid=78162, owner=175687, isHomunculus=true
+[2026-10-17 01:51:58] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:51:58] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:51:58] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:51:58] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:51:58] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:51:58] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:51:58] AI init step 1 start, skills=4
+[2026-10-17 01:51:58] AI init step 1 done
+[2026-10-17 01:55:22] RNAI logger initialized
+[2026-10-17 01:55:22] AI init step 0 start, myid=79291, owner=175687, isHomunculus=true
+[2026-10-17 01:55:22] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:55:22] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:55:22] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:55:22] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:55:22] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:55:22] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:55:23] AI init step 1 start, skills=4
+[2026-10-17 01:55:23] AI init step 1 done
+[2026-10-17 01:56:03] RNAI logger initialized
+[2026-10-17 01:56:03] AI init step 0 start, myid=78999, owner=175687, isHomunculus=true
+[2026-10-17 01:56:03] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:56:03] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:56:03] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:56:03] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:56:03] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:56:03] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:56:03] AI init step 1 start, skills=4
+[2026-10-17 01:56:03] AI init step 1 done
+[2026-10-17 01:56:48] RNAI logger initialized
+[2026-10-17 01:56:48] AI init step 0 start, myid=77936, owner=175687, isHomunculus=true
+[2026-10-17 01:56:48] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:56:48] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:56:48] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:56:48] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:56:48] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:56:48] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:56:48] AI init step 1 start, skills=4
+[2026-10-17 01:56:48] AI init step 1 done
+[2026-10-17 01:57:31] RNAI logger initialized
+[2026-10-17 01:57:31] AI init step 0 start, myid=78180, owner=175687, isHomunculus=true
+[2026-10-17 01:57:31] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:57:31] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:57:31] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:57:31] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:57:31] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:57:31] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:57:31] AI init step 1 start, skills=4
+[2026-10-17 01:57:31] AI init step 1 done
+[2026-10-17 01:58:38] RNAI logger initialized
+[2026-10-17 01:58:38] AI init step 0 start, myid=79237, owner=175687, isHomunculus=true
+[2026-10-17 01:58:38] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:58:38] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:58:38] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:58:38] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:58:38] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:58:38] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:58:38] AI init step 1 start, skills=4
+[2026-10-17 01:58:38] AI init step 1 done
+[2026-10-17 01:59:17] RNAI logger initialized
+[2026-10-17 01:59:17] AI init step 0 start, myid=80011, owner=175687, isHomunculus=true
+[2026-10-17 01:59:17] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:59:17] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:59:17] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:59:17] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:59:17] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:59:17] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:59:17] AI init step 1 start, skills=4
+[2026-10-17 01:59:17] AI init step 1 done
+[2026-10-17 01:59:59] RNAI logger initialized
+[2026-10-17 01:59:59] AI init step 0 start, myid=79665, owner=175687, isHomunculus=true
+[2026-10-17 01:59:59] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:59:59] 【偵錯】生命體類型 ID: 4
+[2026-10-17 01:59:59] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 01:59:59] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 01:59:59] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 01:59:59] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 01:59:59] AI init step 1 start, skills=4
+[2026-10-17 01:59:59] AI init step 1 done
+[2026-10-17 02:01:27] RNAI logger initialized
+[2026-10-17 02:01:27] AI init step 0 start, myid=81974, owner=175687, isHomunculus=true
+[2026-10-17 02:01:27] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:01:27] 【偵錯】生命體類型 ID: 4
+[2026-10-17 02:01:27] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 02:01:27] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 02:01:27] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:01:27] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 02:01:27] AI init step 1 start, skills=4
+[2026-10-17 02:01:27] AI init step 1 done
+[2026-10-17 02:01:28] RNAI logger initialized
+[2026-10-17 02:01:28] AI init step 0 start, myid=81974, owner=175687, isHomunculus=true
+[2026-10-17 02:01:28] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:01:28] 【偵錯】生命體類型 ID: 4
+[2026-10-17 02:01:28] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 02:01:28] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 02:01:28] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:01:28] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 02:01:28] AI init step 1 start, skills=4
+[2026-10-17 02:01:28] AI init step 1 done
+[2026-10-17 02:02:16] RNAI logger initialized
+[2026-10-17 02:02:16] AI init step 0 start, myid=79371, owner=175687, isHomunculus=true
+[2026-10-17 02:02:16] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:02:16] 【偵錯】生命體類型 ID: 4
+[2026-10-17 02:02:16] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 02:02:16] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 02:02:16] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:02:16] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 02:02:16] AI init step 1 start, skills=4
+[2026-10-17 02:02:16] AI init step 1 done
+[2026-10-17 02:03:21] RNAI logger initialized
+[2026-10-17 02:03:21] AI init step 0 start, myid=82027, owner=175687, isHomunculus=true
+[2026-10-17 02:03:21] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:03:21] 【偵錯】生命體類型 ID: 4
+[2026-10-17 02:03:21] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 02:03:21] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 02:03:21] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:03:21] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 02:03:21] AI init step 1 start, skills=4
+[2026-10-17 02:03:21] AI init step 1 done
+[2026-10-17 02:06:45] RNAI logger initialized
+[2026-10-17 02:06:45] AI init step 0 start, myid=81733, owner=175687, isHomunculus=true
+[2026-10-17 02:06:45] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:06:45] 【偵錯】生命體類型 ID: 4
+[2026-10-17 02:06:45] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 02:06:45] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 02:06:45] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:06:45] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 02:06:45] AI init step 1 start, skills=4
+[2026-10-17 02:06:45] AI init step 1 done
+[2026-10-17 02:07:08] RNAI logger initialized
+[2026-10-17 02:07:08] AI init step 0 start, myid=81733, owner=175687, isHomunculus=true
+[2026-10-17 02:07:08] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:07:08] 【偵錯】生命體類型 ID: 4
+[2026-10-17 02:07:08] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 02:07:08] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 02:07:08] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:07:08] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 02:07:09] AI init step 1 start, skills=4
+[2026-10-17 02:07:09] AI init step 1 done
+[2026-10-17 02:08:27] RNAI logger initialized
+[2026-10-17 02:08:27] AI init step 0 start, myid=82954, owner=175687, isHomunculus=true
+[2026-10-17 02:08:27] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:08:27] 【偵錯】生命體類型 ID: 4
+[2026-10-17 02:08:27] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 02:08:27] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 02:08:27] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:08:27] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 02:08:27] AI init step 1 start, skills=4
+[2026-10-17 02:08:27] AI init step 1 done
+[2026-10-17 02:09:46] RNAI logger initialized
+[2026-10-17 02:09:46] AI init step 0 start, myid=83266, owner=175687, isHomunculus=true
+[2026-10-17 02:09:46] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:09:46] 【偵錯】生命體類型 ID: 4
+[2026-10-17 02:09:46] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 02:09:46] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 02:09:46] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:09:46] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 02:09:46] AI init step 1 start, skills=4
+[2026-10-17 02:09:46] AI init step 1 done
+[2026-10-17 02:10:23] RNAI logger initialized
+[2026-10-17 02:10:23] AI init step 0 start, myid=83607, owner=175687, isHomunculus=true
+[2026-10-17 02:10:23] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:10:23] 【偵錯】生命體類型 ID: 4
+[2026-10-17 02:10:23] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 02:10:23] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 02:10:23] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:10:23] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 02:10:23] AI init step 1 start, skills=4
+[2026-10-17 02:10:23] AI init step 1 done
+[2026-10-17 02:10:53] RNAI logger initialized
+[2026-10-17 02:10:53] AI init step 0 start, myid=83607, owner=175687, isHomunculus=true
+[2026-10-17 02:10:53] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:10:53] 【偵錯】生命體類型 ID: 4
+[2026-10-17 02:10:53] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 02:10:53] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 02:10:53] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:10:53] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 02:10:53] AI init step 1 start, skills=4
+[2026-10-17 02:10:53] AI init step 1 done
+[2026-10-17 02:10:54] RNAI logger initialized
+[2026-10-17 02:10:54] AI init step 0 start, myid=83607, owner=175687, isHomunculus=true
+[2026-10-17 02:10:54] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:10:54] 【偵錯】生命體類型 ID: 4
+[2026-10-17 02:10:54] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 02:10:54] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 02:10:54] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:10:54] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 02:10:55] AI init step 1 start, skills=4
+[2026-10-17 02:10:55] AI init step 1 done
+[2026-10-17 02:10:56] RNAI logger initialized
+[2026-10-17 02:10:56] AI init step 0 start, myid=83607, owner=175687, isHomunculus=true
+[2026-10-17 02:10:56] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:10:56] 【偵錯】生命體類型 ID: 4
+[2026-10-17 02:10:56] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 02:10:56] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 02:10:56] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:10:56] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 02:10:56] AI init step 1 start, skills=4
+[2026-10-17 02:10:56] AI init step 1 done
+[2026-10-17 02:10:57] RNAI logger initialized
+[2026-10-17 02:10:57] AI init step 0 start, myid=83607, owner=175687, isHomunculus=true
+[2026-10-17 02:10:57] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:10:57] 【偵錯】生命體類型 ID: 4
+[2026-10-17 02:10:57] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 02:10:57] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 02:10:57] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:10:57] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 02:10:57] AI init step 1 start, skills=4
+[2026-10-17 02:10:57] AI init step 1 done
+[2026-10-17 02:11:02] RNAI logger initialized
+[2026-10-17 02:11:02] AI init step 0 start, myid=83607, owner=175687, isHomunculus=true
+[2026-10-17 02:11:02] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:11:02] 【偵錯】生命體類型 ID: 4
+[2026-10-17 02:11:02] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 02:11:02] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 02:11:02] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:11:02] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 02:11:02] AI init step 1 start, skills=4
+[2026-10-17 02:11:02] AI init step 1 done
+[2026-10-17 02:11:14] RNAI logger initialized
+[2026-10-17 02:11:14] AI init step 0 start, myid=65112, owner=175687, isHomunculus=true
+[2026-10-17 02:11:14] AI unified config candidate: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:11:14] 【偵錯】生命體類型 ID: 4
+[2026-10-17 02:11:14] 【偵錯】判定生命體為: Vanilmirth
+[2026-10-17 02:11:14] 【偵錯】載入 Vanilmirth 設定，DanceAttackMode = 0
+[2026-10-17 02:11:14] AI unified config loaded: ./AI/USER_AI/RNAI/custom/homunculus_config.lua
+[2026-10-17 02:11:14] AI init step 0 done, AtkDis=2, EnableNormalAttack=true
+[2026-10-17 02:11:14] AI init step 1 start, skills=4
+[2026-10-17 02:11:14] AI init step 1 done

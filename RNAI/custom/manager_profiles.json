@@ -1,0 +1,71 @@
+{
+  "version": "1.0",
+  "profiles": {
+    "自訂1": {
+      "saved": true,
+      "combat": {
+        "CooperativeMode": 1,
+        "ContinuousAttackMode": 1,
+        "AutoCounterAttack": 0,
+        "DanceAttackMode": 1,
+        "FollowMode": 0,
+        "SentryMode": 0
+      },
+      "exclude": {
+        "AttackMonstersEnabled": 0,
+        "players": 1,
+        "smartAttackOrder": 0,
+        "friends": 1,
+        "priorityTargets": 0,
+        "plants": 2,
+        "homunculus": 0,
+        "emperium": 0
+      },
+      "parameters": {
+        "RadiusAggr": 20,
+        "FollowDis": 1,
+        "SentryRadius": 9,
+        "PlayerASPD": 190,
+        "SkillMinSP": 0,
+        "AttackTimeoutMs": 3.0,
+        "AltT_ToggleMode": 1
+      }
+    },
+    "自訂2": {
+      "saved": true,
+      "combat": {
+        "CooperativeMode": 1,
+        "ContinuousAttackMode": 1,
+        "AutoCounterAttack": 0,
+        "DanceAttackMode": 1,
+        "FollowMode": 0,
+        "SentryMode": 0
+      },
+      "exclude": {
+        "AttackMonstersEnabled": 0,
+        "players": 1,
+        "smartAttackOrder": 0,
+        "friends": 1,
+        "priorityTargets": 0,
+        "plants": 2,
+        "homunculus": 0,
+        "emperium": 0
+      },
+      "parameters": {
+        "RadiusAggr": 20,
+        "FollowDis": 1,
+        "SentryRadius": 9,
+        "PlayerASPD": 190,
+        "SkillMinSP": 0,
+        "AttackTimeoutMs": 3.0,
+        "AltT_ToggleMode": 1
+      }
+    },
+    "自訂3": {
+      "saved": false,
+      "combat": {},
+      "exclude": {},
+      "parameters": {}
+    }
+  }
+}
