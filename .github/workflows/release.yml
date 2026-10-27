@@ -1,0 +1,46 @@
+name: Build Windows manager release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: manager-release
+  cancel-in-progress: true
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+      - name: Build self-contained manager
+        shell: pwsh
+        run: |
+          dotnet publish RNAI/custom/manager_source_v2/HomunculusManager.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:PublishTrimmed=false -p:PublishReadyToRun=false -p:UpdateRevision=$env:GITHUB_SHA -o publish
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Check configuration and run self-tests
+        shell: pwsh
+        run: |
+          $exe = Join-Path $PWD 'publish/生命體AI管理器.exe'
+          $config = Join-Path $PWD 'RNAI/custom/homunculus_config.lua'
+          foreach ($command in @('--check', '--self-test')) {
+            $process = Start-Process -FilePath $exe -ArgumentList @($command, ('"' + $config + '"')) -Wait -PassThru -WindowStyle Hidden
+            if ($process.ExitCode -ne 0) { throw "$command failed: $($process.ExitCode)" }
+          }
+      - name: Package full and config-safe update archives
+        shell: pwsh
+        run: |
+          ./RNAI/custom/manager_source_v2/package_release.ps1 -ExePath ./publish/生命體AI管理器.exe -OutputDirectory ./release
+      - name: Publish release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "build-$env:GITHUB_SHA" ./release/USER_AI_full.zip ./release/USER_AI_update.zip --target "$env:GITHUB_SHA" --latest --title "USER_AI $($env:GITHUB_SHA.Substring(0,7))" --notes "下載 USER_AI_update.zip 更新現有資料夾；此包不含個人 Lua 設定、名單、Profiles 或 Log。首次使用請下載 USER_AI_full.zip。"

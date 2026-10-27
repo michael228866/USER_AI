@@ -1,0 +1,181 @@
+<Window x:Class="HomunculusManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="生命體 AI 管理器" Width="1000" Height="700" MinWidth="800" MinHeight="600"
+        WindowStartupLocation="CenterScreen" Background="#111827" Foreground="#F9FAFB"
+        FontFamily="Microsoft JhengHei UI, Segoe UI" FontSize="13" UseLayoutRounding="True">
+    <Window.Resources>
+        <SolidColorBrush x:Key="Primary" Color="#8B5CF6"/>
+        <SolidColorBrush x:Key="Hover" Color="#A78BFA"/>
+        <SolidColorBrush x:Key="Surface" Color="#1F2937"/>
+        <SolidColorBrush x:Key="Control" Color="#374151"/>
+        <SolidColorBrush x:Key="Muted" Color="#9CA3AF"/>
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Background" Value="#374151"/>
+            <Setter Property="Foreground" Value="#F9FAFB"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="14,9"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BackgroundBorder" Background="{TemplateBinding Background}" CornerRadius="10"
+                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BackgroundBorder" Property="Background" Value="#A78BFA"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.45"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ModernTextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="#374151"/>
+            <Setter Property="Foreground" Value="#F9FAFB"/>
+            <Setter Property="CaretBrush" Value="#F9FAFB"/>
+            <Setter Property="BorderBrush" Value="#4B5563"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="11,9"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="ToggleStyle" TargetType="CheckBox">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Grid Width="82" Height="36">
+                            <Border x:Name="Track" Background="#374151" CornerRadius="18"/>
+                            <Ellipse x:Name="Thumb" Fill="#F9FAFB" Width="28" Height="28"
+                                     HorizontalAlignment="Left" Margin="4,0,0,0"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Track" Property="Background" Value="#8B5CF6"/>
+                                <Setter TargetName="Thumb" Property="HorizontalAlignment" Value="Right"/>
+                                <Setter TargetName="Thumb" Property="Margin" Value="0,0,4,0"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Track" Property="Opacity" Value="0.8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="ScrollBar">
+            <Setter Property="Width" Value="12"/>
+            <Setter Property="Background" Value="#111827"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid x:Name="ScrollRoot" Background="#111827">
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                <Track.Thumb>
+                                    <Thumb>
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="Thumb">
+                                                <Border Background="#4B5563" CornerRadius="5" Margin="3"/>
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Orientation" Value="Horizontal">
+                                <Setter Property="Width" Value="Auto"/>
+                                <Setter Property="Height" Value="12"/>
+                                <Setter TargetName="PART_Track" Property="IsDirectionReversed" Value="False"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="SidebarColumn" Width="180"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" Background="#1F2937" BorderBrush="#374151" BorderThickness="0,0,1,0">
+            <DockPanel Margin="12,14,12,10">
+                <StackPanel DockPanel.Dock="Top">
+                    <Border Width="34" Height="34" Background="#8B5CF6" CornerRadius="10" HorizontalAlignment="Left">
+                        <TextBlock Text="H" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <TextBlock Text="HOMUNCULUS" Margin="0,8,0,0" FontSize="14" FontWeight="Bold"/>
+                    <TextBlock Text="AI MANAGER" Foreground="#A78BFA" FontSize="11" FontWeight="SemiBold"/>
+                    <Border Height="1" Background="#374151" Margin="0,12,0,10"/>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Bottom">
+                    <Border Height="1" Background="#374151" Margin="0,0,0,7"/>
+                    <TextBlock Text="RO HOMUNCULUS AI" FontSize="10" Foreground="#9CA3AF"/>
+                </StackPanel>
+                <StackPanel x:Name="NavigationPanel"/>
+            </DockPanel>
+        </Border>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" Background="#111827" BorderBrush="#374151" BorderThickness="0,0,0,1" Padding="18,14,18,12">
+                <Grid x:Name="HeaderGrid">
+                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="230"/></Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <TextBlock Text="Homunculus AI Manager" FontSize="20" FontWeight="Bold"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                            <TextBlock x:Name="CurrentTypeText" Foreground="#A78BFA" FontWeight="SemiBold"/>
+                            <TextBlock Text="  ·  " Foreground="#6B7280"/>
+                            <TextBlock x:Name="LoadStateText" Foreground="#10B981"/>
+                            <TextBlock Text="  ·  " Foreground="#6B7280"/>
+                            <TextBlock x:Name="DirtyBadge" Foreground="#F59E0B"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <Button x:Name="UpdateButton" Grid.Column="1" Content="檢查更新" Style="{StaticResource ModernButton}"
+                            HorizontalAlignment="Right" Padding="10,6" Click="UpdateButton_Click"
+                            ToolTip="檢查 GitHub 最新發行版"/>
+                    <TextBox x:Name="SearchBox" Grid.Row="1" Grid.Column="1" Style="{StaticResource ModernTextBox}"
+                             Height="38" ToolTip="搜尋中文名稱、Lua Key 或用途" TextChanged="SearchBox_TextChanged"/>
+                    <TextBlock x:Name="SearchHint" Grid.Row="1" Grid.Column="1" Text="搜尋設定或 Lua Key..." Foreground="#9CA3AF"
+                               Margin="12,0,0,0" VerticalAlignment="Center" IsHitTestVisible="False"/>
+                </Grid>
+            </Border>
+            <Border Grid.Row="1" Background="#111827" Padding="18,12,18,10">
+                <StackPanel>
+                    <TextBlock Text="選擇生命體" Foreground="#9CA3AF" FontSize="12" Margin="0,0,0,10"/>
+                    <UniformGrid x:Name="TypePanel" Columns="5"/>
+                </StackPanel>
+            </Border>
+            <ScrollViewer x:Name="ContentScroll" Grid.Row="2" VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled" Background="#111827">
+                <StackPanel Margin="18,8,18,22">
+                    <TextBlock x:Name="PageTitle" FontSize="23" FontWeight="Bold"/>
+                    <TextBlock x:Name="PageSubtitle" Foreground="#9CA3AF" Margin="0,5,0,18" TextWrapping="Wrap"/>
+                    <StackPanel x:Name="PageStack"/>
+                </StackPanel>
+            </ScrollViewer>
+            <Border Grid.Row="3" Background="#1F2937" BorderBrush="#374151" BorderThickness="0,1,0,0" Padding="18,10">
+                <Grid>
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                    <TextBlock x:Name="StatusText" Foreground="#9CA3AF" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                    <Button x:Name="ResetButton" Grid.Column="1" Content="重設編輯" Style="{StaticResource ModernButton}"
+                            Margin="0,0,10,0" Click="ResetButton_Click"/>
+                    <Button x:Name="SaveButton" Grid.Column="2" Content="寫入 Lua 設定" Style="{StaticResource ModernButton}"
+                            Background="#8B5CF6" Click="SaveButton_Click"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

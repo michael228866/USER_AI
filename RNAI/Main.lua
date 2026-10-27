@@ -178,6 +178,28 @@ local function CanAutoCastBySP(sk,currentSP)
   return (currentSP or 0)>=minSP
 end
 
+local function IsSkillAutoEnabled(sk)
+  if not sk or not sk.id or sk.id==0 then return true end
+  local configs=SkillConfig
+  if type(configs)~="table" then return true end
+  local key="Skill_"..tostring(sk.id)
+  local level=sk.lv and configs[key.."_lv"..tostring(sk.lv)]
+  local config=level or configs[key]
+  return type(config)~="table" or config.enabled~=false
+end
+
+-- dofile() rejects a UTF-8 BOM, which editors may add when saving config files.
+local function LoadConfigFile(path)
+  local fp=io.open(path,"rb")
+  if not fp then error("cannot open "..path) end
+  local source=fp:read("*a")
+  fp:close()
+  if string.sub(source,1,3)=="\239\187\191" then source=string.sub(source,4) end
+  local chunk,err=(loadstring or load)(source,"@"..path)
+  if not chunk then error(err) end
+  return chunk()
+end
+
 local function SafeGetMotion(target)
   local ok,motion=pcall(GetV,V_MOTION,target)
   if ok then return motion end
@@ -300,13 +322,17 @@ end
 function getSepcFilename(myid)
   local t = SafeGetV(V_HOMUNTYPE, myid)
   local d = "./AI/USER_AI/RNAI/custom/"
-  if (t ~= nil) then
+  if (type(t)=="number") then
+    if t >= 6048 and t <= 6052 then t = t - 6000 end
+    if t == 53 then t = 52 end
     if t < 48 then
       local arr = {"lif", "amistr", "filir", "vanilmirth"}
       t = d .. arr[(t - 1) % 4 + 1] .. ".lua"
-    else
+    elseif t <= 52 then
       local arr = {"eira", "bayeri", "sera", "dieter", "eleanor"}
       t = d .. arr[(t - 48) % 5 + 1] .. ".lua"
+    else
+      return false
     end
   else
     t = (SafeGetV(V_MERTYPE, myid) or 1) - 1
@@ -451,7 +477,7 @@ function GetAutoSkill(myid)
   local sp=currentSP/maxsp*100
   local skill_id=0
   for i,sk in ipairs(Skill) do
-    if(sk.when~=2 and t-sk.stemp>=sk.delay and sk.sp[1]<=sp and sp<=sk.sp[2] and CanAutoCastBySP(sk,currentSP) and nOwnerEnemy>=sk.nOwnerEnemy and nMyEnemy>=sk.nMyEnemy and nRangeEnemy>=sk.nRangeEnemy)then
+    if(sk.when~=2 and t-sk.stemp>=sk.delay and sk.sp[1]<=sp and sp<=sk.sp[2] and CanAutoCastBySP(sk,currentSP) and IsSkillAutoEnabled(sk) and nOwnerEnemy>=sk.nOwnerEnemy and nMyEnemy>=sk.nMyEnemy and nRangeEnemy>=sk.nRangeEnemy)then
       if(r<=sk.range)then
         if(skill_id==0)then skill_id=i end
       else
@@ -477,7 +503,7 @@ function autoUseSkill(myId, ownerId, mobId, excludeWhen)
   local sp = currentSP / maxsp * 100
   local usedFlag = false
   for i, sk in ipairs(Skill) do
-    if sk.when ~= excludeWhen and t - sk.stemp >= sk.delay and sk.sp[1] <= sp and sp <= sk.sp[2] and
+    if IsSkillAutoEnabled(sk) and sk.when ~= excludeWhen and t - sk.stemp >= sk.delay and sk.sp[1] <= sp and sp <= sk.sp[2] and
        nOwnerEnemy >= sk.nOwnerEnemy and nMyEnemy >= sk.nMyEnemy and nRangeEnemy >= sk.nRangeEnemy and
        CanUseSkillOnTarget(sk, targets[sk.target]) and CanAutoCastBySP(sk,currentSP) then
       if usedFlag==false and r[sk.target] <= sk.range then
@@ -507,12 +533,23 @@ end
 -- 主 AI（保留原流程，掛鉤 ASPD 與舞步）
 function AI(myid)
   local currentTick=GetTick()
-  if(AITick==currentTick) then return else AITick=currentTick end
+  if(AITick==currentTick) then return end
+  AITick=currentTick
   EPS_Tick(currentTick)
 
   local oid=SafeGetV(V_OWNER,myid)
   if not oid or oid==0 then
     ResetBattleState("owner unavailable",currentTick,1200)
+    return
+  end
+
+  -- The owner or homunculus can disappear from GetV during character exit.
+  -- Do not issue game commands while either actor has no valid position.
+  local ownerX,ownerY=SafeGetV(V_POSITION,oid)
+  local homX,homY=SafeGetV(V_POSITION,myid)
+  if type(ownerX)~="number" or type(ownerY)~="number"
+      or type(homX)~="number" or type(homY)~="number" then
+    ResetBattleState("actor position unavailable",currentTick,1200)
     return
   end
 
@@ -548,10 +585,10 @@ function AI(myid)
     local loadedUnified = false
     if isHomunculus and file_exist(unifiedConfig) then
       AI_Log("AI unified config candidate: " .. unifiedConfig)
-      local ok, err = pcall(dofile, unifiedConfig)
+      local ok, err = pcall(LoadConfigFile, unifiedConfig)
       if ok and type(LoadHomConfig)=="function" then
         local okLoad, loadErr = pcall(LoadHomConfig, myid)
-        if okLoad then
+        if okLoad and loadErr ~= false then
           loadedUnified = true
           AI_Log("AI unified config loaded: " .. unifiedConfig)
         else
@@ -566,7 +603,7 @@ function AI(myid)
       local sepcFilename = getSepcFilename(myid)
       AI_Log("AI config candidate: " .. tostring(sepcFilename))
       if(type(sepcFilename)=="string" and file_exist(sepcFilename))then
-        local ok, err = pcall(dofile, sepcFilename)
+        local ok, err = pcall(LoadConfigFile, sepcFilename)
         if ok then
           AI_Log("AI config loaded: " .. sepcFilename)
         else
