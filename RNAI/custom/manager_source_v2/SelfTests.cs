@@ -18,6 +18,7 @@ internal static class SelfTests
         Check(!UpdateService.HasUpdate(releaseTag, new string('a', 40), true) &&
               !UpdateService.HasUpdate(releaseTag, "local", false) &&
               !UpdateService.HasUpdate("invalid", "local", true), "相同版本或缺少更新包時不提示");
+        CheckUpdateApply();
         var fixture = LuaConfigService.Open(fixturePath);
         var profilesFixture = Path.Combine(Path.GetDirectoryName(fixturePath)!, "manager_profiles.json");
         LuaConfigService.Check(fixturePath);
@@ -268,6 +269,33 @@ internal static class SelfTests
                 throw new IOException("測試暫存路徑超出系統暫存目錄");
             Directory.Delete(tempDir, true);
         }
+    }
+
+    private static void CheckUpdateApply()
+    {
+        var dir = Path.Combine(Path.GetTempPath(), "hm_update_test_" + Guid.NewGuid().ToString("N"));
+        try
+        {
+            var package = Path.Combine(dir, "package");
+            var install = Path.Combine(dir, "install");
+            Directory.CreateDirectory(Path.Combine(package, "RNAI", "custom"));
+            Directory.CreateDirectory(Path.Combine(install, "RNAI", "custom"));
+            Write(package, "AI.lua", "new ai");
+            Write(Path.Combine(package, "RNAI"), "Main.lua", "new main");
+            Write(package, "manager.exe", "new exe");
+            Write(install, "AI.lua", "old ai");
+            Write(install, "manager.exe", "old exe");
+            Write(Path.Combine(install, "RNAI", "custom"), "homunculus_config.lua", "user config");
+
+            var exe = UpdateService.Apply(package, install, Path.Combine(install, "manager.exe"));
+            Check(File.ReadAllText(Path.Combine(install, "AI.lua")) == "new ai" &&
+                  File.ReadAllText(Path.Combine(install, "RNAI", "Main.lua")) == "new main", "自動更新覆蓋 AI 檔案");
+            Check(exe == Path.Combine(install, "manager.exe") && File.ReadAllText(exe) == "new exe" &&
+                  File.ReadAllText(exe + ".old") == "old exe", "自動更新替換管理器並保留舊版");
+            Check(File.ReadAllText(Path.Combine(install, "RNAI", "custom", "homunculus_config.lua")) == "user config",
+                "自動更新不動個人設定");
+        }
+        finally { Directory.Delete(dir, true); }
     }
 
     private static string Write(string dir, string name, string content)

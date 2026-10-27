@@ -39,7 +39,8 @@ public partial class MainWindow : Window
     private readonly Dictionary<int, string> savedProfileNames = [];
     private bool persistWindowPlacement = true;
     private bool checkingUpdates;
-    private string? availableRevision;
+    private UpdateInfo? availableUpdate;
+    private bool restartingForUpdate;
     private bool ListsDirty => friends is not null && enemies is not null &&
         (!friends.SequenceEqual(savedFriends!) || !enemies.SequenceEqual(savedEnemies!));
     private bool ProfilesDirty => profileDrafts.Any(x => savedProfileNames.TryGetValue(x.Key, out var name) && x.Value != name);
@@ -76,7 +77,7 @@ public partial class MainWindow : Window
         Closed += (_, _) => { if (persistWindowPlacement) WindowPlacementService.Save(this); };
         Closing += (_, e) =>
         {
-            if ((session.IsDirty || ListsDirty || ProfilesDirty) && !Confirm("目前有未儲存修改，確定關閉嗎？")) e.Cancel = true;
+            if (!restartingForUpdate && (session.IsDirty || ListsDirty || ProfilesDirty) && !Confirm("目前有未儲存修改，確定關閉嗎？")) e.Cancel = true;
         };
     }
 
@@ -84,39 +85,82 @@ public partial class MainWindow : Window
 
     internal void DisablePlacementPersistence() => persistWindowPlacement = false;
 
-    private async Task CheckForUpdatesAsync()
+    private async Task<bool> CheckForUpdatesAsync()
     {
-        if (checkingUpdates) return;
+        if (checkingUpdates) return false;
         checkingUpdates = true;
         UpdateButton.Content = "檢查中…";
         try
         {
-            availableRevision = await UpdateService.CheckAsync();
-            UpdateButton.Content = availableRevision is null ? "檢查更新" : "有新版可更新";
-            UpdateButton.Background = availableRevision is null ? Control : Success;
-            UpdateButton.ToolTip = availableRevision is null
+            availableUpdate = await UpdateService.CheckAsync();
+            UpdateButton.Content = availableUpdate is null ? "檢查更新" : "有新版可更新";
+            UpdateButton.Background = availableUpdate is null ? Control : Success;
+            UpdateButton.ToolTip = availableUpdate is null
                 ? "目前沒有可用的更新；按此重新檢查"
-                : $"GitHub 版本 {availableRevision}；按此開啟更新包下載頁";
+                : $"GitHub 版本 {availableUpdate.Revision}；按此自動下載並更新";
+            return true;
         }
         catch (Exception)
         {
-            availableRevision = null;
+            availableUpdate = null;
             UpdateButton.Content = "檢查更新";
             UpdateButton.ToolTip = "無法連線 GitHub；按此重試";
+            return false;
         }
         finally { checkingUpdates = false; }
     }
 
     private async void UpdateButton_Click(object sender, RoutedEventArgs e)
     {
-        if (availableRevision is null) { await CheckForUpdatesAsync(); return; }
+        if (checkingUpdates) return;
+        if (availableUpdate is null)
+        {
+            var reached = await CheckForUpdatesAsync();
+            if (availableUpdate is null)
+            {
+                MessageBox.Show(this, reached ? "目前已是最新版本。" : "無法連線 GitHub，請稍後再試。", "檢查更新",
+                    MessageBoxButton.OK, reached ? MessageBoxImage.Information : MessageBoxImage.Warning);
+                return;
+            }
+        }
+        await InstallUpdateAsync(availableUpdate);
+    }
+
+    private async Task InstallUpdateAsync(UpdateInfo update)
+    {
+        var installDir = AppContext.BaseDirectory;
+        if (!File.Exists(Path.Combine(installDir, "AI.lua")))
+        {
+            MessageBox.Show(this, "管理器不在 USER_AI 資料夾內，無法自動更新；將開啟下載頁。", "檢查更新", MessageBoxButton.OK, MessageBoxImage.Warning);
+            try { Process.Start(new ProcessStartInfo(UpdateService.DownloadPage) { UseShellExecute = true }); } catch (Exception) { }
+            return;
+        }
+        var dirty = session.IsDirty || ListsDirty || ProfilesDirty;
+        if (!Confirm($"發現新版 {update.Revision}，要立即下載並更新嗎？\n\n" +
+                     "更新會覆蓋 AI 程式檔與管理器，不會動到你的生命體設定、朋友／黑名單與自訂配置。\n" +
+                     "完成後管理器會自動重新開啟，遊戲內請重新召喚生命體以套用新 AI。" +
+                     (dirty ? "\n\n注意：目前有未儲存的修改，更新後會遺失。" : "")))
+            return;
+
+        checkingUpdates = true;
+        UpdateButton.IsEnabled = false;
+        UpdateButton.Content = "下載更新中…";
         try
         {
-            Process.Start(new ProcessStartInfo(UpdateService.DownloadPage) { UseShellExecute = true });
+            var exe = await UpdateService.InstallAsync(update, installDir);
+            restartingForUpdate = true;
+            UpdateService.Restart(exe);
+            Close();
         }
         catch (Exception ex)
         {
-            MessageBox.Show(this, "無法開啟下載頁：" + ex.Message, "檢查更新", MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show(this, "自動更新失敗：" + ex.Message, "檢查更新", MessageBoxButton.OK, MessageBoxImage.Warning);
+            UpdateButton.Content = "有新版可更新";
+        }
+        finally
+        {
+            checkingUpdates = false;
+            UpdateButton.IsEnabled = true;
         }
     }
 

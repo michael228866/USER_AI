@@ -50,6 +50,7 @@ internal static class Program
                     args.Length > 4 ? double.Parse(args[4], CultureInfo.InvariantCulture) : 700);
                 return 0;
             }
+            UpdateService.CleanupOldVersion();
             app.Run(window);
             return 0;
         }

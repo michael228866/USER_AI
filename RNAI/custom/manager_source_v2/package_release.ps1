@@ -22,7 +22,7 @@ function New-Package([string]$name, [bool]$includeDefaults) {
 生命體 AI 交付版
 
 安裝：將 USER_AI 資料夾放到遊戲的 AI 資料夾內，執行生命體AI管理器.exe 編輯設定。
-更新：在設定器右上角看到新版提示後，下載 USER_AI_update.zip，關閉遊戲與設定器，再合併到現有資料夾。
+更新：在設定器右上角按「檢查更新」，有新版時會自動下載並更新，完成後設定器會自動重新開啟。
 更新包不包含你的生命體設定、朋友與黑名單、自訂配置及 Log。
 AI 運作需要 Lua 檔案，因此 Lua 程式內容可被閱讀；本包不包含 Git 資料或 C# 原始碼。
 '@ | Set-Content -LiteralPath (Join-Path $target '使用說明.txt') -Encoding UTF8
