@@ -476,7 +476,7 @@ public partial class MainWindow : Window
         PageStack.Children.Add(NoticeCard(type.Name,
             $"目前載入 {SettingsCatalog.ForType(session.Type).Count()} 個可編輯欄位。{session.ChangedCount} 項修改尚未寫入 Lua。"));
         PageStack.Children.Add(NoticeCard("資料安全",
-            "寫入時只替換已修改欄位的數值，保留其他生命體、註解、編碼與換行；原檔另存 .manager.bak 備份。"));
+            "寫入時只替換已修改欄位的數值，保留其他生命體、註解、編碼與換行。"));
         PageStack.Children.Add(NoticeCard("原版功能",
             "包含常用、戰鬥、安全、進階、名單與 Profiles。新介面按操作目的重新分類。"));
     }
@@ -523,7 +523,7 @@ public partial class MainWindow : Window
             ("移除選取", () => { if (list.SelectedItem is int id) { ids.Remove(id); RenderPage(); RefreshHeader(); } }),
             ("清空", () => { if (ids.Count > 0 && Confirm($"確定清空{title}？")) { ids.Clear(); RenderPage(); RefreshHeader(); } }),
             ("儲存名單", () => {
-                if (!Confirm($"確定寫入 {fileName}？儲存前會建立 .manager.bak 備份。")) return;
+                if (!Confirm($"確定寫入 {fileName}？")) return;
                 try { var path = Path.Combine(Path.GetDirectoryName(configPath)!, fileName);
                     ListService.Save(path, variable, ids, variable == "friends_data" ? savedFriends : savedEnemies);
                     if (variable == "friends_data") savedFriends = [.. ids]; else savedEnemies = [.. ids];
@@ -545,7 +545,7 @@ public partial class MainWindow : Window
 
     private void RenderSkills()
     {
-        PageStack.Children.Add(NoticeCard("技能清單", "可逐一開關自動施放，並修改技能等級與延遲。修改會直接寫入 Lua 並備份；id=0 是普通攻擊。"));
+        PageStack.Children.Add(NoticeCard("技能清單", "可逐一開關自動施放，並修改技能等級與延遲。修改會直接寫入 Lua；id=0 是普通攻擊。"));
         try
         {
             var skills = SkillService.Read(session.Document.Text, session.Type);
@@ -695,7 +695,7 @@ public partial class MainWindow : Window
             actions.Children.Add(apply);
             var delete = ActionButton("刪除配置", () =>
             {
-                if (!Confirm($"確定刪除自訂{selected}？原配置會備份。")) return;
+                if (!Confirm($"確定刪除自訂{selected}？")) return;
                 try { ProfileService.Delete(profilesPath, selected); savedProfileNames[selected] = $"自訂{selected}";
                     profileDrafts[selected] = savedProfileNames[selected]; notice = $"已刪除自訂{selected}。"; RefreshHeader(); RenderPage(); }
                 catch (Exception ex) { ShowError(ex); }
@@ -936,7 +936,7 @@ public partial class MainWindow : Window
         try
         {
             session.Save();
-            notice = "儲存成功。原設定已備份為 homunculus_config.lua.manager.bak。";
+            notice = "儲存成功。";
             RefreshHeader();
             RenderPage();
         }

@@ -85,7 +85,7 @@ internal static class LuaConfigService
                 stream.Write(bytes);
                 stream.Flush(true);
             }
-            File.Replace(temp, path, path + ".manager.bak");
+            File.Replace(temp, path, null);
         }
         finally
         {

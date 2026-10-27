@@ -88,7 +88,7 @@ internal static class ProfileService
                 stream.Write(output);
                 stream.Flush(true);
             }
-            File.Replace(temp, path, path + ".manager.bak");
+            File.Replace(temp, path, null);
         }
         finally { if (File.Exists(temp)) File.Delete(temp); }
     }

@@ -107,7 +107,7 @@ internal static class SelfTests
                 var expected = LuaConfigService.Update(document.Text, type.Key, new Dictionary<string, int> { ["AttackMonstersEnabled"] = 1 - original });
                 var saved = LuaConfigService.Save(config, document, type.Key, new Dictionary<string, int> { ["AttackMonstersEnabled"] = 1 - original });
                 Check(saved.Text == expected, type.Key + " 只改動一個數值");
-                Check(File.Exists(config + ".manager.bak"), type.Key + " 備份建立");
+                Check(!File.Exists(config + ".manager.bak"), type.Key + " 不產生備份檔");
                 Check(LuaConfigService.Read(saved, type.Key)["AttackMonstersEnabled"] == 1 - original, type.Key + " 寫入讀回");
                 foreach (var other in SettingsCatalog.Types.Where(x => x.Key != type.Key))
                     Check(DictionariesEqual(before[other.Key], LuaConfigService.Read(saved, other.Key)), type.Key + " 不影響 " + other.Key);
@@ -162,7 +162,6 @@ internal static class SelfTests
             var json = JsonNode.Parse(File.ReadAllText(profiles))!;
             Check(json["profiles"]?["自訂3"]?["parameters"]?["AttackTimeoutMs"]?.GetValue<double>() == 3.0,
                 "JSON 以秒儲存");
-            Check(File.Exists(profiles + ".manager.bak"), "配置備份建立");
             ProfileService.Delete(profiles, 2);
             Check(!ProfileService.IsSaved(profiles, 2) && ProfileService.IsSaved(profiles, 1), "刪除單一配置不影響其他配置");
 
@@ -229,7 +228,6 @@ internal static class SelfTests
             ListService.Save(friendsPath, "friends_data", [1001, 1002]);
             Check(friendBytes.AsSpan().SequenceEqual(File.ReadAllBytes(friendsPath)), "名單未變更時保持位元組不變");
             Check(File.ReadAllText(friendsPath).Contains("詳細操作說明"), "名單外註解保留");
-            Check(File.Exists(friendsPath + ".manager.bak") && File.Exists(enemiesPath + ".manager.bak"), "名單備份建立");
             CheckThrows<ArgumentException>(() => ListService.Save(friendsPath, "friends_data", [1, 1]), "重複 ID 拒絕");
             CheckThrows<IOException>(() => ListService.Save(friendsPath, "friends_data", [1001, 1003], [1001]),
                 "名單外部變更拒絕覆蓋");

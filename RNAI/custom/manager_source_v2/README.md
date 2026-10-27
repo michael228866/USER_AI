@@ -8,7 +8,7 @@ Dance Attack 的手動 ASPD 輸入、節奏公式、舊設定相容性及 Mock �
 
 `.github/workflows/release.yml` 在 `main` 更新時建置、驗證並發布 `USER_AI_full.zip` 與 `USER_AI_update.zip`。後者排除個人設定、名單、Profiles 與 Log。手動建置若要與 Release 正確比對，需在 `dotnet publish` 加上 `-p:UpdateRevision=<40 位 Git SHA>`；未指定時版本為 `local`。
 
-「技能管理」可逐一開關九種生命體的自動技能，並修改 `Skill` 表的技能等級（1–10）與延遲；`id=0` 普通攻擊不受自動技能開關影響。技能開關寫入對應生命體的 `SkillConfig.enabled`，手動施法仍可使用。請填入遊戲中已習得的等級。每次寫入會建立備份；若有綁定舊等級的 `SkillConfig` 項目，會拒絕直接變更以免設定失效。
+「技能管理」可逐一開關九種生命體的自動技能，並修改 `Skill` 表的技能等級（1–10）與延遲；`id=0` 普通攻擊不受自動技能開關影響。技能開關寫入對應生命體的 `SkillConfig.enabled`，手動施法仍可使用。請填入遊戲中已習得的等級。若有綁定舊等級的 `SkillConfig` 項目，會拒絕直接變更以免設定失效。
 
 舊設定中的 `8201`、`8203`、`8216`、`8217` 是傭兵技能 ID；設定器會提示並從生命體技能編輯區排除，保留原始 Lua 內容供檢查。
 
@@ -51,6 +51,6 @@ dotnet RNAI/custom/manager_source_v2/bin/Release/net9.0-windows/生命體AI管�
 
 ## 資料安全與限制
 
-Lua 欄位只替換被編輯的字面值；跨生命體定位、巢狀表、外部修改偵測、編碼及換行保留均由 `Services/` 實作。寫入使用同目錄暫存檔與 `.manager.bak`。朋友與黑名單 ID 為四種生命體共用檔案。
+Lua 欄位只替換被編輯的字面值；跨生命體定位、巢狀表、外部修改偵測、編碼及換行保留均由 `Services/` 實作。寫入使用同目錄暫存檔後再取代原檔。朋友與黑名單 ID 為四種生命體共用檔案。
 
 已支援的技能編輯包含 `SkillConfig.enabled`、`Skill` 項目的等級與延遲。`SkillConfig` 其他輔助欄位與 `Skill` 的其餘屬性唯讀。自訂配置保存可編輯的標量值，不保存技能表與 ID 名單。沒有執行 RO 遊戲內驗證，不能宣稱 AI 行為與原版完全等價。詳見 [FEATURE_PARITY.md](FEATURE_PARITY.md)。
