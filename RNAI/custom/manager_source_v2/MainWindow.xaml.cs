@@ -20,7 +20,7 @@ public partial class MainWindow : Window
     private static readonly Brush Warning = Brush("#F59E0B");
     private static readonly Brush Success = Brush("#10B981");
     private static readonly string[] Pages =
-    ["總覽", "常用", "戰鬥", "安全", "進階", "名單", "Profiles", "技能管理", "備份與還原"];
+    ["總覽", "常用", "戰鬥", "安全", "進階", "名單", "Profiles", "技能管理"];
 
     private string configPath;
     private string profilesPath;
@@ -294,7 +294,6 @@ public partial class MainWindow : Window
             case "總覽": RenderOverview(); break;
             case "Profiles": RenderProfiles(); break;
             case "名單": RenderLists(); break;
-            case "備份與還原": RenderBackups(); break;
             case "進階": RenderAdvanced(); break;
             case "技能管理": RenderSkills(); break;
             default:
@@ -542,58 +541,6 @@ public partial class MainWindow : Window
         body.Children.Add(row);
         card.Child = body;
         return card;
-    }
-
-    private void RenderBackups()
-    {
-        var choose = ActionButton("選擇其他設定檔", () =>
-        {
-            if ((session.IsDirty || ListsDirty || ProfilesDirty) && !Confirm("切換設定檔會放棄未儲存修改。繼續嗎？")) return;
-            var dialog = new Microsoft.Win32.OpenFileDialog { Title = "選擇 homunculus_config.lua",
-                FileName = "homunculus_config.lua", Filter = "Lua 設定檔 (*.lua)|*.lua" };
-            if (dialog.ShowDialog(this) != true) return;
-            try
-            {
-                if (!string.Equals(Path.GetFileName(dialog.FileName), "homunculus_config.lua", StringComparison.OrdinalIgnoreCase))
-                    throw new FormatException("請選擇 homunculus_config.lua。");
-                LuaConfigService.Check(dialog.FileName);
-                var nextProfiles = Path.Combine(Path.GetDirectoryName(dialog.FileName)!, "manager_profiles.json");
-                if (!File.Exists(nextProfiles)) throw new FileNotFoundException("找不到同目錄的 manager_profiles.json", nextProfiles);
-                var nextSession = new EditorSession(dialog.FileName);
-                configPath = dialog.FileName;
-                profilesPath = nextProfiles;
-                session = nextSession;
-                friends = enemies = savedFriends = savedEnemies = null;
-                profileDrafts.Clear(); savedProfileNames.Clear();
-                notice = "已載入新設定檔。"; RefreshHeader(); RefreshTypes(); RenderPage();
-            }
-            catch (Exception ex) { ShowError(ex); }
-        });
-        PageStack.Children.Add(choose);
-        var path = configPath + ".manager.bak";
-        PageStack.Children.Add(NoticeCard("寫入前備份", "每次 Lua 設定有實際修改時建立 .manager.bak。名單與配置也各自保留同名備份。"));
-        if (!File.Exists(path)) { PageStack.Children.Add(NoticeCard("沒有 Lua 備份", path)); return; }
-        string current, backup;
-        try { current = LuaConfigService.Open(configPath).Text; backup = LuaConfigService.Open(path).Text; }
-        catch (Exception ex) { PageStack.Children.Add(NoticeCard("備份無法讀取", ex.Message)); return; }
-        var changedLines = current.Split('\n').Zip(backup.Split('\n')).Count(pair => pair.First != pair.Second)
-            + Math.Abs(current.Split('\n').Length - backup.Split('\n').Length);
-        PageStack.Children.Add(NoticeCard("上一次備份", $"{File.GetLastWriteTime(path):yyyy-MM-dd HH:mm:ss} · 與目前檔案約 {changedLines} 行不同"));
-        var button = ActionButton("還原上一次 Lua 備份", () =>
-        {
-            if ((session.IsDirty || ListsDirty) && !Confirm("還原會放棄目前未儲存修改。繼續嗎？")) return;
-            if (!Confirm("確定還原上一次 Lua 設定？目前設定會另存 .manager.bak。")) return;
-            try
-            {
-                LuaConfigService.Check(path);
-                var original = LuaConfigService.Open(configPath);
-                ListService.AtomicWrite(configPath, original, backup);
-                session.ReloadFromDisk();
-                notice = "已還原 Lua 備份。"; RefreshHeader(); RenderPage();
-            }
-            catch (Exception ex) { ShowError(ex); }
-        });
-        PageStack.Children.Add(button);
     }
 
     private void RenderSkills()

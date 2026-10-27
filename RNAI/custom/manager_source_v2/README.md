@@ -20,7 +20,7 @@ Dance Attack 的手動 ASPD 輸入、節奏公式、舊設定相容性及 Mock �
 
 執行專案根目錄的 `生命體AI管理器.exe`。這是 Windows x64 自含 .NET Runtime 的單一 EXE，不需另外安裝 .NET；設定檔 `homunculus_config.lua`、`manager_profiles.json`、`friends_list.lua`、`enemies_list.lua` 保持在 `RNAI/custom/`。啟動時會讀取設定，只有按下明確的儲存按鈕才會寫入。
 
-介面左側保留原版「常用、戰鬥、安全、進階、名單、Profiles」六頁，另外提供總覽、技能管理與備份還原；頂部生命體卡片、搜尋框及頁尾儲存狀態固定。更換設定檔請到「備份與還原」按「選擇其他設定檔」。Lua 設定、自訂配置、名單、技能延遲分別儲存；每項動作的按鈕清楚標示寫入位置。
+介面左側保留原版「常用、戰鬥、安全、進階、名單、Profiles」六頁，另外提供總覽與技能管理；頂部生命體卡片、搜尋框及頁尾儲存狀態固定。Lua 設定、自訂配置、名單、技能延遲分別儲存；每項動作的按鈕清楚標示寫入位置。
 
 視窗預設 1000×700，最小 800×600，啟動置中；關閉後的大小與位置記錄在 `%LOCALAPPDATA%\HomunculusAiManager\window.json`。若上次螢幕已移除，視窗會移回可見工作區。側欄在窄視窗縮為 160 px；設定卡片與名單卡片依寬度重排，頂部生命體選擇與頁尾儲存列固定。程式宣告 Per Monitor V2 DPI 支援。尺寸與縮放截圖及驗收結果見 [WINDOWED_UI.md](WINDOWED_UI.md)。
 
@@ -51,6 +51,6 @@ dotnet RNAI/custom/manager_source_v2/bin/Release/net9.0-windows/生命體AI管�
 
 ## 資料安全與限制
 
-Lua 欄位只替換被編輯的字面值；跨生命體定位、巢狀表、外部修改偵測、編碼及換行保留均由 `Services/` 實作。寫入使用同目錄暫存檔與 `.manager.bak`。備份頁可還原上一次有效的 Lua 配置。朋友與黑名單 ID 為四種生命體共用檔案。
+Lua 欄位只替換被編輯的字面值；跨生命體定位、巢狀表、外部修改偵測、編碼及換行保留均由 `Services/` 實作。寫入使用同目錄暫存檔與 `.manager.bak`。朋友與黑名單 ID 為四種生命體共用檔案。
 
 已支援的技能編輯包含 `SkillConfig.enabled`、`Skill` 項目的等級與延遲。`SkillConfig` 其他輔助欄位與 `Skill` 的其餘屬性唯讀。自訂配置保存可編輯的標量值，不保存技能表與 ID 名單。沒有執行 RO 遊戲內驗證，不能宣稱 AI 行為與原版完全等價。詳見 [FEATURE_PARITY.md](FEATURE_PARITY.md)。

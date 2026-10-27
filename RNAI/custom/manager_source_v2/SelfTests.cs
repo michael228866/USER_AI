@@ -245,11 +245,6 @@ internal static class SelfTests
                 "小數舞步節拍寫入讀回");
             Check(LuaConfigService.Read(changedDance, "lif")["DanceEnabled"] == 1 - danceValues["DanceEnabled"],
                 "Lua Boolean 寫入讀回");
-            var rollback = LuaConfigService.Open(config + ".manager.bak");
-            LuaConfigService.Check(config + ".manager.bak");
-            ListService.AtomicWrite(config, LuaConfigService.Open(config), rollback.Text);
-            Check(LuaConfigService.Read(LuaConfigService.Open(config), "lif")["DanceEnabled"] == danceValues["DanceEnabled"],
-                "上一次 Lua 備份還原");
 
             json["profiles"]?["自訂3"]?["combat"]?.AsObject().Remove("FollowMode");
             File.WriteAllText(profiles, json.ToJsonString());
