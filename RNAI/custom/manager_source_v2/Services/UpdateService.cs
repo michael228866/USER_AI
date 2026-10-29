@@ -49,7 +49,7 @@ internal static class UpdateService
     // Downloads the update package and copies it over the install folder. The running
     // manager cannot be overwritten, so it is renamed aside and replaced; returns the
     // path of the new manager to restart into.
-    internal static async Task<string> InstallAsync(UpdateInfo update, string installDir)
+    internal static async Task<string> InstallAsync(UpdateInfo update, string installDir, IProgress<(long Read, long? Total)>? progress = null)
     {
         var work = Path.Combine(Path.GetTempPath(), "USER_AI_update_" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(work);
@@ -63,7 +63,16 @@ internal static class UpdateService
                 response.EnsureSuccessStatusCode();
                 await using var source = await response.Content.ReadAsStreamAsync();
                 await using var target = File.Create(zip);
-                await source.CopyToAsync(target);
+                var total = response.Content.Headers.ContentLength;
+                var buffer = new byte[81920];
+                long read = 0;
+                int count;
+                while ((count = await source.ReadAsync(buffer)) > 0)
+                {
+                    await target.WriteAsync(buffer.AsMemory(0, count));
+                    read += count;
+                    progress?.Report((read, total));
+                }
             }
             var extracted = Path.Combine(work, "extracted");
             ZipFile.ExtractToDirectory(zip, extracted);

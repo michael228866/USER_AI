@@ -147,7 +147,12 @@ public partial class MainWindow : Window
         UpdateButton.Content = "下載更新中…";
         try
         {
-            var exe = await UpdateService.InstallAsync(update, installDir);
+            var progress = new Progress<(long Read, long? Total)>(p =>
+                UpdateButton.Content = p.Total is > 0
+                    ? $"下載更新中 {p.Read * 100 / p.Total.Value}%（{p.Read / 1048576.0:0.0}/{p.Total.Value / 1048576.0:0.0} MB）"
+                    : $"下載更新中 {p.Read / 1048576.0:0.0} MB");
+            var exe = await UpdateService.InstallAsync(update, installDir, progress);
+            UpdateButton.Content = "安裝更新中…";
             restartingForUpdate = true;
             UpdateService.Restart(exe);
             Close();
