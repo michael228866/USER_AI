@@ -255,6 +255,7 @@ local function SafeSkillObject(myid,lv,id,target)
       return false
     end
     LastSkillTick=now
+    AI_Log("skill " .. tostring(id) .. " lv" .. tostring(lv) .. " -> " .. tostring(target))
     if id and id>0 then
       _EPS_AttackCount  = (_EPS_AttackCount or 0) + 1
       _eEPS_AttackCount = (_eEPS_AttackCount or 0) + 1
@@ -275,6 +276,7 @@ local function SafeSkillGround(myid,lv,id,x,y)
       return false
     end
     LastSkillTick=now
+    AI_Log("skill " .. tostring(id) .. " lv" .. tostring(lv) .. " -> (" .. tostring(x) .. "," .. tostring(y) .. ")")
     return true
   end
   return false
@@ -553,7 +555,17 @@ function AI(myid)
     return
   end
 
-  if (AI_MAIN_LAST_MY_ID or 0)~=0 and (AI_MAIN_LAST_MY_ID~=myid or AI_MAIN_LAST_OWNER_ID~=oid) then
+  -- The client reloads the whole AI on summon and on every map change, so the
+  -- id/position checks below have nothing to compare against. Stay idle briefly
+  -- after a fresh load instead of casting buffs or moving while the map settles.
+  if (AI_MAIN_LAST_MY_ID or 0)==0 then
+    AI_MAIN_LAST_MY_ID=myid
+    AI_MAIN_LAST_OWNER_ID=oid
+    ResetBattleState("ai loaded",currentTick,AI_LOAD_PROTECT_MS or 3000)
+    return
+  end
+
+  if AI_MAIN_LAST_MY_ID~=myid or AI_MAIN_LAST_OWNER_ID~=oid then
     AI_MAIN_LAST_MY_ID=myid
     AI_MAIN_LAST_OWNER_ID=oid
     ResetBattleState("id changed",currentTick,AI_TRANSITION_PROTECT_MS or 8000)
