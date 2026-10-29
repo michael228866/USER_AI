@@ -247,16 +247,16 @@ local function ChaseTimedOut(myid,target,now)
     ChaseProgressTick=now
     return false
   end
-  return now-ChaseProgressTick>(AttackTimeoutMs or 2000)
+  return now-ChaseProgressTick>(AttackTimeoutMs or 5000)
 end
 
 local function SkipUnreachableTarget(target,now)
   for id,untilTick in pairs(TargetSkipUntil) do
     if untilTick<=now then TargetSkipUntil[id]=nil end
   end
-  TargetSkipUntil[target]=now+(TemporarySkipDuration or 3000)
+  TargetSkipUntil[target]=now+(TemporarySkipDuration or 10000)
   ChaseTarget=0
-  AI_Log("target " .. tostring(target) .. " unreachable, skip " .. tostring(TemporarySkipDuration or 3000) .. "ms")
+  AI_Log("target " .. tostring(target) .. " unreachable, skip " .. tostring(TemporarySkipDuration or 10000) .. "ms")
 end
 
 local function SafeAttack(myid,target)

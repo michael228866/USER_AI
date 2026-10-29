@@ -91,10 +91,10 @@ HomConfig = {
 
     -- 攻擊超時防卡機制
     AttackTimeoutEnabled = 1,
-    AttackTimeoutMs = 1000,
+    AttackTimeoutMs = 5000,
 
     -- 臨時跳過目標配置
-    TemporarySkipDuration = 1500,  -- 放棄目標後3秒內不再鎖定
+    TemporarySkipDuration = 10000,  -- 放棄目標後10秒內不再鎖定
 
     -- 技能設定
 
@@ -240,10 +240,10 @@ HomConfig = {
 
     -- 攻擊超時防卡機制
     AttackTimeoutEnabled = 1,
-    AttackTimeoutMs = 1000,
+    AttackTimeoutMs = 5000,
 
     -- 臨時跳過目標配置
-    TemporarySkipDuration = 3000,  -- 放棄目標後3秒內不再鎖定
+    TemporarySkipDuration = 10000,  -- 放棄目標後10秒內不再鎖定
 
     -- 技能設定
 
@@ -356,10 +356,10 @@ HomConfig = {
 
     -- 攻擊超時防卡機制
     AttackTimeoutEnabled = 1,
-    AttackTimeoutMs = 1000,
+    AttackTimeoutMs = 5000,
 
     -- 臨時跳過目標配置
-    TemporarySkipDuration = 3000,  -- 放棄目標後3秒內不再鎖定
+    TemporarySkipDuration = 10000,  -- 放棄目標後10秒內不再鎖定
 
     -- 技能設定
 
@@ -487,10 +487,10 @@ HomConfig = {
 
     -- 攻擊超時防卡機制
     AttackTimeoutEnabled = 1,
-    AttackTimeoutMs = 3000,
+    AttackTimeoutMs = 5000,
 
     -- 臨時跳過目標配置
-    TemporarySkipDuration = 2000,  -- 放棄目標後3秒內不再鎖定
+    TemporarySkipDuration = 10000,  -- 放棄目標後10秒內不再鎖定
 
     -- 技能設定
 
@@ -628,10 +628,10 @@ HomConfig = {
 
     -- 攻擊超時防卡機制
     AttackTimeoutEnabled = 1,
-    AttackTimeoutMs = 1000,
+    AttackTimeoutMs = 5000,
 
     -- 臨時跳過目標配置
-    TemporarySkipDuration = 1500,  -- 放棄目標後3秒內不再鎖定
+    TemporarySkipDuration = 10000,  -- 放棄目標後10秒內不再鎖定
 
     -- 技能設定
 
@@ -760,10 +760,10 @@ HomConfig = {
 
     -- 攻擊超時防卡機制
     AttackTimeoutEnabled = 1,
-    AttackTimeoutMs = 1000,
+    AttackTimeoutMs = 5000,
 
     -- 臨時跳過目標配置
-    TemporarySkipDuration = 3000,  -- 放棄目標後3秒內不再鎖定
+    TemporarySkipDuration = 10000,  -- 放棄目標後10秒內不再鎖定
 
     -- 技能設定
 
@@ -892,10 +892,10 @@ HomConfig = {
 
     -- 攻擊超時防卡機制
     AttackTimeoutEnabled = 1,
-    AttackTimeoutMs = 3000,
+    AttackTimeoutMs = 5000,
 
     -- 臨時跳過目標配置
-    TemporarySkipDuration = 2000,  -- 放棄目標後3秒內不再鎖定
+    TemporarySkipDuration = 10000,  -- 放棄目標後10秒內不再鎖定
 
     -- 技能設定
 
@@ -1019,10 +1019,10 @@ HomConfig = {
 
     -- 攻擊超時防卡機制
     AttackTimeoutEnabled = 1,
-    AttackTimeoutMs = 1000,
+    AttackTimeoutMs = 5000,
 
     -- 臨時跳過目標配置
-    TemporarySkipDuration = 3000,  -- 放棄目標後3秒內不再鎖定
+    TemporarySkipDuration = 10000,  -- 放棄目標後10秒內不再鎖定
 
     -- 技能設定
 
@@ -1151,10 +1151,10 @@ HomConfig = {
 
     -- 攻擊超時防卡機制
     AttackTimeoutEnabled = 1,
-    AttackTimeoutMs = 1000,
+    AttackTimeoutMs = 5000,
 
     -- 臨時跳過目標配置
-    TemporarySkipDuration = 3000,  -- 放棄目標後3秒內不再鎖定
+    TemporarySkipDuration = 10000,  -- 放棄目標後10秒內不再鎖定
 
     -- 技能設定
 
