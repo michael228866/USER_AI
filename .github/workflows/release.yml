@@ -43,4 +43,4 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "build-$env:GITHUB_SHA" ./release/USER_AI_full.zip ./release/USER_AI_update.zip --target "$env:GITHUB_SHA" --latest --title "USER_AI $($env:GITHUB_SHA.Substring(0,7))" --notes "下載 USER_AI_update.zip 更新現有資料夾；此包不含個人 Lua 設定、名單、Profiles 或 Log。首次使用請下載 USER_AI_full.zip。"
+          gh release create "build-$env:GITHUB_SHA" ./release/USER_AI_full.zip ./release/USER_AI_update.zip ./release/USER_AI_lua.zip --target "$env:GITHUB_SHA" --latest --title "USER_AI $($env:GITHUB_SHA.Substring(0,7))" --notes "下載 USER_AI_update.zip 更新現有資料夾；此包不含個人 Lua 設定、名單、Profiles 或 Log。首次使用請下載 USER_AI_full.zip。"

@@ -137,9 +137,10 @@ public partial class MainWindow : Window
         }
         var dirty = session.IsDirty || ListsDirty || ProfilesDirty;
         if (!Confirm($"發現新版 {update.Revision}，要立即下載並更新嗎？\n\n" +
-                     "更新會覆蓋 AI 程式檔與管理器，不會動到你的生命體設定、朋友／黑名單與自訂配置。\n" +
-                     "完成後管理器會自動重新開啟，遊戲內請重新召喚生命體以套用新 AI。" +
-                     (dirty ? "\n\n注意：目前有未儲存的修改，更新後會遺失。" : "")))
+                     "更新會覆蓋 AI 程式檔，不會動到你的生命體設定、朋友／黑名單與自訂配置。\n" +
+                     "管理器本身沒有變更時只下載 Lua 檔；有變更時會一併更新並自動重新開啟。\n" +
+                     "遊戲內請重新召喚生命體以套用新 AI。" +
+                     (dirty ? "\n\n注意：目前有未儲存的修改，若管理器需要重新開啟會遺失。" : "")))
             return;
 
         checkingUpdates = true;
@@ -152,7 +153,16 @@ public partial class MainWindow : Window
                     ? $"下載更新中 {p.Read * 100 / p.Total.Value}%（{p.Read / 1048576.0:0.0}/{p.Total.Value / 1048576.0:0.0} MB）"
                     : $"下載更新中 {p.Read / 1048576.0:0.0} MB");
             var exe = await UpdateService.InstallAsync(update, installDir, progress);
-            UpdateButton.Content = "安裝更新中…";
+            if (exe is null)
+            {
+                availableUpdate = null;
+                UpdateButton.Content = "檢查更新";
+                UpdateButton.Background = Control;
+                UpdateButton.ToolTip = "目前沒有可用的更新；按此重新檢查";
+                MessageBox.Show(this, $"已更新到 {update.Revision}（只更新 Lua 檔，管理器不需重開）。\n遊戲內請重新召喚生命體以套用新 AI。",
+                    "檢查更新", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
             restartingForUpdate = true;
             UpdateService.Restart(exe);
             Close();

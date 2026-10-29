@@ -9,12 +9,12 @@ $exe = (Resolve-Path $ExePath).Path
 New-Item -ItemType Directory -Force -Path $OutputDirectory | Out-Null
 $output = (Resolve-Path $OutputDirectory).Path
 
-function New-Package([string]$name, [bool]$includeDefaults) {
+function New-Package([string]$name, [bool]$includeDefaults, [bool]$includeManager = $true) {
     $stage = Join-Path $output ([guid]::NewGuid().ToString('N'))
     $target = Join-Path $stage 'USER_AI'
     try {
         New-Item -ItemType Directory -Force -Path (Join-Path $target 'RNAI/custom') | Out-Null
-        Copy-Item -LiteralPath $exe -Destination (Join-Path $target '生命體AI管理器.exe')
+        if ($includeManager) { Copy-Item -LiteralPath $exe -Destination (Join-Path $target '生命體AI管理器.exe') }
         Copy-Item -Path (Join-Path $root '*.lua') -Destination $target
         Copy-Item -Path (Join-Path $root 'RNAI/*.lua') -Destination (Join-Path $target 'RNAI')
         Copy-Item -LiteralPath (Join-Path $root 'RNAI/custom/Vanilmirth.lua') -Destination (Join-Path $target 'RNAI/custom')
@@ -46,3 +46,5 @@ AI 運作需要 Lua 檔案，因此 Lua 程式內容可被閱讀；本包不包�
 
 New-Package 'USER_AI_full.zip' $true
 New-Package 'USER_AI_update.zip' $false
+# Used by the manager's updater when the manager itself has not changed since the installed build.
+New-Package 'USER_AI_lua.zip' $false $false

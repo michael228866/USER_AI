@@ -280,13 +280,27 @@ internal static class SelfTests
             Write(install, "manager.exe", "old exe");
             Write(Path.Combine(install, "RNAI", "custom"), "homunculus_config.lua", "user config");
 
-            var exe = UpdateService.Apply(package, install, Path.Combine(install, "manager.exe"));
+            var exe = UpdateService.Apply(package, install);
             Check(File.ReadAllText(Path.Combine(install, "AI.lua")) == "new ai" &&
                   File.ReadAllText(Path.Combine(install, "RNAI", "Main.lua")) == "new main", "自動更新覆蓋 AI 檔案");
             Check(exe == Path.Combine(install, "manager.exe") && File.ReadAllText(exe) == "new exe" &&
                   File.ReadAllText(exe + ".old") == "old exe", "自動更新替換管理器並保留舊版");
             Check(File.ReadAllText(Path.Combine(install, "RNAI", "custom", "homunculus_config.lua")) == "user config",
                 "自動更新不動個人設定");
+
+            File.Delete(Path.Combine(package, "manager.exe"));
+            Write(package, "AI.lua", "lua only");
+            Check(UpdateService.Apply(package, install) is null &&
+                  File.ReadAllText(Path.Combine(install, "AI.lua")) == "lua only" &&
+                  File.ReadAllText(Path.Combine(install, "manager.exe")) == "new exe", "Lua 更新包不動管理器");
+
+            var commit = new string('c', 40);
+            Check(UpdateService.ReadRevision(install, "fallback") == "fallback", "沒有安裝紀錄時使用管理器版本");
+            Write(install, "installed_revision.txt", commit + "\r\n");
+            Check(UpdateService.ReadRevision(install, "fallback") == commit, "讀取已安裝版本紀錄");
+            Check(!UpdateService.TouchesManager(["RNAI/Main.lua", "RNAI/custom/homunculus_config.lua"]) &&
+                  UpdateService.TouchesManager(["RNAI/Main.lua", "RNAI/custom/manager_source_v2/Program.cs"]) &&
+                  UpdateService.TouchesManager([".github/workflows/release.yml"]), "判斷管理器是否有變更");
         }
         finally { Directory.Delete(dir, true); }
     }
