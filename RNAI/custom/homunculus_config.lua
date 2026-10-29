@@ -39,7 +39,6 @@ HomConfig = {
     SkillMinSP = 0,
 
     -- Dance Attack 設定
-    DanceAttackMode = 0,
     PlayerASPD = 188,
     DanceMinSP = 0,
     DanceActivationDelay = 500,
@@ -186,7 +185,6 @@ HomConfig = {
     SkillMinSP = 0,
 
     -- Dance Attack 設定
-    DanceAttackMode = 0,
     PlayerASPD = 188,
     DancePhase = 0.25,
     UseHopDance = false,
@@ -302,7 +300,6 @@ HomConfig = {
     SkillMinSP = 100,
 
     -- Dance Attack 設定
-    DanceAttackMode = 1,
     PlayerASPD = 193,
     DancePhase = 0.4,
     UseHopDance = true,
@@ -435,7 +432,6 @@ HomConfig = {
     SkillMinSP = 0,
 
     -- Dance Attack 設定
-    DanceAttackMode = 1,
     PlayerASPD = 190,
     DanceMinSP = 0,
     DanceActivationDelay = 500,
@@ -569,7 +565,6 @@ HomConfig = {
     SkillMinSP = 0,
 
     -- Dance Attack 設定
-    DanceAttackMode = 0,
     DanceEnabled = false,
     DanceAttack = true,
     UseHopDance = false,
@@ -701,7 +696,6 @@ HomConfig = {
     SkillMinSP = 0,
 
     -- Dance Attack 設定
-    DanceAttackMode = 0,
     DanceEnabled = false,
     DanceAttack = true,
     UseHopDance = false,
@@ -833,7 +827,6 @@ HomConfig = {
     SkillMinSP = 0,
 
     -- Dance Attack 設定
-    DanceAttackMode = 0,
     DanceEnabled = false,
     DanceAttack = true,
     UseHopDance = false,
@@ -960,7 +953,6 @@ HomConfig = {
     SkillMinSP = 0,
 
     -- Dance Attack 設定
-    DanceAttackMode = 0,
     DanceEnabled = false,
     DanceAttack = true,
     UseHopDance = false,
@@ -1092,7 +1084,6 @@ HomConfig = {
     SkillMinSP = 0,
 
     -- Dance Attack 設定
-    DanceAttackMode = 0,
     DanceEnabled = false,
     DanceAttack = true,
     UseHopDance = false,
@@ -1248,7 +1239,7 @@ function LoadHomConfig(myid)
     TraceAI(string.format("【偵錯】判定生命體為: %s", tostring(homType)))
     local config = homType and HomConfig[homType]
     if config then
-      TraceAI(string.format("【偵錯】載入 %s 設定，DanceAttackMode = %s", homType, tostring(config.DanceAttackMode)))
+      TraceAI(string.format("【偵錯】載入 %s 設定", homType))
       for k, v in pairs(config) do
         if type(v) == "table" then
           _G[k] = deepcopy(v)

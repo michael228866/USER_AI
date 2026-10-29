@@ -337,7 +337,7 @@ public partial class MainWindow : Window
         var battle = new HashSet<string>
         {
             "AttackMonstersEnabled", "CooperativeMode", "ContinuousAttackMode", "FollowMode", "AltT_ToggleMode",
-            "SentryMode", "AutoCounterAttack", "MVPMode", "SkillMode", "DanceAttackMode",
+            "SentryMode", "AutoCounterAttack", "MVPMode", "SkillMode",
             "AutoBlacklist", "BlacklistPriority", "BlacklistOnly"
         };
         return SettingsCatalog.ForType(session.Type).Where(field => name switch

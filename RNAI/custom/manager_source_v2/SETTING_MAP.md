@@ -10,7 +10,6 @@
 | `CooperativeMode` | 1/1/1/0 | 決定生命體如何配合主人選擇攻擊目標。 | Enum / 0-1 | Segmented | 僅確認載入，未見直接引用 |
 | `ContinuousAttackMode` | 2/0/0/2 | 控制擊殺後是否繼續搜尋，以及返回主人的距離。 | Enum / 0-1 | Segmented | 僅確認載入，未見直接引用 |
 | `AutoCounterAttack` | 1/1/1/0 | 受到攻擊時是否反擊。 | Enum / 0-1 | Toggle | 僅確認載入，未見直接引用 |
-| `DanceAttackMode` | 0/0/0/0 | 設定檔的走位攻擊開關。 | Enum / 0-1 | Toggle | 程式碼引用候選 |
 | `FollowMode` | 0/0/0/0 | 原 Lua 未說明各數值的行為；保留原始數值。 | Enum / 0-1 | Segmented | 僅確認載入，未見直接引用 |
 | `SentryMode` | 0/0/0/0 | 是否使用哨戒點周圍的搜尋行為。 | Enum / 0-1 | Toggle | 僅確認載入，未見直接引用 |
 | `players` | 1/1/1/1 | 1 代表不攻擊玩家；0 代表允許。 | Enum / 0-1 | Toggle | 程式碼引用候選 |

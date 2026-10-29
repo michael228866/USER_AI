@@ -48,7 +48,6 @@ SkillMinSP = 0-- 自動技能最低SP；0=不限制，低於此SP時不施放技
 -- 說明: 控制生命體是否使用技能，支援主動/被動/哨兵/反擊所有模式
 
 -- Dance Attack 設定
-DanceAttackMode = 0  -- 跳舞攻擊模式：0=關閉, 1=開啟
 PlayerASPD = 190     -- 玩家ASPD值（必填）
 DanceMinSP = 0       -- 最小SP需求：僅在SP >= 此值時執行dance
 DanceActivationDelay = 500  -- 載入後延遲(ms)：召喚/重登x豪秒後才啟用Dance（防止過圖斷線）

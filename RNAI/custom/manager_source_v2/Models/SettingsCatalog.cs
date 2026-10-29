@@ -8,12 +8,12 @@ internal sealed record SettingDefinition(
     string Unit = "", params string[] Choices)
 {
     internal bool IsBoolean => Key is "DanceEnabled" or "DanceAttack" or "UseHopDance";
-    internal bool AppliesTo(string type) => (type is "eira" or "bayeri" or "sera" or "dieter" or "eleanor") ? Key is not ("PlayerASPD" or "DanceAttack" or "DanceAttackMode") : (Key != "ASPD" &&
+    internal bool AppliesTo(string type) => (type is "eira" or "bayeri" or "sera" or "dieter" or "eleanor") ? Key is not ("PlayerASPD" or "DanceAttack") : (Key != "ASPD" &&
         (Key is not ("DanceEnabled" or "DanceAttack" or "SkillThrottleMs")
         || type is "lif" or "Vanilmirth"));
     internal bool InLegacyProfile => LegacyProfileKeys.Contains(Key);
     internal int Scale => Key == "DancePhase" ? 100 : 1;
-    private static readonly HashSet<string> LegacyProfileKeys = ["AttackMonstersEnabled", "CooperativeMode", "ContinuousAttackMode", "AutoCounterAttack", "DanceAttackMode", "FollowMode", "SentryMode", "players", "friends", "homunculus", "plants", "emperium", "priorityTargets", "smartAttackOrder", "RadiusAggr", "FollowDis", "SentryRadius", "PlayerASPD", "AttackTimeoutMs", "AltT_ToggleMode", "SkillMinSP"];
+    private static readonly HashSet<string> LegacyProfileKeys = ["AttackMonstersEnabled", "CooperativeMode", "ContinuousAttackMode", "AutoCounterAttack", "FollowMode", "SentryMode", "players", "friends", "homunculus", "plants", "emperium", "priorityTargets", "smartAttackOrder", "RadiusAggr", "FollowDis", "SentryRadius", "PlayerASPD", "AttackTimeoutMs", "AltT_ToggleMode", "SkillMinSP"];
     internal string DisplayValue(int value) => Kind == SettingKind.Number
         ? $"{value / (double)Scale:0.##}{(Unit.Length == 0 ? "" : " " + Unit)}"
         : value >= 0 && value < Choices.Length ? Choices[value] : value.ToString();
@@ -40,7 +40,6 @@ internal static class SettingsCatalog
         new("CooperativeMode", "協同作戰模式", "決定生命體如何配合主人選擇攻擊目標。", "戰鬥行為", SettingKind.Choice, 0, 3, "combat", Choices: ["被動", "主動", "鎖定主人目標", "內掛鎖定"]),
         new("ContinuousAttackMode", "連續戰鬥模式", "控制擊殺後是否繼續搜尋，以及返回主人的距離。", "戰鬥行為", SettingKind.Choice, 0, 2, "combat", Choices: ["標準", "連續戰鬥", "激進"]),
         new("AutoCounterAttack", "自動反擊", "受到攻擊時是否反擊。", "戰鬥行為", SettingKind.Toggle, 0, 1, "combat", Choices: ["關閉", "開啟"]),
-        new("DanceAttackMode", "舊版走位模式值", "RO3 原版舞步不讀取此值；實際由 DanceEnabled 控制。", "戰鬥行為", SettingKind.Toggle, 0, 1, "combat", Choices: ["0", "1"]),
         new("FollowMode", "跟隨模式", "原 Lua 未說明各數值的行為；保留原始數值。", "移動與跟隨", SettingKind.Choice, 0, 2, "combat", Choices: ["模式 0", "模式 1", "模式 2"]),
         new("SentryMode", "哨戒模式", "是否使用哨戒點周圍的搜尋行為。", "戰鬥行為", SettingKind.Toggle, 0, 1, "combat", Choices: ["關閉", "開啟"]),
 
