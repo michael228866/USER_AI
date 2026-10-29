@@ -227,6 +227,38 @@ local function SafeFreeObjRectPos(target,myid,range,oid)
   return nil,nil
 end
 
+-- The client API exposes no walls or pathing, so a monster behind a wall is
+-- detected by its effect: the chase stops closing in and no attack or cast
+-- happens within AttackTimeoutMs. Such a target is skipped for
+-- TemporarySkipDuration (checked by the target scoring in MapInfo.lua).
+TargetSkipUntil = TargetSkipUntil or {}
+local ChaseTarget,ChaseBestDis,ChaseProgressTick=0,999,0
+
+local function ChaseTimedOut(myid,target,now)
+  if (AttackTimeoutEnabled or 1)==0 then return false end
+  local dis=SafeRectDistance(myid,target)
+  if target~=ChaseTarget then
+    ChaseTarget,ChaseBestDis,ChaseProgressTick=target,dis,now
+    return false
+  end
+  local motion=SafeGetMotion(myid)
+  if dis<ChaseBestDis or motion==MOTION_ATTACK or motion==MOTION_ATTACK2 or motion==MOTION_CAST then
+    ChaseBestDis=math.min(ChaseBestDis,dis)
+    ChaseProgressTick=now
+    return false
+  end
+  return now-ChaseProgressTick>(AttackTimeoutMs or 2000)
+end
+
+local function SkipUnreachableTarget(target,now)
+  for id,untilTick in pairs(TargetSkipUntil) do
+    if untilTick<=now then TargetSkipUntil[id]=nil end
+  end
+  TargetSkipUntil[target]=now+(TemporarySkipDuration or 3000)
+  ChaseTarget=0
+  AI_Log("target " .. tostring(target) .. " unreachable, skip " .. tostring(TemporarySkipDuration or 3000) .. "ms")
+end
+
 local function SafeAttack(myid,target)
   if not IsAttackableTarget(target) then return false end
   local now=GetTick()
@@ -738,6 +770,9 @@ function AI(myid)
 
   elseif (MyState==ST_ATTACK_PRE) then
     if(bestTarget<=0 or Mobs[bestTarget]==nil or Mobs[bestTarget][5]<0)then RemoveTarget(); MyState=ST_FOLLOW
+    elseif ChaseTimedOut(myid,Mobs[bestTarget][1],currentTick) then
+      SkipUnreachableTarget(Mobs[bestTarget][1],currentTick)
+      RemoveTarget(); Target=0; MyState=ST_FOLLOW
     else
       Target=Mobs[bestTarget][1]
       if(isWeakTarget(Target))then

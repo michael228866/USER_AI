@@ -446,6 +446,9 @@ function RefreshData(myid,oid) --更新戰場情報
       score=(score>=0) and (score*100+30-d1-d2) or -1
     end
 
+    -- 暫時跳過打不到的目標（例如隔牆），由 Main.lua 的追擊逾時判定
+    if TargetSkipUntil and (TargetSkipUntil[v[1]] or 0)>t then score=-1 end
+
     Mobs[i][5]=score
     if(score>max_score)then
       max_score=score
