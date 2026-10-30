@@ -510,9 +510,9 @@ end
 
 -- The server regenerates SP only after about 4.3s without moving, so while SP
 -- is not full dancing stops until the next regen and then dances for
--- DanceRegenBurstMs (0 = never rest).
+-- DanceRegenBurstMs (default 0 = never rest; 4000 alternates evenly).
 local function DanceResting(myid,now)
-  local burst=DanceRegenBurstMs or 4000
+  local burst=DanceRegenBurstMs or 0
   if burst<=0 then return false end
   local sp,maxsp=SafeGetV(V_SP,myid),SafeGetV(V_MAXSP,myid)
   if not sp or not maxsp or sp>=maxsp then return false end
