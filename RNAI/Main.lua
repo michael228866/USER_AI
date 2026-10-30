@@ -503,9 +503,12 @@ local function DoHopDance(myid, enemy)
   if not bx or not by then return false end
   local nx,ny = GetDanceCell(bx,by,enemy)
   if not nx or not ny then return false end
-  -- One hop per move interval; the step back happens on the next hop.
+  -- One hop (out, attack, back) per move interval; the step back is part of
+  -- the hop, so it bypasses the SafeMove rate limit.
   if not SafeMove(myid, nx, ny) then return false end
-  return SafeAttack(myid, enemy)
+  local attacked=SafeAttack(myid, enemy)
+  pcall(Move, myid, bx, by)
+  return attacked
 end
 
 -- The server regenerates SP only after about 4.3s without moving, so while SP
