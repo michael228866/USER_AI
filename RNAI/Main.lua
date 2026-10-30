@@ -118,9 +118,16 @@ local function SafeCommand(fn,id)
   return {NONE_CMD or 0}
 end
 
+-- Every Move is a packet to the server. Callers such as following and hop
+-- dancing used to send one or two per AI tick, which servers can treat as a
+-- flood and disconnect, so all moves share one rate limit.
+local LastMovePacketTick=0
 local function SafeMove(id,x,y)
   if not id or not x or not y then return false end
+  local now=GetTick()
+  if now-LastMovePacketTick<math.max(MoveDelay or 150,100) then return false end
   local ok=pcall(Move,id,x,y)
+  if ok then LastMovePacketTick=now end
   return ok==true
 end
 
@@ -488,6 +495,7 @@ end
 
 local function DoHopDance(myid, enemy)
   if IsTransitionProtected(GetTick()) then return false end
+  if SafeRectDistance(myid,enemy) > (DanceMaxRadius or 2) then return false end
   local ex,ey = SafeGetV(V_POSITION, enemy)
   if not ex or not ey then return false end
   local keepR = DanceKeepRange or AtkDis or 1
@@ -495,11 +503,9 @@ local function DoHopDance(myid, enemy)
   if not bx or not by then return false end
   local nx,ny = GetDanceCell(bx,by,enemy)
   if not nx or not ny then return false end
-  SafeMove(myid, nx, ny)
-  local attacked=SafeAttack(myid, enemy)
-  SafeMove(myid, bx, by)
-  LastAttackTick = GetTick()
-  return attacked
+  -- One hop per move interval; the step back happens on the next hop.
+  if not SafeMove(myid, nx, ny) then return false end
+  return SafeAttack(myid, enemy)
 end
 
 function AttackDanceTick(myid,target)
