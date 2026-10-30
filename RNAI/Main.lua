@@ -188,16 +188,43 @@ local function IsSkillAutoEnabled(sk)
   return type(config)~="table" or config.enabled~=false
 end
 
--- dofile() rejects a UTF-8 BOM, which editors may add when saving config files.
-local function LoadConfigFile(path)
+local function ReadConfigSource(path)
   local fp=io.open(path,"rb")
-  if not fp then error("cannot open "..path) end
+  if not fp then return nil end
   local source=fp:read("*a")
   fp:close()
+  -- dofile() rejects a UTF-8 BOM, which editors may add when saving config files.
   if string.sub(source,1,3)=="\239\187\191" then source=string.sub(source,4) end
+  return source
+end
+
+-- The last loaded config, watched so that edits apply without re-summoning.
+local ConfigPath,ConfigSource,ConfigCheckTick=nil,nil,0
+
+local function LoadConfigFile(path)
+  local source=ReadConfigSource(path)
+  if not source then error("cannot open "..path) end
   local chunk,err=(loadstring or load)(source,"@"..path)
   if not chunk then error(err) end
+  ConfigPath,ConfigSource=path,source
   return chunk()
+end
+
+-- A changed file that does not compile is ignored so a half-finished edit
+-- keeps the running settings instead of falling back to another config.
+local function ConfigChanged(now)
+  if not ConfigPath or now-ConfigCheckTick<(ConfigReloadCheckMs or 2000) then return false end
+  ConfigCheckTick=now
+  local source=ReadConfigSource(ConfigPath)
+  if not source or source==ConfigSource then return false end
+  ConfigSource=source
+  local chunk,err=(loadstring or load)(source,"@"..ConfigPath)
+  if not chunk then
+    AI_Log("config changed but has errors, keeping current settings: " .. tostring(err))
+    return false
+  end
+  AI_Log("config changed, reloading " .. ConfigPath)
+  return true
 end
 
 local function SafeGetMotion(target)
@@ -625,6 +652,7 @@ function AI(myid)
   local homType=SafeGetV(V_HOMUNTYPE,myid)
   local isHomunculus=homType~=nil
 
+  if InitStatus==2 and ConfigChanged(currentTick) then InitStatus=0 end
   if InitStatus==0 then
     AI_Log("AI init step 0 start, myid=" .. tostring(myid) .. ", owner=" .. tostring(oid) .. ", isHomunculus=" .. tostring(isHomunculus))
     AtkDis=SafeGetV(V_ATTACKRANGE,myid) or 1
