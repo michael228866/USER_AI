@@ -737,6 +737,13 @@ function AI(myid)
     return
   end
   if(mymo~=MyMotion)then MyMotion=mymo; MyMotion_t=GetTick() end
+  -- shortcut: diagnostic to learn when the server regenerates SP, remove once dancing rests for it
+  if mymo==MOTION_MOVE then LastWalkTick=currentTick end
+  local sp=SafeGetV(V_SP,myid)
+  if sp and LastSP and sp>LastSP then
+    AI_Log("sp +"..(sp-LastSP).." -> "..sp..", still "..(currentTick-(LastWalkTick or 0)).."ms, last move cmd "..(currentTick-LastMovePacketTick).."ms ago")
+  end
+  LastSP=sp
 
   RefreshData(myid,oid)
   if IsTransitionProtected(currentTick) then
