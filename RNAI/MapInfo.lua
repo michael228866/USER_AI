@@ -353,7 +353,7 @@ function RefreshData(myid,oid) --更新戰場情報
                 end
 
                 local ownerDis=safe_obj_rect_dis(oid,v) or 999
-                Mobs[v][4]=(ownerDis>14) and -1 or RefreshKey
+                Mobs[v][4]=(ownerDis>math.min(radius,14)) and -1 or RefreshKey -- 索敵半徑也是追擊上限，超出就放棄
                 tar=safe_getv(V_TARGET,v) or 0
                 if(tar>0 and safe_ismonster(tar)==false)then
                   Mobs[v][2]=tar
