@@ -610,6 +610,8 @@ function AI(myid)
     ResetBattleState("owner unavailable",currentTick,1200)
     return
   end
+  -- Every game client writes to the same ai.log.
+  AI_LOG_TAG="["..tostring(oid).."] "
 
   -- The owner or homunculus can disappear from GetV during character exit.
   -- Do not issue game commands while either actor has no valid position.

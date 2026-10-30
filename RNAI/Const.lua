@@ -74,7 +74,7 @@ function AI_Log(message)
 		return
 	end
 
-	file:write("[" .. ai_log_now() .. "] " .. tostring(message) .. "\n")
+	file:write("[" .. ai_log_now() .. "] " .. (AI_LOG_TAG or "") .. tostring(message) .. "\n")
 	file:close()
 end
 
