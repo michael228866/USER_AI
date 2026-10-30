@@ -139,7 +139,7 @@ public partial class MainWindow : Window
         if (!Confirm($"發現新版 {update.Revision}，要立即下載並更新嗎？\n\n" +
                      "更新會覆蓋 AI 程式檔，不會動到你的生命體設定、朋友／黑名單與自訂配置。\n" +
                      "管理器本身沒有變更時只下載 Lua 檔；有變更時會一併更新並自動重新開啟。\n" +
-                     "遊戲內請重新召喚生命體以套用新 AI。" +
+                     "遊戲內的生命體會在幾秒內自動套用新 AI，不必重新召喚。" +
                      (dirty ? "\n\n注意：目前有未儲存的修改，若管理器需要重新開啟會遺失。" : "")))
             return;
 
@@ -159,7 +159,7 @@ public partial class MainWindow : Window
                 UpdateButton.Content = "檢查更新";
                 UpdateButton.Background = Control;
                 UpdateButton.ToolTip = "目前沒有可用的更新；按此重新檢查";
-                MessageBox.Show(this, $"已更新到 {update.Revision}（只更新 Lua 檔，管理器不需重開）。\n遊戲內請重新召喚生命體以套用新 AI。",
+                MessageBox.Show(this, $"已更新到 {update.Revision}（只更新 Lua 檔，管理器不需重開）。\n遊戲內的生命體會在幾秒內自動套用新 AI，不必重新召喚。",
                     "檢查更新", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
