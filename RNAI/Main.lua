@@ -508,6 +508,17 @@ local function DoHopDance(myid, enemy)
   return SafeAttack(myid, enemy)
 end
 
+-- The server regenerates SP only after about 4.3s without moving, so while SP
+-- is not full dancing stops until the next regen and then dances for
+-- DanceRegenBurstMs (0 = never rest).
+local function DanceResting(myid,now)
+  local burst=DanceRegenBurstMs or 4000
+  if burst<=0 then return false end
+  local sp,maxsp=SafeGetV(V_SP,myid),SafeGetV(V_MAXSP,myid)
+  if not sp or not maxsp or sp>=maxsp then return false end
+  return now-(LastSPRegenTick or 0)>=burst
+end
+
 function AttackDanceTick(myid,target)
   if not DanceEnabled or not DanceAttack or not target or target<=0 then return end
   if IsTransitionProtected(GetTick()) then return end
@@ -737,10 +748,11 @@ function AI(myid)
     return
   end
   if(mymo~=MyMotion)then MyMotion=mymo; MyMotion_t=GetTick() end
-  -- shortcut: diagnostic to learn when the server regenerates SP, remove once dancing rests for it
+  -- SP regen times drive DanceResting; the log line shows how long it stood still.
   if mymo==MOTION_MOVE then LastWalkTick=currentTick end
   local sp=SafeGetV(V_SP,myid)
   if sp and LastSP and sp>LastSP then
+    LastSPRegenTick=currentTick
     AI_Log("sp +"..(sp-LastSP).." -> "..sp..", still "..(currentTick-(LastWalkTick or 0)).."ms, last move cmd "..(currentTick-LastMovePacketTick).."ms ago")
   end
   LastSP=sp
@@ -841,7 +853,7 @@ function AI(myid)
         end
       end
       -- ======（新增）舞步掛鉤：預攻擊階段也可抖動/試刀 ======
-      if DanceEnabled and Target>0 and not IsPlayerTarget(Target) then
+      if DanceEnabled and Target>0 and not IsPlayerTarget(Target) and not DanceResting(myid,currentTick) then
         if not UseHopDance or not DoHopDance(myid, Target) then
           AttackDanceTick(myid,Target)
         end
@@ -866,7 +878,7 @@ function AI(myid)
         end
       end
       -- ======（新增）舞步掛鉤：攻擊態持續抖動/Hop ======
-      if DanceEnabled and Target>0 and not IsPlayerTarget(Target) and SafeRectDistance(myid,Target) <= (DanceMaxRadius or AtkDis) then
+      if DanceEnabled and Target>0 and not IsPlayerTarget(Target) and SafeRectDistance(myid,Target) <= (DanceMaxRadius or AtkDis) and not DanceResting(myid,currentTick) then
         if not UseHopDance or not DoHopDance(myid, Target) then
           AttackDanceTick(myid,Target)
         end
