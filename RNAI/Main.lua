@@ -228,26 +228,33 @@ local function SafeFreeObjRectPos(target,myid,range,oid)
 end
 
 -- The client API exposes no walls or pathing, so a monster behind a wall is
--- detected by its effect: the chase stops closing in and no attack or cast
--- happens within AttackTimeoutMs. Such a target is skipped for
--- TemporarySkipDuration (checked by the target scoring in MapInfo.lua).
+-- detected by its effect: the chase stops closing in, the target stays out of
+-- range and does not fight back within AttackTimeoutMs. Such a target is
+-- skipped for TemporarySkipDuration (checked by the target scoring in
+-- MapInfo.lua). Being in attack range counts as fighting because the attack
+-- motion is shorter than the attack delay and dancing interrupts it; skill
+-- range counts only while skills are actually being cast.
 TargetSkipUntil = TargetSkipUntil or {}
-local ChaseTarget,ChaseBestDis,ChaseProgressTick=0,999,0
+local ChaseTarget,ChaseBestDis,ChaseProgressTick,ChaseRange=0,999,0,1
 
 local function ChaseTimedOut(myid,target,now)
   if (AttackTimeoutEnabled or 1)==0 then return false end
   local dis=SafeRectDistance(myid,target)
   if target~=ChaseTarget then
-    ChaseTarget,ChaseBestDis,ChaseProgressTick=target,dis,now
+    ChaseTarget,ChaseBestDis,ChaseProgressTick,ChaseRange=target,dis,now,AtkDis or 1
     return false
   end
+  local timeout=AttackTimeoutMs or 5000
   local motion=SafeGetMotion(myid)
-  if dis<ChaseBestDis or motion==MOTION_ATTACK or motion==MOTION_ATTACK2 or motion==MOTION_CAST then
+  if dis<ChaseBestDis or dis<=(AtkDis or 1)
+     or (dis<=ChaseRange and now-(LastSkillTick or 0)<=timeout)
+     or SafeGetV(V_TARGET,target)==myid
+     or motion==MOTION_ATTACK or motion==MOTION_ATTACK2 or motion==MOTION_CAST then
     ChaseBestDis=math.min(ChaseBestDis,dis)
     ChaseProgressTick=now
     return false
   end
-  return now-ChaseProgressTick>(AttackTimeoutMs or 5000)
+  return now-ChaseProgressTick>timeout
 end
 
 local function SkipUnreachableTarget(target,now)
@@ -784,6 +791,7 @@ function AI(myid)
         end
       else
         local chaseDis = autoUseSkill(myid, oid, Target, 2)
+        ChaseRange=tonumber(chaseDis) or AtkDis or 1
         if(chaseDis~=false and Target>0 and SafeRectDistance(oid,Target)<15)then
           local x,y=SafeFreeObjRectPos(Target,myid,chaseDis,oid)
           MoveToDest(myid,x,y)
