@@ -478,7 +478,10 @@ local function GetDanceCell(x, y, enemy)
   local first  = (DanceDir >= 0) and 1 or -1
   local second = -first
   local bx,by = x,y
-  local cand = { { bx + first*step, by }, { bx + second*step, by }, }
+  -- Vertical steps cover a target straight east or west, where no
+  -- horizontal step stays at keepR.
+  local cand = { { bx + first*step, by }, { bx + second*step, by },
+                 { bx, by + first*step }, { bx, by + second*step }, }
   local function valid(cx,cy)
     local d = math.max(math.abs(cx-ex), math.abs(cy-ey))
     if d ~= keepR then return false end
@@ -600,7 +603,9 @@ local SmartX,SmartY,SmartTick,SmartTries,SmartSince=nil,nil,0,0,0
 function ChaseMove(myid,x,y,now)
   local mx,my=SafeGetV(V_POSITION,myid)
   if SmartMoveEnabled~=1 or not mx or not x or not y then MoveToDest(myid,x,y); return false end
-  if not SmartX or math.max(math.abs(mx-SmartX),math.abs(my-SmartY))>=2 or (mx==x and my==y) then
+  -- Dancing next to the target moves less than 2 cells but is not stuck.
+  if not SmartX or math.max(math.abs(mx-SmartX),math.abs(my-SmartY))>=2 or (mx==x and my==y)
+     or (Target>0 and SafeRectDistance(myid,Target)<=math.max(AtkDis or 1,DanceMaxRadius or 2)) then
     SmartX,SmartY,SmartTick,SmartTries=mx,my,now,0
     MoveToDest(myid,x,y)
     return false
