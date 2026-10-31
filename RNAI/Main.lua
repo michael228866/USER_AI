@@ -522,6 +522,18 @@ local function DanceResting(myid,now)
   return now-(LastSPRegenTick or 0)>=burst
 end
 
+-- Dance only after standing in attack range of the target for
+-- DanceCombatDelay, so it does not start while still walking up to it.
+local DanceTarget,DanceEngageTick=0,0
+local function DanceAllowed(myid,target,now)
+  if SafeRectDistance(myid,target)>math.max(AtkDis or 1,DanceMaxRadius or 2) then
+    DanceTarget=0
+    return false
+  end
+  if target~=DanceTarget then DanceTarget,DanceEngageTick=target,now end
+  return now-DanceEngageTick>=(DanceCombatDelay or 400) and not DanceResting(myid,now)
+end
+
 function AttackDanceTick(myid,target)
   if not DanceEnabled or not DanceAttack or not target or target<=0 then return end
   if IsTransitionProtected(GetTick()) then return end
@@ -856,7 +868,7 @@ function AI(myid)
         end
       end
       -- ======（新增）舞步掛鉤：預攻擊階段也可抖動/試刀 ======
-      if DanceEnabled and Target>0 and not IsPlayerTarget(Target) and not DanceResting(myid,currentTick) then
+      if DanceEnabled and Target>0 and not IsPlayerTarget(Target) and DanceAllowed(myid,Target,currentTick) then
         if not UseHopDance or not DoHopDance(myid, Target) then
           AttackDanceTick(myid,Target)
         end
@@ -881,7 +893,7 @@ function AI(myid)
         end
       end
       -- ======（新增）舞步掛鉤：攻擊態持續抖動/Hop ======
-      if DanceEnabled and Target>0 and not IsPlayerTarget(Target) and SafeRectDistance(myid,Target) <= (DanceMaxRadius or AtkDis) and not DanceResting(myid,currentTick) then
+      if DanceEnabled and Target>0 and not IsPlayerTarget(Target) and SafeRectDistance(myid,Target) <= (DanceMaxRadius or AtkDis) and DanceAllowed(myid,Target,currentTick) then
         if not UseHopDance or not DoHopDance(myid, Target) then
           AttackDanceTick(myid,Target)
         end
