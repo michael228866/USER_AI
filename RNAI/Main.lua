@@ -824,6 +824,9 @@ function AI(myid)
       SkipUnreachableTarget(Mobs[bestTarget][1],currentTick)
       RemoveTarget(); Target=0; MyState=ST_FOLLOW
     else
+      if Target~=Mobs[bestTarget][1] then
+        AI_Log("target "..tostring(Mobs[bestTarget][1]).." type "..tostring(SafeGetV(V_HOMUNTYPE,Mobs[bestTarget][1])).." score "..tostring(Mobs[bestTarget][5]))
+      end
       Target=Mobs[bestTarget][1]
       if(isWeakTarget(Target))then
         local dis=SafeRectDistance(myid,Target)
