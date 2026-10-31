@@ -58,7 +58,7 @@ internal static class SettingsCatalog
         new("SentryRadius", "哨戒半徑", "哨兵點周圍的搜尋與追擊範圍。", "移動與跟隨", SettingKind.Number, 0, 100, "parameters", Unit: "格"),
         new("PlayerASPD", "攻速 ASPD", "舞步與攻擊節奏使用的攻速。", "移動與跟隨", SettingKind.Number, 1, 193, "parameters", Unit: "ASPD"),
         new("AttackTimeoutMs", "攻擊逾時", "攻擊卡住後放棄目標的時間；Lua 使用毫秒。", "戰鬥行為", SettingKind.Number, 0, 60000, "parameters", Unit: "毫秒"),
-        new("AltT_ToggleMode", "Alt+T 切換模式", "按快捷鍵後切換到的協同作戰模式。", "戰鬥行為", SettingKind.Choice, 0, 3, "parameters", Choices: ["被動", "主動", "鎖定主人目標", "內掛鎖定"]),
+        new("AltT_ToggleMode", "Alt+T 切換模式", "連按兩下 Alt+T 時切換到的協同作戰模式；選「不切換」就停用這個快捷鍵。", "戰鬥行為", SettingKind.Choice, 0, 4, "parameters", Choices: ["被動", "主動", "鎖定主人目標", "內掛鎖定", "不切換"]),
         new("SkillMinSP", "技能最低 SP", "低於此 SP 時不自動施放技能；0 表示不限制。", "技能管理", SettingKind.Number, 0, 100000, "parameters", Unit: "SP")
         ,new("MoveDelay", "移動延遲", "兩次移動指令間的間隔。", "移動與跟隨", SettingKind.Number, 0, 60000, "parameters", Unit: "毫秒")
         ,new("AutoReturnDelay", "自動返回延遲", "Alt+右鍵移動到定點後，等多久自動回到主人身邊；0 表示不自動返回。", "移動與跟隨", SettingKind.Number, 0, 60000, "parameters", Unit: "毫秒")
@@ -71,12 +71,9 @@ internal static class SettingsCatalog
         ,new("BlacklistPriority", "黑名單優先", "黑名單上的玩家或怪物種類優先攻擊。", "黑白名單", SettingKind.Toggle, 0, 1, "combat", Choices: ["關閉", "開啟"])
         ,new("BlacklistOnly", "僅攻擊黑名單", "只攻擊黑名單上的對象（反擊不受限）。", "黑白名單", SettingKind.Toggle, 0, 1, "combat", Choices: ["關閉", "開啟"])
         ,new("mercenary", "排除傭兵", "目標排除表中的傭兵值。", "攻擊目標與優先權", SettingKind.Toggle, 0, 1, "exclude", "AttackAllExclude", Choices: ["允許", "排除"])
-        ,new("ALT_T_ModeSwitch", "Alt+T 切換", "控制 Alt+T 模式切換快捷鍵。", "進階設定", SettingKind.Toggle, 0, 1, "hotkeys", "HotkeySettings", Choices: ["關閉", "開啟"])
         ,new("ALT_RightClick_Move", "Alt 右鍵移動", "控制 Alt 右鍵移動快捷鍵。", "進階設定", SettingKind.Toggle, 0, 1, "hotkeys", "HotkeySettings", Choices: ["關閉", "開啟"])
-        ,new("ALT_RightClick_FirstPoint", "Alt 右鍵第一點", "控制第一點快捷鍵。", "進階設定", SettingKind.Toggle, 0, 1, "hotkeys", "HotkeySettings", Choices: ["關閉", "開啟"])
-        ,new("ALT_SHIFT_SecondPoint", "Alt+Shift 第二點", "控制第二點快捷鍵。", "進階設定", SettingKind.Toggle, 0, 1, "hotkeys", "HotkeySettings", Choices: ["關閉", "開啟"])
-        ,new("ALT_SHIFT_FullView_FirstPoint", "全視野第一點", "控制全視野加入第一點。", "進階設定", SettingKind.Toggle, 0, 1, "hotkeys", "HotkeySettings", Choices: ["關閉", "開啟"])
-        ,new("ALT_SHIFT_FullView_SecondPoint", "全視野第二點", "控制全視野加入第二點。", "進階設定", SettingKind.Toggle, 0, 1, "hotkeys", "HotkeySettings", Choices: ["關閉", "開啟"])
+        ,new("ALT_RightClick_FirstPoint", "框選加朋友", "Alt+右鍵點第一個角、Alt+Shift+右鍵點第二個角，把範圍內的玩家加為朋友。", "進階設定", SettingKind.Toggle, 0, 1, "hotkeys", "HotkeySettings", Choices: ["關閉", "開啟"])
+        ,new("ALT_SHIFT_FullView_FirstPoint", "全視野加朋友", "Alt+Shift+右鍵在地面連點兩次（5 秒內），把畫面內所有玩家加為朋友。", "進階設定", SettingKind.Toggle, 0, 1, "hotkeys", "HotkeySettings", Choices: ["關閉", "開啟"])
         ,new("ALT_SHIFT_SingleAdd", "單一加入好友", "控制加入單一好友快捷鍵。", "進階設定", SettingKind.Toggle, 0, 1, "hotkeys", "HotkeySettings", Choices: ["關閉", "開啟"])
         ,new("ALT_SHIFT_CounterAttack", "反擊快捷鍵", "控制切換反擊快捷鍵。", "進階設定", SettingKind.Toggle, 0, 1, "hotkeys", "HotkeySettings", Choices: ["關閉", "開啟"])
         ,new("StuckDetectionEnabled", "卡住偵測", "移動卡住時嘗試恢復。", "移動與跟隨", SettingKind.Toggle, 0, 1, "parameters", Choices: ["關閉", "開啟"])

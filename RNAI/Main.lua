@@ -551,7 +551,8 @@ function Hotkey(name)
 end
 
 -- Double Alt+T switches between the configured CooperativeMode and
--- AltT_ToggleMode. Passive (0) uses SearchMode[1], the others SearchMode[2].
+-- AltT_ToggleMode (4 = no switching). Passive (0) uses SearchMode[1], the
+-- others SearchMode[2].
 CoopToggled=CoopToggled or false
 function ApplyCoopMode()
   if CoopToggled then CooperativeMode=AltT_ToggleMode or 1 else CooperativeMode=BaseCoopMode or 1 end
@@ -855,7 +856,7 @@ function AI(myid)
     end
   elseif msg[1]==FOLLOW_CMD then
     local t=GetTick()
-    if t-FollowCmdTime<500 and Hotkey("ALT_T_ModeSwitch") then
+    if t-FollowCmdTime<500 and AltT_ToggleMode~=4 then
       CoopToggled=not CoopToggled
       ApplyCoopMode()
       AI_Log("CooperativeMode="..tostring(CooperativeMode))
@@ -886,7 +887,7 @@ function AI(myid)
   -- Reserved (Alt+Shift) commands manage the friend list.
   if(msg[1]==NONE_CMD)then
     if(rmsg[1]==MOVE_CMD)then
-      if(MyState==ST_MOVE_CMD or MyState==ST_HOLD) and Hotkey("ALT_RightClick_FirstPoint") and Hotkey("ALT_SHIFT_SecondPoint") then
+      if(MyState==ST_MOVE_CMD or MyState==ST_HOLD) and Hotkey("ALT_RightClick_FirstPoint") then
         local x1,y1=math.min(DestX,rmsg[2]),math.min(DestY,rmsg[3])
         local x2,y2=math.max(DestX,rmsg[2]),math.max(DestY,rmsg[3])
         if addFriendsInRange then addFriendsInRange(x1,y1,x2,y2,myid,oid) end
@@ -897,7 +898,7 @@ function AI(myid)
           rmsg[1]=ATTACK_OBJECT_CMD; rmsg[2]=actor
         elseif FullViewTick and currentTick-FullViewTick<=5000 then
           FullViewTick=nil
-          if Hotkey("ALT_SHIFT_FullView_SecondPoint") and addAllVisibleFriends then
+          if addAllVisibleFriends then
             AI_Log("friends added in view: "..tostring(addAllVisibleFriends(myid,oid)))
           end
         elseif Hotkey("ALT_SHIFT_FullView_FirstPoint") then

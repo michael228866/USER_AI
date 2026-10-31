@@ -37,12 +37,9 @@
 | `BlacklistPriority` | 0/0/0/1 | 原版提供此開關；實際目標排序依 Lua 邏輯。 | Enum / 0-1 | Toggle | 僅確認載入，未見直接引用 |
 | `BlacklistOnly` | 0/0/0/0 | 原版提供此開關；實際目標過濾依 Lua 邏輯。 | Enum / 0-1 | Toggle | 程式碼引用候選 |
 | `mercenary` | 0/1/1/1 | 目標排除表中的傭兵值。 | Enum / 0-1 | Toggle | 僅確認載入，未見直接引用 |
-| `ALT_T_ModeSwitch` | 1/1/1/1 | 控制 Alt+T 模式切換快捷鍵。 | Enum / 0-1 | Toggle | 僅確認載入，未見直接引用 |
 | `ALT_RightClick_Move` | 1/1/1/1 | 控制 Alt 右鍵移動快捷鍵。 | Enum / 0-1 | Toggle | 僅確認載入，未見直接引用 |
 | `ALT_RightClick_FirstPoint` | 1/1/1/1 | 控制第一點快捷鍵。 | Enum / 0-1 | Toggle | 僅確認載入，未見直接引用 |
-| `ALT_SHIFT_SecondPoint` | 1/1/1/1 | 控制第二點快捷鍵。 | Enum / 0-1 | Toggle | 僅確認載入，未見直接引用 |
 | `ALT_SHIFT_FullView_FirstPoint` | 1/1/1/1 | 控制全視野加入第一點。 | Enum / 0-1 | Toggle | 僅確認載入，未見直接引用 |
-| `ALT_SHIFT_FullView_SecondPoint` | 1/1/1/1 | 控制全視野加入第二點。 | Enum / 0-1 | Toggle | 僅確認載入，未見直接引用 |
 | `ALT_SHIFT_SingleAdd` | 1/1/1/1 | 控制加入單一好友快捷鍵。 | Enum / 0-1 | Toggle | 僅確認載入，未見直接引用 |
 | `ALT_SHIFT_CounterAttack` | 1/0/0/0 | 控制切換反擊快捷鍵。 | Enum / 0-1 | Toggle | 僅確認載入，未見直接引用 |
 | `StuckDetectionEnabled` | 1/1/1/1 | 移動卡住時嘗試恢復。 | Enum / 0-1 | Toggle | 僅確認載入，未見直接引用 |
