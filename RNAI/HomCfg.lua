@@ -24,6 +24,20 @@ PriorityTargets = {
   [3975] = 9000,  -- 黃金蟲
 }
 
+-- ===== MVP 怪物種類（MVPMode=1 時最優先並鎖定）=====
+-- 伺服器若有自訂 MVP，把怪物種類 ID 加進來即可
+MVPTargets = MVPTargets or {
+  [1038]=true, [1039]=true, [1046]=true, [1059]=true, [1086]=true, [1087]=true,
+  [1112]=true, [1115]=true, [1147]=true, [1150]=true, [1157]=true, [1159]=true,
+  [1190]=true, [1251]=true, [1252]=true, [1272]=true, [1312]=true, [1373]=true,
+  [1389]=true, [1418]=true, [1492]=true, [1511]=true, [1583]=true, [1623]=true,
+  [1630]=true, [1646]=true, [1647]=true, [1648]=true, [1649]=true, [1650]=true,
+  [1651]=true, [1658]=true, [1685]=true, [1688]=true, [1708]=true, [1719]=true,
+  [1734]=true, [1751]=true, [1768]=true, [1779]=true, [1785]=true, [1832]=true,
+  [1871]=true, [1874]=true, [1885]=true, [1917]=true, [1956]=true, [1957]=true,
+  [2022]=true, [2068]=true, [2087]=true, [2165]=true,
+}
+
 -- ===== 技能清單（維持你原本 8013 與普攻；如需改 8014 可自行切換）=====
 Skill = {}
 

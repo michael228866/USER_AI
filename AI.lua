@@ -5,6 +5,8 @@ local function LoadModules()
   dofile("./AI/USER_AI/RNAI/Geo.lua")
   dofile("./AI/USER_AI/RNAI/tablelib.lua")
   dofile("./AI/USER_AI/RNAI/MapInfo.lua")
+  dofile("./AI/USER_AI/RNAI/friends.lua")
+  dofile("./AI/USER_AI/RNAI/enemies.lua")
   dofile("./AI/USER_AI/RNAI/Main.lua")
   return AI
 end

@@ -352,31 +352,6 @@ else
     cleanupDuplicateEnemies()
 end
 
--- ��ʲK�[�Ǫ�����ID��¦W��]�Ѻ޲z���ϥΡ^
-function addMonsterTypeToBlacklist(monsterTypeId, reason)
-    if not monsterTypeId or monsterTypeId <= 0 or monsterTypeId >= 100000 then
-        return false, "�L�Ī��Ǫ�����ID"
-    end
-
-    local success = addEnemyToBlacklist(monsterTypeId, reason or "��ʲK�[")
-    if success then
-        return true, string.format("���\�K�[�Ǫ����� %d ��¦W��", monsterTypeId)
-    else
-        return false, "�K�[����"
-    end
-end
-
--- ����Ҧ��¦W��Ǫ�����ID�]�Ѻ޲z���ϥΡ^
-function getBlacklistMonsterTypes()
-    local monsterTypes = {}
-    for _, id in ipairs(enemies_blacklist) do
-        if id < 100000 then  -- �Ǫ�ID
-            table.insert(monsterTypes, id)
-        end
-    end
-    return monsterTypes
-end
-
 -- 手動添加黑名單函數（用戶自行添加）
 function addToBlacklist(id, reason)
     if not id or type(id) ~= "number" then

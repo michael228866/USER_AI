@@ -140,8 +140,33 @@ local function is_attackable_player(id, myid, oid)
   return true
 end
 
+-- AutoCounterAttack lets a player who is hitting the owner or the
+-- homunculus be fought back even while players are excluded.
+local function is_counter_target(id, myid, oid)
+  if AutoCounterAttack~=1 then return false end
+  local tar=safe_getv(V_TARGET,id)
+  return tar==myid or tar==oid
+end
+
+local function blacklist_bonus(id)
+  if BlacklistPriority==1 and isBlacklisted and isBlacklisted(id) then return 10000 end
+  return 0
+end
+
+-- The sentry point replaces the owner as the centre of the search while
+-- SentryMode holds one (set by an Alt+right-click move in Main.lua).
+local function anchor_dis(oid, v)
+  if SentryX and SentryY then
+    local x,y=safe_getv(V_POSITION,v)
+    if not x or not y then return 999 end
+    return math.max(math.abs(x-SentryX),math.abs(y-SentryY))
+  end
+  return safe_obj_rect_dis(oid,v) or 999
+end
+
 local function collect_player_targets(A, myid, oid)
-  if not can_attack_players() then return 0 end
+  local allowAll=can_attack_players()
+  if not allowAll and AutoCounterAttack~=1 then return 0 end
 
   local added=0
   local maxTargets=AI_CROWD_MAX_PLAYER_TARGETS or 8
@@ -149,11 +174,10 @@ local function collect_player_targets(A, myid, oid)
 
   for i,id in ipairs(A)do
     if i>maxLoop then break end
-    if is_attackable_player(id,myid,oid)then
-      local score=AI_PLAYER_TARGET_SCORE or 50000
-      if isBlacklisted and isBlacklisted(id) then
-        score=score+10000
-      elseif BlacklistOnly==1 then
+    local counter=is_player_id(id) and id~=myid and id~=oid and is_counter_target(id,myid,oid)
+    if (allowAll and is_attackable_player(id,myid,oid)) or counter then
+      local score=(AI_PLAYER_TARGET_SCORE or 50000)+blacklist_bonus(id)
+      if BlacklistOnly==1 and not counter and not (isBlacklisted and isBlacklisted(id)) then
         score=-1
       end
 
@@ -170,6 +194,77 @@ local function collect_player_targets(A, myid, oid)
   end
 
   return added
+end
+
+-- Homunculus classes are 1-52 on the client and 6001-6016/6048-6052 on the
+-- server; mercenaries are 6017-6046. Monster classes start at 1001.
+local function is_homunculus_type(t)
+  return type(t)=="number" and ((t>=1 and t<=52) or (t>=6001 and t<=6016) or (t>=6048 and t<=6052))
+end
+
+local function is_mercenary_type(t)
+  return type(t)=="number" and t>=6017 and t<=6046
+end
+
+local EMPERIUM=1288
+
+-- CooperativeMode: 0 passive and 1 active use SearchSetting (Main.lua picks
+-- it per mode), 2 attacks only the owner's target ignoring every filter, and
+-- 3 does that while the owner has a target and searches like 1 otherwise.
+-- AutoCounterAttack lets anything hitting the owner or homunculus through.
+local function monster_score(v,t,myid,oid,otar,mtar,d1,d2,radius)
+  local mobType=safe_getv(V_HOMUNTYPE,v[1])
+  local mode=CooperativeMode or 1
+  local exclude=AttackAllExclude or {}
+  if mode==2 or (mode==3 and otar>0 and Mobs[otar]) then
+    if v[1]~=otar then return -1 end
+    return 100000000+30-d2
+  end
+  if mobType==EMPERIUM and exclude.emperium==0 then return -1 end
+  local counter=AutoCounterAttack==1 and (v[2]==myid or v[2]==oid)
+  if not counter then
+    if AttackMonstersEnabled==0 then return -1 end
+    if exclude.homunculus==1 and is_homunculus_type(mobType) then return -1 end
+    if exclude.mercenary==1 and is_mercenary_type(mobType) then return -1 end
+    if BlacklistOnly==1 and not (isBlacklisted and isBlacklisted(v[1])) then return -1 end
+    -- FollowMode 1 stays at the owner's feet and only hits what is already in reach
+    if (FollowMode or 0)>=1 and d2>(AtkDis or 1) and d1>3 then return -1 end
+  end
+
+  local score=(d1<=radius)and SearchSetting[8] or SearchSetting[7]
+
+  -- 攻擊目標關係分
+  score=score+((v[2]==0 or tb_exist(friends,v[2]))and 0 or
+    ((v[2]==oid)and SearchSetting[1] or((v[2]==myid)and SearchSetting[2] or SearchSetting[3])))
+
+  -- 當前主人/生命體目標加權
+  score=score+((v[1]==otar)and SearchSetting[4] or 0)
+  score=score+((v[1]==mtar)and SearchSetting[5] or 0)
+
+  -- 其他玩家最近攻擊痕跡
+  score=score+((t-v[3]<3000)and SearchSetting[6] or 0)
+
+  -- ★ 由 HomCfg.lua 提供的優先權重（priorityTargets: 0=使用，1=關閉）
+  if exclude.priorityTargets~=1 and mobType and PriorityTargets[mobType] then
+    score=score+PriorityTargets[mobType]
+  end
+
+  -- 智慧攻擊順序：清單越前面越優先
+  if exclude.smartAttackOrder==1 and type(SmartAttackPriorityOrder)=="table" then
+    for i,id in ipairs(SmartAttackPriorityOrder) do
+      if id==mobType then score=score+(#SmartAttackPriorityOrder-i+1)*1000; break end
+    end
+  end
+
+  score=score+blacklist_bonus(v[1])
+  if counter and score<0 then score=0 end
+  if score<0 then return -1 end
+
+  -- 最終距離處理；華麗金屬與 MVP 加到不會被其他目標搶走
+  score=score*100+30-d1-d2
+  if mobType==EMPERIUM and exclude.emperium==1 then score=score+10000000 end
+  if MVPMode==1 and mobType and MVPTargets and MVPTargets[mobType] then score=score+5000000 end
+  return score
 end
 
 function XYInMobs(x,y)
@@ -202,6 +297,9 @@ function RefreshData(myid,oid) --更新戰場情報
     return
   end
   local scanInterval=AI_SCAN_INTERVAL_MS or 600
+  if (CooperativeMode==1 or CooperativeMode==3) and (ActiveModeRefreshInterval or 0)>0 then
+    scanInterval=ActiveModeRefreshInterval
+  end
   if (AI_LAST_ACTOR_COUNT or 0) >= (AI_CROWD_ACTOR_COUNT or 60) then
     scanInterval=AI_CROWD_SCAN_INTERVAL_MS or 2000
   end
@@ -248,6 +346,9 @@ function RefreshData(myid,oid) --更新戰場情報
     maxOtherTargetChecks=AI_CROWD_OTHERS_TARGET_CHECK or 12
   end
   local radius=RadiusAggr or 12
+  if SentryX then radius=SentryRadius or 13 end
+  -- 0 = attack plants, 1 = skip every plant, 2 = skip only the sprout (1555)
+  local plantRule=(AttackAllExclude and AttackAllExclude.plants) or 1
 
   -- 更新 Mobs 的 RefreshKey 與 Target，加入新的 Mob，並把其他物件放 others
   for i,v in ipairs(A)do
@@ -272,11 +373,8 @@ function RefreshData(myid,oid) --更新戰場情報
         if(safe_ismonster(v)==true)then
           if processedMobs < maxMobs then
             mobTypeId=safe_getv(V_HOMUNTYPE,v)
-            if mobTypeId~=nil and plants[mobTypeId]~=nil then
-              isplants=true
-            else
-              isplants=false
-            end
+            isplants=mobTypeId~=nil and plants[mobTypeId]~=nil and
+              (plantRule==1 or (plantRule==2 and mobTypeId==1555))
 
             if(isplants==false)then
               local motion=safe_getv(V_MOTION,v)
@@ -285,7 +383,7 @@ function RefreshData(myid,oid) --更新戰場情報
                   Mobs[v]={v,0,0,0}
                 end
 
-                local ownerDis=safe_obj_rect_dis(oid,v) or 999
+                local ownerDis=anchor_dis(oid,v)
                 Mobs[v][4]=(ownerDis>math.min(radius,14)) and -1 or RefreshKey -- 索敵半徑也是追擊上限，超出就放棄
                 tar=safe_getv(V_TARGET,v) or 0
                 if(tar>0 and safe_ismonster(tar)==false)then
@@ -323,6 +421,9 @@ function RefreshData(myid,oid) --更新戰場情報
   for i,v in ipairs(others)do
     if i > maxOtherTargetChecks then break end
     tar=safe_getv(V_TARGET,v) or 0
+    if AutoBlacklist==1 and addEnemyToBlacklist and is_player_id(v) and (tar==myid or tar==oid) then
+      addEnemyToBlacklist(v,"攻擊主人或生命體")
+    end
     if(tar>0 and safe_ismonster(tar)==true)then
       if(Mobs[tar]~=nil)then
         Mobs[tar][3]=t
@@ -339,11 +440,10 @@ function RefreshData(myid,oid) --更新戰場情報
     d2=safe_obj_rect_dis(myid,v[1]) or 999
 
     if v[6]==true or is_player_id(v[1]) then
-      if can_attack_players() and is_attackable_player(v[1],myid,oid) then
-        score=AI_PLAYER_TARGET_SCORE or 50000
-        if isBlacklisted and isBlacklisted(v[1]) then
-          score=score+10000
-        elseif BlacklistOnly==1 then
+      local counter=is_counter_target(v[1],myid,oid)
+      if (can_attack_players() and is_attackable_player(v[1],myid,oid)) or counter then
+        score=(AI_PLAYER_TARGET_SCORE or 50000)+blacklist_bonus(v[1])
+        if BlacklistOnly==1 and not counter and not (isBlacklisted and isBlacklisted(v[1])) then
           score=-1
         end
 
@@ -356,27 +456,7 @@ function RefreshData(myid,oid) --更新戰場情報
         score=-1
       end
     else
-      score=(d1<=radius)and SearchSetting[8] or SearchSetting[7]
-
-      -- 攻擊目標關係分
-      score=score+((v[2]==0 or tb_exist(friends,v[2]))and 0 or
-        ((v[2]==oid)and SearchSetting[1] or((v[2]==myid)and SearchSetting[2] or SearchSetting[3])))
-
-      -- 當前主人/生命體目標加權
-      score=score+((v[1]==otar)and SearchSetting[4] or 0)
-      score=score+((v[1]==mtar)and SearchSetting[5] or 0)
-
-      -- 其他玩家最近攻擊痕跡
-      score=score+((t-v[3]<3000)and SearchSetting[6] or 0)
-
-      -- ★ 由 HomCfg.lua 提供的優先權重（數值直接加總）
-      local mobType = safe_getv(V_HOMUNTYPE, v[1])
-      if mobType and PriorityTargets[mobType] then
-        score = score + (PriorityTargets[mobType] or 0)
-      end
-
-      -- 最終距離處理
-      score=(score>=0) and (score*100+30-d1-d2) or -1
+      score=monster_score(v,t,myid,oid,otar,mtar,anchor_dis(oid,v[1]),d2,radius)
     end
 
     -- 暫時跳過打不到的目標（例如隔牆），由 Main.lua 的追擊逾時判定

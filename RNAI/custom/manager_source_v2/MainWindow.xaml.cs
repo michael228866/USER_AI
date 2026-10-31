@@ -616,15 +616,21 @@ public partial class MainWindow : Window
                 }
                 row.Children.Add(new TextBlock { Text = "延遲", Foreground = Muted,
                     VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 7, 0) });
-                var input = new TextBox { Text = skill.Delay.ToString(CultureInfo.InvariantCulture), Width = 110,
-                    Style = (Style)FindResource("ModernTextBox"), ToolTip = "0–600000 毫秒" };
+                // Lua stores milliseconds; the page shows seconds.
+                var input = new TextBox { Text = (skill.Delay / 1000m).ToString(CultureInfo.InvariantCulture), Width = 110,
+                    Style = (Style)FindResource("ModernTextBox"), ToolTip = "0–600 秒" };
                 row.Children.Add(input);
+                row.Children.Add(new TextBlock { Text = "秒", Foreground = Muted,
+                    VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(7, 0, 0, 0) });
                 var save = ActionButton("更新延遲", () =>
                 {
-                    if (!int.TryParse(input.Text, NumberStyles.Integer, CultureInfo.InvariantCulture, out var delay) || delay is < 0 or > 600000)
-                    { notice = "技能延遲需為 0–600000 毫秒。"; RefreshHeader(); return; }
+                    var validSeconds = decimal.TryParse(input.Text, NumberStyles.Number, CultureInfo.InvariantCulture, out var seconds);
+                    var ms = seconds * 1000;
+                    if (!validSeconds || ms != decimal.Truncate(ms) || ms is < 0 or > 600000)
+                    { notice = "技能延遲需為 0–600 秒（最多到小數點後 3 位）。"; RefreshHeader(); return; }
+                    var delay = (int)ms;
                     if (session.IsDirty) { notice = "請先儲存或重設其他 Lua 設定，再更新技能延遲。"; RefreshHeader(); return; }
-                    if (!Confirm($"確定將技能 {skill.Id} 的延遲設為 {delay} 毫秒？")) return;
+                    if (!Confirm($"確定將技能 {skill.Id} 的延遲設為 {seconds} 秒？")) return;
                     try { SkillService.SaveDelay(configPath, session.Type, skill.Index, skill.Id, skill.Level, delay);
                         session.ReloadFromDisk(); notice = $"技能 {skill.Id} 延遲已更新。"; RefreshHeader(); RenderPage(); }
                     catch (Exception ex) { ShowError(ex); }
@@ -735,7 +741,7 @@ public partial class MainWindow : Window
         left.Children.Add(new TextBlock { Text = field.Description, Foreground = Muted, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 5, 0, 0) });
         left.Children.Add(new TextBlock
         {
-            Text = $"{field.Key}  ·  範圍 {field.Min}–{field.Max}{(field.Unit.Length > 0 ? " " + field.Unit : "")}",
+            Text = $"{field.Key}  ·  範圍 {field.Min / (decimal)field.UiScale:0.###}–{field.Max / (decimal)field.UiScale:0.###}{(field.Unit.Length > 0 ? " " + field.Unit : "")}",
             FontSize = 11, Foreground = Brush("#6B7280"), Margin = new Thickness(0, 8, 0, 0), TextWrapping = TextWrapping.Wrap
         });
         var changed = new TextBlock { Foreground = Warning, FontSize = 11, Margin = new Thickness(0, 5, 0, 0) };
@@ -813,23 +819,23 @@ public partial class MainWindow : Window
         {
             var input = new TextBox
             {
-                Width = 100, Text = (value / (decimal)field.Scale).ToString(CultureInfo.InvariantCulture), TextAlignment = TextAlignment.Right,
-                Style = (Style)FindResource("ModernTextBox"), ToolTip = $"允許範圍 {field.Min}–{field.Max}"
+                Width = 100, Text = (value / (decimal)field.UiScale).ToString(CultureInfo.InvariantCulture), TextAlignment = TextAlignment.Right,
+                Style = (Style)FindResource("ModernTextBox"), ToolTip = $"允許範圍 {field.Min / (decimal)field.UiScale:0.###}–{field.Max / (decimal)field.UiScale:0.###}"
             };
             var adjusting = false;
             void CommitText(bool revertInvalid)
             {
                 if (adjusting) return;
                 var validNumber = decimal.TryParse(input.Text, NumberStyles.Number, CultureInfo.InvariantCulture, out var parsed);
-                var scaled = validNumber ? parsed * field.Scale : -1;
+                var scaled = validNumber ? parsed * field.UiScale : -1;
                 if (!validNumber || scaled != decimal.Truncate(scaled) || scaled < field.Min || scaled > field.Max)
                 {
                     input.BorderBrush = Brush("#EF4444");
                     if (revertInvalid)
                     {
-                        notice = $"{field.Name} 需介於 {field.Min}–{field.Max}。原值已保留。";
+                        notice = $"{field.Name} 需介於 {field.Min / (decimal)field.UiScale:0.###}–{field.Max / (decimal)field.UiScale:0.###}{field.Unit}。原值已保留。";
                         adjusting = true;
-                        input.Text = (session.Values[field.Key] / (decimal)field.Scale).ToString(CultureInfo.InvariantCulture);
+                        input.Text = (session.Values[field.Key] / (decimal)field.UiScale).ToString(CultureInfo.InvariantCulture);
                         adjusting = false;
                         RefreshHeader();
                     }

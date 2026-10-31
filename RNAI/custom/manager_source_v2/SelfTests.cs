@@ -127,8 +127,9 @@ internal static class SelfTests
             Check(LuaConfigService.Read(spSaved, "amistr")["SkillMinSP"] == amistrSp,
                 "飛里樂技能最低 SP 不影響其他生命體");
             Check(ProfileService.Load(profiles, 1)["AttackTimeoutMs"] == 3000, "既有配置秒數載入為毫秒");
-            Check(SettingsCatalog.Find("priorityTargets").DisplayValue(0) == "原值 0" &&
-                  SettingsCatalog.Find("priorityTargets").DisplayValue(1) == "原值 1", "有歧義數值不重新定義");
+            Check(SettingsCatalog.Find("priorityTargets").DisplayValue(0) == "使用優先權重" &&
+                  SettingsCatalog.Find("priorityTargets").DisplayValue(1) == "關閉", "副本特殊目標選項文字");
+            Check(SettingsCatalog.Find("SkillThrottleMs").DisplayValue(110) == "0.11 秒", "技能節流以秒顯示");
 
             foreach (var variant in new[]
             {

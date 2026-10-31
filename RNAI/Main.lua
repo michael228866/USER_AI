@@ -16,7 +16,6 @@ Target=0
 ManualSkill = { ["id"]=0, ["lv"]=0, ["target"]=0, ["x"]=0, ["y"]=0, ["range"]=0 }
 AtkDis=1
 
-Aggr=1
 MoveCmdTime=0
 FollowCmdTime=0
 MyMotion=0
@@ -25,6 +24,11 @@ EnableNormalAttack=true
 
 -- 讀不到時避免 nil
 PriorityTargets = PriorityTargets or {}
+
+-- 開關功能的執行狀態（每次載入重設）
+SentryX,SentryY=nil,nil
+HoldSince,FullViewTick,ReturnToOwner=0,nil,false
+AILoadTick=nil
 
 -- ============（新增）ASPD/舞步/節流 變數 ============
 -- 這些會由 HomCfg.lua 覆蓋或給定
@@ -79,7 +83,8 @@ end
 
 -- ASPD → 時序
 local function SetupAspdTimings()
-  local Tms = ((200 - (ASPD or 190)) / 50) * 1000  -- T = (200-ASPD)/50 * 1000
+  -- Normal homunculus configs keep their speed in PlayerASPD (the manager edits that one).
+  local Tms = ((200 - (PlayerASPD or ASPD or 190)) / 50) * 1000  -- T = (200-ASPD)/50 * 1000
   if Tms < 140 then Tms = 140 end                  -- 安全下限
   AttackPeriodMs   = math.floor(Tms + 0.5)         -- ASPD=190 → ≈200ms
   if not AttackThrottleMs or AttackThrottleMs==0 then AttackThrottleMs = AttackPeriodMs end
@@ -163,6 +168,11 @@ end
 local function IsAttackableTarget(target)
   if not target or target==0 then return false end
   if IsPlayerTarget(target) then return true end
+  -- AutoCounterAttack: a player hitting the owner or homunculus can be fought back
+  if AutoCounterAttack==1 and type(target)=="number" and target>=(AI_PLAYER_ID_MIN or 100000) then
+    local ok,tar=pcall(GetV,V_TARGET,target)
+    if ok and tar and (tar==MyID or tar==OwnerID) then return true end
+  end
   local ok,isMonster=pcall(IsMonster,target)
   return ok and isMonster==1
 end
@@ -529,7 +539,87 @@ local function DanceAllowed(myid,target,now)
     return false
   end
   if target~=DanceTarget then DanceTarget,DanceEngageTick=target,now end
+  if now-(AILoadTick or now)<(DanceActivationDelay or 0) then return false end
+  if (SafeGetV(V_SP,myid) or 0)<(DanceMinSP or 0) then return false end
   return now-DanceEngageTick>=(DanceCombatDelay or 400) and not DanceResting(myid,now)
+end
+
+-- ===== 開關：快捷鍵、協同模式、卡住偵測、智慧移動 =====
+-- A hotkey works unless its HotkeySettings entry is 0.
+function Hotkey(name)
+  return not (type(HotkeySettings)=="table" and HotkeySettings[name]==0)
+end
+
+-- Double Alt+T switches between the configured CooperativeMode and
+-- AltT_ToggleMode. Passive (0) uses SearchMode[1], the others SearchMode[2].
+CoopToggled=CoopToggled or false
+function ApplyCoopMode()
+  if CoopToggled then CooperativeMode=AltT_ToggleMode or 1 else CooperativeMode=BaseCoopMode or 1 end
+  SearchSetting=SearchMode[(CooperativeMode==0) and 1 or 2] or SearchSetting
+end
+
+-- StuckDetection: the AI keeps sending moves but the position does not
+-- change. After StuckEarlyWarningTime it tries a recovery move every
+-- StuckRecoveryAttemptInterval; after StuckTimeoutMs it returns true.
+local StuckX,StuckY,StuckSince,StuckLastTry=nil,nil,0,0
+function CheckStuck(myid,oid,now)
+  if StuckDetectionEnabled~=1 then return false end
+  local x,y=SafeGetV(V_POSITION,myid)
+  if not x then return false end
+  if x~=StuckX or y~=StuckY or now-LastMovePacketTick>1000
+     -- dancing next to the target moves without changing cells
+     or (Target>0 and SafeRectDistance(myid,Target)<=math.max(AtkDis or 1,DanceMaxRadius or 2)) then
+    StuckX,StuckY,StuckSince=x,y,now
+    return false
+  end
+  local still=now-StuckSince
+  if still>=(StuckTimeoutMs or 5000) then
+    StuckSince=now
+    AI_Log("stuck "..still.."ms, giving up")
+    return true
+  end
+  if still>=(StuckEarlyWarningTime or 2500) and now-StuckLastTry>=(StuckRecoveryAttemptInterval or 1000) then
+    StuckLastTry=now
+    if StuckRecoveryMode==1 then
+      local ox,oy=SafeGetV(V_POSITION,oid)
+      if ox then SafeMove(myid,ox,oy) end
+    else
+      SafeMove(myid,x+math.random(-3,3),y+math.random(-3,3))
+    end
+    AI_Log("stuck "..still.."ms, recovery move")
+  end
+  return false
+end
+
+-- SmartMove: while chasing, moving less than 2 cells within
+-- SmartMoveStuckThreshold steps sideways, alternating sides and growing from
+-- SmartMoveBypassDistance to SmartMoveMaxBypassDistance. Returns true once
+-- bypassing has lasted SmartMoveTimeout, so the caller drops the target.
+local SmartX,SmartY,SmartTick,SmartTries,SmartSince=nil,nil,0,0,0
+function ChaseMove(myid,x,y,now)
+  local mx,my=SafeGetV(V_POSITION,myid)
+  if SmartMoveEnabled~=1 or not mx or not x or not y then MoveToDest(myid,x,y); return false end
+  if not SmartX or math.max(math.abs(mx-SmartX),math.abs(my-SmartY))>=2 or (mx==x and my==y) then
+    SmartX,SmartY,SmartTick,SmartTries=mx,my,now,0
+    MoveToDest(myid,x,y)
+    return false
+  end
+  if now-SmartTick<(SmartMoveStuckThreshold or 600) then MoveToDest(myid,x,y); return false end
+  if SmartTries==0 then SmartSince=now end
+  if now-SmartSince>=(SmartMoveTimeout or 5000) then
+    SmartX=nil
+    AI_Log("smart move timed out")
+    return true
+  end
+  SmartTries=SmartTries+1
+  SmartTick=now
+  local dist=math.min((SmartMoveBypassDistance or 3)+SmartTries-1,SmartMoveMaxBypassDistance or 8)
+  local sx=(x>mx and 1) or (x<mx and -1) or 0
+  local sy=(y>my and 1) or (y<my and -1) or 0
+  local side=(SmartTries%2==1) and 1 or -1
+  SafeMove(myid,mx-sy*dist*side+sx,my+sx*dist*side+sy)
+  AI_Log("smart move bypass "..dist)
+  return false
 end
 
 function AttackDanceTick(myid,target)
@@ -633,6 +723,7 @@ function AI(myid)
   local currentTick=GetTick()
   if(AITick==currentTick) then return end
   AITick=currentTick
+  AILoadTick=AILoadTick or currentTick
   EPS_Tick(currentTick)
 
   local oid=SafeGetV(V_OWNER,myid)
@@ -642,6 +733,7 @@ function AI(myid)
   end
   -- Every game client writes to the same ai.log.
   AI_LOG_TAG="["..tostring(oid).."] "
+  MyID,OwnerID=myid,oid
 
   -- The owner or homunculus can disappear from GetV during character exit.
   -- Do not issue game commands while either actor has no valid position.
@@ -705,7 +797,8 @@ function AI(myid)
       end
     end
     SetupAspdTimings()
-    for i,sMode in ipairs(SearchMode) do if(SearchSetting==sMode) then Aggr=i; break end end
+    BaseCoopMode=CooperativeMode or 1
+    ApplyCoopMode()
     AI_Log("AI init step 0 done, AtkDis=" .. tostring(AtkDis) .. ", EnableNormalAttack=" .. tostring(EnableNormalAttack))
     return
   elseif InitStatus==1 then
@@ -753,11 +846,22 @@ function AI(myid)
   RefreshData(myid,oid)
 
   if msg[1]==MOVE_CMD then
-    MyState=ST_MOVE_CMD; DestX=msg[2]; DestY=msg[3]
+    if Hotkey("ALT_RightClick_Move") then
+      MyState=ST_MOVE_CMD; DestX=msg[2]; DestY=msg[3]
+      if SentryMode==1 then
+        SentryX,SentryY=DestX,DestY
+        AI_Log("sentry point "..tostring(DestX)..","..tostring(DestY))
+      end
+    end
   elseif msg[1]==FOLLOW_CMD then
     local t=GetTick()
-    if(t-FollowCmdTime<500)then Aggr=Aggr%#SearchMode+1; SearchSetting=SearchMode[Aggr] end
+    if t-FollowCmdTime<500 and Hotkey("ALT_T_ModeSwitch") then
+      CoopToggled=not CoopToggled
+      ApplyCoopMode()
+      AI_Log("CooperativeMode="..tostring(CooperativeMode))
+    end
     FollowCmdTime=t; MyState=ST_FOLLOW
+    SentryX,SentryY=nil,nil
   elseif msg[1]==ATTACK_OBJECT_CMD then
     if IsAttackableTarget(msg[2]) then
       MyState=ST_ATTACK; Target=msg[2]
@@ -779,48 +883,86 @@ function AI(myid)
     ManualSkill.range = SafeGetV(V_SKILLATTACKRANGE_LEVEL, myid, ManualSkill.id, ManualSkill.lv) or 1
   end
 
+  -- Reserved (Alt+Shift) commands manage the friend list.
   if(msg[1]==NONE_CMD)then
     if(rmsg[1]==MOVE_CMD)then
-      if(MyState==ST_MOVE_CMD or MyState==ST_HOLD)then
+      if(MyState==ST_MOVE_CMD or MyState==ST_HOLD) and Hotkey("ALT_RightClick_FirstPoint") and Hotkey("ALT_SHIFT_SecondPoint") then
         local x1,y1=math.min(DestX,rmsg[2]),math.min(DestY,rmsg[3])
         local x2,y2=math.max(DestX,rmsg[2]),math.max(DestY,rmsg[3])
-        local tx,ty
-        for i,v in ipairs(others)do
-          tx,ty=SafeGetV(V_POSITION,v)
-          if(tx and ty and x1<=tx and tx<=x2 and y1<=ty and ty<=y2)then friends[#friends+1]=v end
-        end
+        if addFriendsInRange then addFriendsInRange(x1,y1,x2,y2,myid,oid) end
         MyState=ST_FOLLOW
       else
-        rmsg[2]=XYInMobs(rmsg[2],rmsg[3]); rmsg[1]=ATTACK_OBJECT_CMD
+        local actor=XYInMobs(rmsg[2],rmsg[3])
+        if actor then
+          rmsg[1]=ATTACK_OBJECT_CMD; rmsg[2]=actor
+        elseif FullViewTick and currentTick-FullViewTick<=5000 then
+          FullViewTick=nil
+          if Hotkey("ALT_SHIFT_FullView_SecondPoint") and addAllVisibleFriends then
+            AI_Log("friends added in view: "..tostring(addAllVisibleFriends(myid,oid)))
+          end
+        elseif Hotkey("ALT_SHIFT_FullView_FirstPoint") then
+          FullViewTick=currentTick
+        end
       end
     end
     if(rmsg[1]==ATTACK_OBJECT_CMD)then
-      if(rmsg[2]==myid)then
-        friends={}
-      else
-        local f_exist=false
-        for i,v in ipairs(friends)do if(v==rmsg[2])then f_exist=true; break end end
-        if(f_exist==false)then friends[#friends+1]=rmsg[2] end
+      local id=rmsg[2]
+      if id==myid then
+        if clearFriends then clearFriends() end
+        AI_Log("friends cleared")
+      elseif id==oid then
+        if Hotkey("ALT_SHIFT_CounterAttack") then
+          AutoCounterAttack=(AutoCounterAttack==1) and 0 or 1
+          AI_Log("AutoCounterAttack="..AutoCounterAttack)
+        end
+      elseif Hotkey("ALT_SHIFT_SingleAdd") and addFriend and addFriend(id) then
+        AI_Log("friend added "..tostring(id))
       end
     end
   end
 
   if(MyState==ST_MOVE_CMD) then
-    if(MoveToDest(myid,DestX,DestY)==true) then MyState=ST_HOLD end
+    if(MoveToDest(myid,DestX,DestY)==true) then MyState=ST_HOLD; HoldSince=currentTick end
+
+  elseif (MyState==ST_HOLD) then
+    if SentryX or ((AutoReturnDelay or 0)>0 and currentTick-(HoldSince or 0)>=AutoReturnDelay) then
+      MyState=ST_FOLLOW
+    end
 
   elseif (MyState==ST_FOLLOW) then
     autoUseSkill(myid, oid, oid, 1)
-    if(bestTarget>0 and Mobs[bestTarget] and Mobs[bestTarget][5]>=0)then MyState=ST_ATTACK_PRE end
-    if(MyState==ST_FOLLOW and SafeRectDistance(oid,myid)>(FollowDis or 3))then
-      local x1,y1=SafeGetV(V_POSITION,oid)
-      local x2,y2=SafeGetV(V_POSITION,myid)
-      local dx,dy=SafeRectPos(x1,y1,x2,y2,FollowDis or 3)
-      SafeMove(myid,dx,dy)
+    local followDis=((FollowMode or 0)>=1) and 0 or (FollowDis or 3)
+    local ownerDis=SafeRectDistance(oid,myid)
+    if ReturnToOwner and ownerDis<=math.max(followDis,1) then ReturnToOwner=false end
+    if(bestTarget>0 and Mobs[bestTarget] and Mobs[bestTarget][5]>=0)then
+      local attacker=Mobs[bestTarget][2]==oid or Mobs[bestTarget][2]==myid
+      if not ReturnToOwner or attacker then MyState=ST_ATTACK_PRE end
+    end
+    if MyState==ST_FOLLOW then
+      CheckStuck(myid,oid,currentTick)
+      local ax,ay=SafeGetV(V_POSITION,oid)
+      local anchorDis=ownerDis
+      if SentryX then
+        ax,ay=SentryX,SentryY
+        local mx,my=SafeGetV(V_POSITION,myid)
+        anchorDis=math.max(math.abs(mx-ax),math.abs(my-ay))
+        followDis=0
+      end
+      if anchorDis>followDis then
+        local x2,y2=SafeGetV(V_POSITION,myid)
+        local dx,dy=SafeRectPos(ax,ay,x2,y2,followDis)
+        SafeMove(myid,dx,dy)
+      end
     end
 
   elseif (MyState==ST_ATTACK_PRE) then
-    if(bestTarget<=0 or Mobs[bestTarget]==nil or Mobs[bestTarget][5]<0)then RemoveTarget(); MyState=ST_FOLLOW
-    elseif ChaseTimedOut(myid,Mobs[bestTarget][1],currentTick) then
+    local leash=(ContinuousAttackMode==0 and 9) or (ContinuousAttackMode==1 and 13) or nil
+    if(bestTarget<=0 or Mobs[bestTarget]==nil or Mobs[bestTarget][5]<0)then
+      RemoveTarget(); MyState=ST_FOLLOW
+      if ContinuousAttackMode==0 then ReturnToOwner=true end
+    elseif leash and not SentryX and SafeRectDistance(oid,myid)>leash then
+      RemoveTarget(); Target=0; MyState=ST_FOLLOW; ReturnToOwner=true
+    elseif ChaseTimedOut(myid,Mobs[bestTarget][1],currentTick) or CheckStuck(myid,oid,currentTick) then
       SkipUnreachableTarget(Mobs[bestTarget][1],currentTick)
       RemoveTarget(); Target=0; MyState=ST_FOLLOW
     else
@@ -828,20 +970,26 @@ function AI(myid)
         AI_Log("target "..tostring(Mobs[bestTarget][1]).." type "..tostring(SafeGetV(V_HOMUNTYPE,Mobs[bestTarget][1])).." score "..tostring(Mobs[bestTarget][5]))
       end
       Target=Mobs[bestTarget][1]
+      local gaveUp=false
       if(isWeakTarget(Target))then
         local dis=SafeRectDistance(myid,Target)
         if(dis<=AtkDis)then SafeAttack(myid,Target) end -- 改用安全普攻
-        if(Target>0 and SafeRectDistance(oid,Target)<15)then
+        if((FollowMode or 0)<1 and Target>0 and SafeRectDistance(oid,Target)<15)then
           local x,y=SafeFreeObjRectPos(Target,myid,AtkDis,oid)
-          MoveToDest(myid,x,y)
+          gaveUp=ChaseMove(myid,x,y,currentTick)
         end
       else
         local chaseDis = autoUseSkill(myid, oid, Target, 2)
         ChaseRange=tonumber(chaseDis) or AtkDis or 1
-        if(chaseDis~=false and Target>0 and SafeRectDistance(oid,Target)<15)then
+        if((FollowMode or 0)<1 and chaseDis~=false and Target>0 and SafeRectDistance(oid,Target)<15)then
           local x,y=SafeFreeObjRectPos(Target,myid,chaseDis,oid)
-          MoveToDest(myid,x,y)
+          gaveUp=ChaseMove(myid,x,y,currentTick)
         end
+      end
+      if gaveUp then
+        SkipUnreachableTarget(Target,currentTick)
+        RemoveTarget(); Target=0; MyState=ST_FOLLOW
+        return
       end
       -- ======（新增）舞步掛鉤：預攻擊階段也可抖動/試刀 ======
       if DanceEnabled and Target>0 and not IsPlayerTarget(Target) and DanceAllowed(myid,Target,currentTick) then
