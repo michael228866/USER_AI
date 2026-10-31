@@ -94,8 +94,6 @@ local function CanAttackNow(now)  return (now-(LastAttackTick or 0)) >= (AttackT
 local function CanCastNow(now)    return (now-(LastSkillTick  or 0)) >= (SkillThrottleMs  or 110) end
 
 AI_MAIN_TRANSITION_UNTIL = AI_MAIN_TRANSITION_UNTIL or 0
-AI_MAIN_LAST_MY_ID = AI_MAIN_LAST_MY_ID or 0
-AI_MAIN_LAST_OWNER_ID = AI_MAIN_LAST_OWNER_ID or 0
 AI_MAIN_LAST_RESET_LOG = AI_MAIN_LAST_RESET_LOG or 0
 
 local function SafeGetV(vType,id,p1,p2)
@@ -155,7 +153,7 @@ local function ResetBattleState(reason,now,protectMs)
 end
 
 local function IsTransitionProtected(now)
-  return (AI_MAIN_TRANSITION_UNTIL or 0)>now or (AI_TRANSITION_PROTECT_UNTIL or 0)>now
+  return (AI_MAIN_TRANSITION_UNTIL or 0)>now
 end
 
 local function IsPlayerTarget(target)
@@ -655,28 +653,8 @@ function AI(myid)
     return
   end
 
-  -- The client reloads the whole AI on summon and on every map change, so the
-  -- id/position checks below have nothing to compare against. Stay idle briefly
-  -- after a fresh load instead of casting buffs or moving while the map settles.
-  if (AI_MAIN_LAST_MY_ID or 0)==0 then
-    AI_MAIN_LAST_MY_ID=myid
-    AI_MAIN_LAST_OWNER_ID=oid
-    ResetBattleState("ai loaded",currentTick,AI_LOAD_PROTECT_MS or 3000)
-    return
-  end
-
-  if AI_MAIN_LAST_MY_ID~=myid or AI_MAIN_LAST_OWNER_ID~=oid then
-    AI_MAIN_LAST_MY_ID=myid
-    AI_MAIN_LAST_OWNER_ID=oid
-    ResetBattleState("id changed",currentTick,AI_TRANSITION_PROTECT_MS or 8000)
-    return
-  end
-
-  AI_MAIN_LAST_MY_ID=myid
-  AI_MAIN_LAST_OWNER_ID=oid
-
   if IsTransitionProtected(currentTick) then
-    local protectUntil=math.max(AI_MAIN_TRANSITION_UNTIL or 0,AI_TRANSITION_PROTECT_UNTIL or 0)
+    local protectUntil=AI_MAIN_TRANSITION_UNTIL or 0
     ResetBattleState("transition protect active",currentTick,math.max(0,protectUntil-currentTick))
     return
   end
@@ -773,11 +751,6 @@ function AI(myid)
   LastSP=sp
 
   RefreshData(myid,oid)
-  if IsTransitionProtected(currentTick) then
-    local protectUntil=math.max(AI_MAIN_TRANSITION_UNTIL or 0,AI_TRANSITION_PROTECT_UNTIL or 0)
-    ResetBattleState("map transition detected",currentTick,math.max(0,protectUntil-currentTick))
-    return
-  end
 
   if msg[1]==MOVE_CMD then
     MyState=ST_MOVE_CMD; DestX=msg[2]; DestY=msg[3]

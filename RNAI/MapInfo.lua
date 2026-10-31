@@ -33,15 +33,6 @@ AI_CROWD_PLAYER_LOOP = AI_CROWD_PLAYER_LOOP or 80
 AI_CROWD_MAX_PLAYER_TARGETS = AI_CROWD_MAX_PLAYER_TARGETS or 8
 AI_PLAYER_TARGET_SCORE = AI_PLAYER_TARGET_SCORE or 50000
 AI_TRANSITION_PROTECT_MS = AI_TRANSITION_PROTECT_MS or 8000
-AI_LOAD_PROTECT_MS = AI_LOAD_PROTECT_MS or 3000
-AI_TRANSITION_PROTECT_UNTIL = AI_TRANSITION_PROTECT_UNTIL or 0
-AI_TRANSITION_DISTANCE_DELTA = AI_TRANSITION_DISTANCE_DELTA or 35
-AI_LAST_MY_ID = AI_LAST_MY_ID or 0
-AI_LAST_OWNER_ID = AI_LAST_OWNER_ID or 0
-AI_LAST_MY_X = AI_LAST_MY_X or nil
-AI_LAST_MY_Y = AI_LAST_MY_Y or nil
-AI_LAST_OWNER_X = AI_LAST_OWNER_X or nil
-AI_LAST_OWNER_Y = AI_LAST_OWNER_Y or nil
 AI_LAST_ACTOR_COUNT = AI_LAST_ACTOR_COUNT or 0
 AI_MAX_ACTORS_LOOP = AI_MAX_ACTORS_LOOP or 96
 AI_MAX_ACTORS_PER_REFRESH = AI_MAX_ACTORS_PER_REFRESH or 32
@@ -125,61 +116,6 @@ local function clear_battle_scan()
   nMyEnemy=0
   nRangeEnemy=0
   bestTarget=0
-end
-
-local function enter_transition_protect(t, reason)
-  clear_battle_scan()
-  AI_CROWD_SAFE_UNTIL=t+(AI_TRANSITION_PROTECT_MS or 8000)
-  AI_TRANSITION_PROTECT_UNTIL=AI_CROWD_SAFE_UNTIL
-  scan_log(t, "Transition protect: " .. tostring(reason) .. ", skip_ms=" .. tostring(AI_TRANSITION_PROTECT_MS or 8000))
-end
-
-local function update_transition_guard(t,myid,oid)
-  if (AI_TRANSITION_PROTECT_UNTIL or 0)>t then
-    clear_battle_scan()
-    return false
-  end
-
-  if (AI_LAST_MY_ID or 0)~=0 and (AI_LAST_MY_ID~=myid or AI_LAST_OWNER_ID~=oid) then
-    AI_LAST_MY_ID=myid
-    AI_LAST_OWNER_ID=oid
-    AI_LAST_MY_X=nil
-    AI_LAST_MY_Y=nil
-    AI_LAST_OWNER_X=nil
-    AI_LAST_OWNER_Y=nil
-    enter_transition_protect(t,"id changed")
-    return false
-  end
-
-  AI_LAST_MY_ID=myid
-  AI_LAST_OWNER_ID=oid
-
-  local ox,oy=safe_getv(V_POSITION,oid)
-  local mx,my=safe_getv(V_POSITION,myid)
-  if not ox or not oy or not mx or not my then
-    enter_transition_protect(t,"position unavailable")
-    return false
-  end
-
-  local limit=AI_TRANSITION_DISTANCE_DELTA or 35
-  if AI_LAST_OWNER_X and AI_LAST_OWNER_Y and AI_LAST_MY_X and AI_LAST_MY_Y then
-    local ownerDelta=math.abs(ox-AI_LAST_OWNER_X)+math.abs(oy-AI_LAST_OWNER_Y)
-    local myDelta=math.abs(mx-AI_LAST_MY_X)+math.abs(my-AI_LAST_MY_Y)
-    if ownerDelta>limit or myDelta>limit then
-      AI_LAST_OWNER_X=ox
-      AI_LAST_OWNER_Y=oy
-      AI_LAST_MY_X=mx
-      AI_LAST_MY_Y=my
-      enter_transition_protect(t,"position jump owner=" .. tostring(ownerDelta) .. ", my=" .. tostring(myDelta))
-      return false
-    end
-  end
-
-  AI_LAST_OWNER_X=ox
-  AI_LAST_OWNER_Y=oy
-  AI_LAST_MY_X=mx
-  AI_LAST_MY_Y=my
-  return true
 end
 
 local function is_player_id(id)
@@ -272,9 +208,6 @@ function RefreshData(myid,oid) --更新戰場情報
   if(t-RefreshTime>scanInterval)then
     RefreshTime=t
   else
-    return
-  end
-  if not update_transition_guard(t,myid,oid) then
     return
   end
   nOwnerEnemy=0
