@@ -478,10 +478,9 @@ local function GetDanceCell(x, y, enemy)
   local first  = (DanceDir >= 0) and 1 or -1
   local second = -first
   local bx,by = x,y
-  -- Vertical steps cover a target straight east or west, where no
-  -- horizontal step stays at keepR.
-  local cand = { { bx + first*step, by }, { bx + second*step, by },
-                 { bx, by + first*step }, { bx, by + second*step }, }
+  -- A target straight east or west has no valid cell, so the hop moves in
+  -- place, which cancels the attack delay and is the fastest dance.
+  local cand = { { bx + first*step, by }, { bx + second*step, by }, }
   local function valid(cx,cy)
     local d = math.max(math.abs(cx-ex), math.abs(cy-ey))
     if d ~= keepR then return false end
