@@ -56,6 +56,42 @@ internal static class SkillService
         ListService.AtomicWrite(path, original, updated);
     }
 
+    // An S-type homunculus keeps the skills of the form it mutated from.
+    internal static readonly string[] BaseTypes = ["lif", "amistr", "filir", "Vanilmirth"];
+
+    internal static IReadOnlyList<(string BaseType, SkillEntry Skill)> Inheritable(string text, string type)
+    {
+        if (BaseTypes.Contains(type)) return [];
+        var have = Read(text, type).Select(x => x.Id).ToHashSet();
+        return BaseTypes.SelectMany(b => Read(text, b)
+            .Where(x => x.Id > 0 && IsHomunculusSkill(x.Id) && !have.Contains(x.Id))
+            .Select(x => (b, x))).ToArray();
+    }
+
+    // Copies the skill entry from the base form's list to the front of the
+    // S-type list, plus an enabled SkillConfig entry when there is none.
+    internal static void AddInherited(string path, string type, string baseType, int id)
+    {
+        var original = LuaConfigService.Open(path);
+        var text = original.Text;
+        if (!Inheritable(text, type).Any(x => x.BaseType == baseType && x.Skill.Id == id))
+            throw new IOException("技能清單已改變，請重新載入。");
+        var source = Ranges(text, baseType).First(r => Required(text, r, "id") == id);
+        var entry = text[(source.Start - 1)..(source.End + 1)];
+        var root = LuaConfigService.FindBlock(text, "HomConfig", 0, text.Length);
+        var hom = LuaConfigService.FindBlock(text, type, root.Open + 1, root.Close);
+        var skills = LuaConfigService.FindBlock(text, "Skill", hom.Open + 1, hom.Close);
+        var config = LuaConfigService.FindBlock(text, "SkillConfig", hom.Open + 1, hom.Close);
+        var newline = text.Contains("\r\n") ? "\r\n" : "\n";
+        var edits = new List<(int At, string Text)> { (skills.Open + 1, entry + ",") };
+        if (!Regex.IsMatch(text[(config.Open + 1)..config.Close], @"\bSkill_" + id + @"\s*="))
+            edits.Add((config.Open + 1, newline + "      Skill_" + id + " = { enabled = true },"));
+        var updated = text;
+        foreach (var (at, insert) in edits.OrderByDescending(x => x.At))
+            updated = updated[..at] + insert + updated[at..];
+        ListService.AtomicWrite(path, original, updated);
+    }
+
     internal static bool? ReadAutoEnabled(string text, string type, int id, int level)
         => FindAutoEnabled(text, type, id, level)?.Enabled;
 

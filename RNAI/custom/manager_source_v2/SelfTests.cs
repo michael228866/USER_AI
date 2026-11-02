@@ -96,6 +96,22 @@ internal static class SelfTests
             CheckThrows<ArgumentOutOfRangeException>(() =>
                 SkillService.SaveLevel(sSkillPath, "eleanor", 0, 8028, 1, 6),
                 "艾蕾諾亞音速爪拒絕超過五級");
+            Check(SkillService.Inheritable(sSkillText, "filir").Count == 0 &&
+                  SkillService.Inheritable(sSkillText, "sera").Any(x => x.Skill.Id == 8009) &&
+                  SkillService.Inheritable(sSkillText, "sera").All(x => x.Skill.Id != 8013),
+                  "S 型可加入未擁有的原始型態技能");
+            var filirBefore = SkillService.Read(sSkillText, "filir");
+            SkillService.AddInherited(sSkillPath, "sera", "filir", 8009);
+            sSkillText = LuaConfigService.Open(sSkillPath).Text;
+            var seraSkills = SkillService.Read(sSkillText, "sera");
+            Check(seraSkills[0].Id == 8009 && seraSkills[0].Level == 5 && seraSkills[^1].Id == 0 &&
+                  SkillService.ReadAutoEnabled(sSkillText, "sera", 8009, 5) == true &&
+                  SkillService.ReadAutoEnabled(sSkillText, "sera", 8019, 1) == false &&
+                  SkillService.Read(sSkillText, "filir").SequenceEqual(filirBefore) &&
+                  LuaConfigService.Read(LuaConfigService.Open(sSkillPath), "sera").Count > 0,
+                  "S 型加入原始技能後可讀回且不影響原始型態");
+            CheckThrows<IOException>(() => SkillService.AddInherited(sSkillPath, "sera", "filir", 8009),
+                "同一技能不重複加入");
             foreach (var name in new[] { "friends_list.lua", "enemies_list.lua" })
                 File.Copy(Path.Combine(Path.GetDirectoryName(fixturePath)!, name), Path.Combine(tempDir, name));
             File.AppendAllText(Path.Combine(tempDir, "friends_list.lua"), "\n-- 詳細操作說明\n");

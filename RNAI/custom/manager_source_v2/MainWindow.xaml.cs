@@ -640,6 +640,34 @@ public partial class MainWindow : Window
                 card.Child = row;
                 PageStack.Children.Add(card);
             }
+            var inheritable = SkillService.Inheritable(session.Document.Text, session.Type);
+            if (inheritable.Count > 0)
+            {
+                PageStack.Children.Add(NoticeCard("加入原始型態技能",
+                    "S 型生命體會保留突變前的技能。只加入你的生命體在遊戲中真的有的技能，加入後會自動施放。"));
+                var card = Card();
+                var row = new WrapPanel();
+                foreach (var (baseType, skill) in inheritable)
+                {
+                    var add = ActionButton($"加入 {SkillName(skill.Id)} ({skill.Id})", () =>
+                    {
+                        if (session.IsDirty) { notice = "請先儲存或重設其他 Lua 設定，再加入技能。"; RefreshHeader(); return; }
+                        if (!Confirm($"確定加入技能 {SkillName(skill.Id)} ({skill.Id})？請確認遊戲中的生命體有這個技能。")) return;
+                        try
+                        {
+                            SkillService.AddInherited(configPath, session.Type, baseType, skill.Id);
+                            session.ReloadFromDisk();
+                            notice = $"技能 {skill.Id} 已加入。";
+                            RefreshHeader(); RenderPage();
+                        }
+                        catch (Exception ex) { ShowError(ex); }
+                    });
+                    add.Margin = new Thickness(0, 0, 8, 8);
+                    row.Children.Add(add);
+                }
+                card.Child = row;
+                PageStack.Children.Add(card);
+            }
             PageStack.Children.Add(CodeCard("SkillConfig", LuaConfigService.ExtractBlock(session.Document.Text, session.Type, "SkillConfig")));
         }
         catch (Exception ex) { PageStack.Children.Add(NoticeCard("技能讀取失敗", ex.Message)); }
