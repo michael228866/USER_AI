@@ -897,10 +897,16 @@ HomConfig = {
       Skill_8018 = { enabled = false },
       Skill_8020 = { enabled = false },
       Skill_8021 = { enabled = false },
+      Skill_8013 = { enabled = false },  -- 善變（由巴尼米樂斯突變才有）
     },
     SmartAttackPriorityOrder = {},
 
     Skill = {{
+        id=8013, lv=5, target=0, when=1, times=1, delay=3050,
+        sp={0,100}, range=9,
+        nMyEnemy=0, nOwnerEnemy=0, nRangeEnemy=0,
+        chase=1, stemp=0, count=0, priority=90
+      },{
         id=8019, lv=1, target=0, when=1, times=1, delay=5000,
         sp={0,100}, range=5,
         nMyEnemy=0, nOwnerEnemy=0, nRangeEnemy=0,
