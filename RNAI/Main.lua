@@ -656,19 +656,23 @@ function autoUseSkill(myId, ownerId, mobId, excludeWhen)
        nOwnerEnemy >= sk.nOwnerEnemy and nMyEnemy >= sk.nMyEnemy and nRangeEnemy >= sk.nRangeEnemy and
        CanUseSkillOnTarget(sk, targets[sk.target]) and CanAutoCastBySP(sk,currentSP) then
       if usedFlag==false and r[sk.target] <= sk.range then
+        local cast = true
         if sk.id == 0 then
           SafeAttack(myId, targets[sk.target])
         elseif sk.castType == 0 then
-          SafeSkillObject(myId, sk.lv, sk.id, myId)
+          cast = SafeSkillObject(myId, sk.lv, sk.id, myId)
         elseif sk.castType == 1 then
-          SafeSkillObject(myId, sk.lv, sk.id, targets[sk.target]) -- 改用安全施法
+          cast = SafeSkillObject(myId, sk.lv, sk.id, targets[sk.target]) -- 改用安全施法
         elseif sk.castType == 2 then
           local x,y = SafeGetV(V_POSITION, targets[sk.target])
-          if x and y then SafeSkillGround(myId, sk.lv, sk.id, x, y) end
+          cast = SafeSkillGround(myId, sk.lv, sk.id, x, y)
         end
         usedFlag = true
-        sk.count = sk.count + 1
-        if(sk.count >= sk.times)then sk.count = 0; sk.stemp = t end
+        -- A cast blocked by SkillThrottleMs did not happen, so its delay does not start.
+        if cast then
+          sk.count = sk.count + 1
+          if(sk.count >= sk.times)then sk.count = 0; sk.stemp = t end
+        end
       end
       if mobId > 0 and sk.chase == 1 and r[sk.target] > sk.range and minRadius > sk.range then
         minRadius = sk.range
@@ -770,6 +774,8 @@ function AI(myid)
       if SkillData[sk.id]~=nil then
         local skData = SkillData[sk.id]
         castType = SkillData[sk.id][1]
+        -- Eleanor's combos hit enemies; old configs aimed them at the homunculus itself.
+        if sk.id==8029 or sk.id==8030 or sk.id==8037 or sk.id==8038 then sk.target=0 end
         if SkillData[sk.id][2][sk.lv]~=nil then effectArea = SkillData[sk.id][2][sk.lv] else effectArea = 0 end
       else castType = 1; effectArea = 0 end
       if sk["castType"] == nil then sk["castType"]=castType end

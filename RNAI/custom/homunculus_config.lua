@@ -1162,11 +1162,11 @@ HomConfig = {
         sp={0,100}, nMyEnemy=0, nOwnerEnemy=0, nRangeEnemy=0,
         chase=1, stemp=0, count=0, priority=70
       },{
-        id=8029, lv=1, target=2, when=1, times=1, delay=5000,
+        id=8029, lv=1, target=0, when=1, times=1, delay=5000,
         sp={0,100}, nMyEnemy=0, nOwnerEnemy=0, nRangeEnemy=0,
         chase=1, stemp=0, count=0, priority=70
       },{
-        id=8030, lv=1, target=2, when=1, times=1, delay=5000,
+        id=8030, lv=1, target=0, when=1, times=1, delay=5000,
         sp={0,100}, nMyEnemy=0, nOwnerEnemy=0, nRangeEnemy=0,
         chase=1, stemp=0, count=0, priority=70
       },{
@@ -1174,11 +1174,11 @@ HomConfig = {
         sp={0,100}, nMyEnemy=0, nOwnerEnemy=0, nRangeEnemy=0,
         chase=1, stemp=0, count=0, priority=70
       },{
-        id=8037, lv=1, target=2, when=1, times=1, delay=5000,
+        id=8037, lv=1, target=0, when=1, times=1, delay=5000,
         sp={0,100}, nMyEnemy=0, nOwnerEnemy=0, nRangeEnemy=0,
         chase=1, stemp=0, count=0, priority=70
       },{
-        id=8038, lv=1, target=2, when=1, times=1, delay=5000,
+        id=8038, lv=1, target=0, when=1, times=1, delay=5000,
         sp={0,100}, nMyEnemy=0, nOwnerEnemy=0, nRangeEnemy=0,
         chase=1, stemp=0, count=0, priority=70
       },{
