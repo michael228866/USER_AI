@@ -69,7 +69,6 @@ ASPD       = ASPD       or 193   -- 建議測 190~193
 DancePhase = DancePhase or 0.40  -- 0.40~0.48，與伺服器節奏微調
 
 -- 水平抖動（貼身左右小步）
-DanceAttack            = (DanceAttack ~= false) -- true=啟用抖動
 DanceStep              = 1       -- 左右步幅
 DanceKeepRange         = 1       -- 與目標維持距離（格）
 DanceMaxRadius         = 2       -- ≤ 此距離啟動抖動
@@ -79,7 +78,6 @@ DanceTriggerAttack     = true    -- 節拍點嘗試普攻
 DanceTriggerAttackTries= 1
 
 -- Hop 舞步（可選開）
-UseHopDance            = true    -- true=嘗試 Hop，一次靠近-普攻-回位
 UseDanceAttack         = 1       -- Hop 的模式輔助參數
 UseSkillOnly           = 0
 DanceMinSP             = 0

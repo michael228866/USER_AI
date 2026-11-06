@@ -35,7 +35,6 @@ AILoadTick=nil
 DanceEnabled  = (DanceEnabled ~= false)
 ASPD          = ASPD or 190
 DancePhase    = DancePhase or 0.46
-DanceAttack   = (DanceAttack ~= false)
 DanceKeepRange= DanceKeepRange or 1
 DanceMaxRadius= DanceMaxRadius or 2
 DanceStep     = DanceStep or 1
@@ -44,7 +43,6 @@ DancePattern  = DancePattern or {1}
 DanceTriggerAttack      = (DanceTriggerAttack ~= false)
 DanceTriggerAttackTries = DanceTriggerAttackTries or 1
 
-UseHopDance   = UseHopDance or false
 UseDanceAttack= UseDanceAttack or 0
 UseSkillOnly  = UseSkillOnly or 0
 DanceMinSP    = DanceMinSP or 0
@@ -493,16 +491,6 @@ local function GetDanceCell(x, y, enemy)
   return bx,by
 end
 
-local function ShouldHopDance(myid, enemy)
-  if UseHopDance ~= true then return false end
-  if not enemy or enemy<=0 then return false end
-  if SafeGetMotion(enemy) == MOTION_DEAD then return false end
-  local spok = (UseSkillOnly ~= 1 and UseDanceAttack == 1 and (SafeGetV(V_SP,myid) or 0) >= (DanceMinSP or 0))
-  local bers = (BerserkMode == 1 and Berserk_Dance == 1)
-  local pnok = (panicmode == 1 and Panic_UseDanceAttack == 1 and (HPPercent and HPPercent(myid) or 100) > (FleeHP or 0))
-  return (spok or bers or pnok)
-end
-
 local function DoHopDance(myid, enemy)
   if IsTransitionProtected(GetTick()) then return false end
   if SafeRectDistance(myid,enemy) > (DanceMaxRadius or 2) then return false end
@@ -625,38 +613,6 @@ function ChaseMove(myid,x,y,now)
   SafeMove(myid,mx-sy*dist*side+sx,my+sx*dist*side+sy)
   AI_Log("smart move bypass "..dist)
   return false
-end
-
-function AttackDanceTick(myid,target)
-  if not DanceEnabled or not DanceAttack or not target or target<=0 then return end
-  if IsTransitionProtected(GetTick()) then return end
-  if SafeRectDistance(myid,target) > (DanceMaxRadius or 2) then return end
-  local now = GetTick()
-  local pat = DancePattern or {1}
-  local idx = DancePatternIdx or 1
-  local mul = pat[(idx-1) % #pat + 1]
-  local doStep = (not DanceMicro) or (mul ~= 0)
-  if doStep and now - (LastDanceTick or 0) >= (DanceIntervalMs or 92) then
-    local tx,ty = SafeGetV(V_POSITION, target)
-    if not tx or not ty then return end
-    local keepR = DanceKeepRange or AtkDis or 1
-    local bx,by = ClosestRectToKeepR(myid, tx, ty, keepR)
-    if not bx or not by then return end
-    local dx,dy = GetDanceCell(bx,by,target)
-    if now - (MoveCmdTime or 0) >= (MoveDelay or 80) then
-      if SafeMove(myid, dx, dy) then MoveCmdTime = now end
-    end
-    LastDanceTick = now
-  end
-  DancePatternIdx = ((idx) % #pat) + 1
-  if DanceTriggerAttack and (now - (LastAttackTick or 0)) >= ((AttackPeriodMs or 200) - 5) then
-    if SafeRectDistance(myid,target) <= (DanceKeepRange or 1) then
-      for _=1,(DanceTriggerAttackTries or 1) do
-        SafeAttack(myid, target)
-      end
-      LastAttackTick = now
-    end
-  end
 end
 
 -- 讀取自動技能（原函式）
@@ -998,9 +954,7 @@ function AI(myid)
       end
       -- ======（新增）舞步掛鉤：預攻擊階段也可抖動/試刀 ======
       if DanceEnabled and Target>0 and not IsPlayerTarget(Target) and DanceAllowed(myid,Target,currentTick) then
-        if not UseHopDance or not DoHopDance(myid, Target) then
-          AttackDanceTick(myid,Target)
-        end
+        DoHopDance(myid, Target)
       end
     end
 
@@ -1023,9 +977,7 @@ function AI(myid)
       end
       -- ======（新增）舞步掛鉤：攻擊態持續抖動/Hop ======
       if DanceEnabled and Target>0 and not IsPlayerTarget(Target) and SafeRectDistance(myid,Target) <= (DanceMaxRadius or AtkDis) and DanceAllowed(myid,Target,currentTick) then
-        if not UseHopDance or not DoHopDance(myid, Target) then
-          AttackDanceTick(myid,Target)
-        end
+        DoHopDance(myid, Target)
       end
     end
 

@@ -50,8 +50,6 @@ internal static class SelfTests
                 type + " 的 S 技能預設不自動施放");
             Check(LuaConfigService.Read(fixture, type)["DanceEnabled"] == 0,
                 type + " 未校準舞步預設關閉");
-            Check(LuaConfigService.ReadValue(fixture.Text, type, SettingsCatalog.Find("DanceAttack")) == 1,
-                type + " 開啟舞步時無第二開關阻擋");
             Check(LuaConfigService.ExtractBlock(fixture.Text, type, "SkillConfig").Contains($"Skill_{skillId}", StringComparison.Ordinal) &&
                   LuaConfigService.GetUnmanagedFields(fixture.Text, type).Contains("AttackThrottleMs = 0", StringComparison.Ordinal),
                   type + " 有獨立技能開關與 ASPD 節流重算設定");

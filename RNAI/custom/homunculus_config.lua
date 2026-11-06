@@ -152,8 +152,6 @@ HomConfig = {
     DanceEnabled = true,
     ASPD = 193,
     DancePhase = 0.4,
-    DanceAttack = true,
-    UseHopDance = false,
     SkillThrottleMs = 90,
   },
 
@@ -187,7 +185,6 @@ HomConfig = {
     -- Dance Attack 設定
     PlayerASPD = 188,
     DancePhase = 0.25,
-    UseHopDance = false,
     DanceMinSP = 0,
     DanceActivationDelay = 500,
     DanceCombatDelay = 400,
@@ -302,7 +299,6 @@ HomConfig = {
     -- Dance Attack 設定
     PlayerASPD = 193,
     DancePhase = 0.4,
-    UseHopDance = true,
     DanceMinSP = 0,
     DanceActivationDelay = 500,
     DanceCombatDelay = 400,
@@ -531,8 +527,6 @@ HomConfig = {
     DanceEnabled = true,
     ASPD = 190,
     DancePhase = 0.2,
-    DanceAttack = true,
-    UseHopDance = false,
     SkillThrottleMs = 90,
   },
 
@@ -566,8 +560,6 @@ HomConfig = {
 
     -- Dance Attack 設定
     DanceEnabled = false,
-    DanceAttack = true,
-    UseHopDance = false,
     ASPD = 190,
     AttackThrottleMs = 0,
     DancePhase = 0.4,
@@ -697,8 +689,6 @@ HomConfig = {
 
     -- Dance Attack 設定
     DanceEnabled = false,
-    DanceAttack = true,
-    UseHopDance = false,
     ASPD = 190,
     AttackThrottleMs = 0,
     DancePhase = 0.4,
@@ -828,8 +818,6 @@ HomConfig = {
 
     -- Dance Attack 設定
     DanceEnabled = false,
-    DanceAttack = true,
-    UseHopDance = false,
     ASPD = 190,
     AttackThrottleMs = 0,
     DancePhase = 0.4,
@@ -960,8 +948,6 @@ HomConfig = {
 
     -- Dance Attack 設定
     DanceEnabled = false,
-    DanceAttack = true,
-    UseHopDance = false,
     ASPD = 190,
     AttackThrottleMs = 0,
     DancePhase = 0.4,
@@ -1091,8 +1077,6 @@ HomConfig = {
 
     -- Dance Attack 設定
     DanceEnabled = false,
-    DanceAttack = true,
-    UseHopDance = false,
     ASPD = 190,
     AttackThrottleMs = 0,
     DancePhase = 0.4,

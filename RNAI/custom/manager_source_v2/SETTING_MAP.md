@@ -58,6 +58,4 @@
 | `DanceEnabled` | true/—/—/true | 舞步系統總開關；Lua true/false。 | Boolean | Toggle | 程式碼引用候選 |
 | `ASPD` | —/—/—/— | 舞步節奏使用的攻速。 | Number | Numeric Input | 程式碼引用候選 |
 | `DancePhase` | 0.4/0.25/0.25/0.2 | 輸入 0.25 代表 25%；無設定時預設 0.25。這不是已驗證的最佳值。 | Number | Numeric Input | 程式碼引用候選 |
-| `DanceAttack` | true/—/—/true | 水平左右移動攻擊；Lua true/false。 | Boolean | Toggle | 程式碼引用候選 |
-| `UseHopDance` | false/—/—/true | 靠近、普攻、回位；Lua true/false。 | Boolean | Toggle | 程式碼引用候選 |
 | `SkillThrottleMs` | 90/—/—/90 | 最短技能施放間隔。 | Number | Numeric Input | 程式碼引用候選 |

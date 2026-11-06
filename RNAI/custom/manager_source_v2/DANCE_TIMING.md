@@ -4,7 +4,7 @@ RO4 的 `SetupAspdTimings`、`GetDanceCell`、`ShouldHopDance`、`DoHopDance`、
 
 RO3 原版舞步只讀取 `ASPD` 與 `DanceEnabled`，不讀取 `PlayerASPD`。RO4 目前與原版相同；設定器內的 `PlayerASPD` 不控制舞步，使用時須以實際 `ASPD`、`DanceEnabled` 值為準。舊的 `DanceAttackMode` 已從設定檔與設定器移除。
 
-目前飛里樂由 `HomCfg.lua` 的 `ASPD=193` 決定攻擊週期，並使用 `DancePhase=0.4`、`MoveDelay=150`、`UseHopDance=true`。RO3 飛里樂未覆蓋 `UseHopDance`，會繼承 `HomCfg.lua` 的 `true`；RO4 已恢復相同的有效值。RO3 公式為：
+目前飛里樂由 `HomCfg.lua` 的 `ASPD=193` 決定攻擊週期，並使用 `DancePhase=0.4`、`MoveDelay=150`。`DanceEnabled` 是唯一的舞步開關，開啟時一律使用 Hop 舞步（跳出去、普攻、跳回來）。RO3 公式為：
 
 - `AttackPeriodMs = max(140, (200 - ASPD) × 20)`
 - `DanceIntervalMs = floor(AttackPeriodMs × DancePhase)`
@@ -15,4 +15,3 @@ RO3 原版舞步只讀取 `ASPD` 與 `DanceEnabled`，不讀取 `PlayerASPD`。R
 | 190 | 200 ms | 80 ms | 150 ms |
 | 193 | 140 ms | 56 ms | 150 ms |
 
-`tests/dance_timing_mock.ps1` 比對本機 RO3 舞步函式，並模擬 ASPD 185～193 的計時器。模擬結果是命令排程，不代表伺服器實際命中、傷害或攻速。需要遊戲內 Log 與傷害資料才能驗證體感速度。

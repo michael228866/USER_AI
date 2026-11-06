@@ -7,9 +7,9 @@ internal sealed record SettingDefinition(
     int Min, int Max, string ProfileGroup, string? Parent = null,
     string Unit = "", params string[] Choices)
 {
-    internal bool IsBoolean => Key is "DanceEnabled" or "DanceAttack" or "UseHopDance";
-    internal bool AppliesTo(string type) => (type is "eira" or "bayeri" or "sera" or "dieter" or "eleanor") ? Key is not ("PlayerASPD" or "DanceAttack") : (Key != "ASPD" &&
-        (Key is not ("DanceEnabled" or "DanceAttack" or "SkillThrottleMs")
+    internal bool IsBoolean => Key == "DanceEnabled";
+    internal bool AppliesTo(string type) => (type is "eira" or "bayeri" or "sera" or "dieter" or "eleanor") ? Key != "PlayerASPD" : (Key != "ASPD" &&
+        (Key is not ("DanceEnabled" or "SkillThrottleMs")
         || type is "lif" or "Vanilmirth"));
     internal bool InLegacyProfile => LegacyProfileKeys.Contains(Key);
     internal int Scale => Key == "DancePhase" ? 100 : 1;
@@ -89,11 +89,9 @@ internal static class SettingsCatalog
         ,new("SmartMoveTimeout", "智慧移動逾時", "繞路失敗後放棄目標的時間。", "移動與跟隨", SettingKind.Number, 0, 120000, "parameters", Unit: "毫秒")
         ,new("AttackTimeoutEnabled", "攻擊逾時偵測", "攻擊過久時放棄目標。", "戰鬥行為", SettingKind.Toggle, 0, 1, "parameters", Choices: ["關閉", "開啟"])
         ,new("TemporarySkipDuration", "暫時跳過目標", "放棄目標後重新鎖定前的等待時間。", "戰鬥行為", SettingKind.Number, 0, 120000, "parameters", Unit: "毫秒")
-        ,new("DanceEnabled", "跳舞攻擊", "自行選擇是否跳舞；每種生命體獨立儲存。", "移動與跟隨", SettingKind.Toggle, 0, 1, "parameters", Choices: ["關閉", "開啟"])
+        ,new("DanceEnabled", "跳舞攻擊", "開啟後用 Hop 舞步：跳出去、普攻、跳回來；關閉就站著打。每種生命體獨立儲存。", "移動與跟隨", SettingKind.Toggle, 0, 1, "parameters", Choices: ["關閉", "開啟"])
         ,new("ASPD", "舞步 ASPD", "舞步節奏使用的攻速。", "移動與跟隨", SettingKind.Number, 0, 200, "parameters", Unit: "ASPD")
         ,new("DancePhase", "舞步比例（進階）", "輸入 0.25 代表 25%；無設定時預設 0.25。這不是已驗證的最佳值。", "移動與跟隨", SettingKind.Number, 1, 49, "parameters")
-        ,new("DanceAttack", "水平抖動", "水平左右移動攻擊；Lua true/false。", "移動與跟隨", SettingKind.Toggle, 0, 1, "parameters", Choices: ["關閉", "開啟"])
-        ,new("UseHopDance", "Hop 舞步", "靠近、普攻、回位；Lua true/false。", "移動與跟隨", SettingKind.Toggle, 0, 1, "parameters", Choices: ["關閉", "開啟"])
         ,new("SkillThrottleMs", "技能節流", "最短技能施放間隔。", "技能管理", SettingKind.Number, 0, 60000, "parameters", Unit: "秒")
     ];
 
