@@ -12,6 +12,7 @@ internal sealed class EditorSession
     internal EditorSession(string path)
     {
         this.path = path;
+        LuaConfigService.AddMissingFields(path);
         document = LuaConfigService.Open(path);
         Type = SettingsCatalog.Types[0].Key;
         Reload();

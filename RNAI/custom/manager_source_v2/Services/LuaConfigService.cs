@@ -57,10 +57,7 @@ internal static class LuaConfigService
             var match = FindValue(text, type, field);
             if (match is null)
             {
-                // Written only once the user changes it, at the top of the type block.
-                if (value != field.MissingValue)
-                    edits.Add((TypeRange(text, type).Start, 0, (text.Contains("\r\n") ? "\r\n" : "\n")
-                        + "    " + field.Key + " = " + FormatValue(value, field) + ","));
+                edits.Add((TypeRange(text, type).Start, 0, MissingLine(text, field, value)));
                 continue;
             }
             var group = match.Groups["value"];
@@ -71,6 +68,23 @@ internal static class LuaConfigService
             text = text[..edit.Start] + edit.Value + text[(edit.Start + edit.Length)..];
         return text;
     }
+
+    // Older configs lack some fields (DanceEnabled for filir and amistr); the
+    // manager writes them with the value the AI already uses, so every
+    // homunculus has the line to edit.
+    internal static void AddMissingFields(string path)
+    {
+        var original = Open(path);
+        var text = original.Text;
+        foreach (var (type, _, _) in SettingsCatalog.Types)
+            foreach (var field in SettingsCatalog.ForType(type))
+                if (field.MissingValue is int value && FindValue(text, type, field) is null)
+                    text = text.Insert(TypeRange(text, type).Start, MissingLine(text, field, value));
+        if (text != original.Text) ListService.AtomicWrite(path, original, text);
+    }
+
+    private static string MissingLine(string text, SettingDefinition field, int value)
+        => (text.Contains("\r\n") ? "\r\n" : "\n") + "    " + field.Key + " = " + FormatValue(value, field) + ",";
 
     // The game's Lua cannot parse a UTF-8 BOM, so it is dropped on save; UTF-16 keeps its mark.
     internal static byte[] SavedPreamble(ConfigDocument document) =>

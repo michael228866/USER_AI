@@ -114,16 +114,17 @@ internal static class SelfTests
             var fixtureFilir = fixture.Text.IndexOf("  filir = {", StringComparison.Ordinal);
             var danceLine = fixture.Text.IndexOf("    DanceEnabled = true,", fixtureFilir, StringComparison.Ordinal);
             File.WriteAllText(noDancePath, fixture.Text.Remove(danceLine, fixture.Text.IndexOf('\n', danceLine) - danceLine + 1));
+            LuaConfigService.AddMissingFields(noDancePath);
             var noDance = LuaConfigService.Open(noDancePath);
-            Check(LuaConfigService.Read(noDance, "filir")["DanceEnabled"] == 1 &&
-                  LuaConfigService.Save(noDancePath, noDance, "filir", new Dictionary<string, int> { ["DanceEnabled"] = 1 }) == noDance,
-                  "缺少跳舞開關時視為開啟且不改檔");
+            LuaConfigService.AddMissingFields(noDancePath);
+            Check(noDance.Text == fixture.Text.Insert(fixture.Text.IndexOf('{', fixtureFilir) + 1, "\r\n    DanceEnabled = true,")
+                      .Remove(danceLine + "\r\n    DanceEnabled = true,".Length, fixture.Text.IndexOf('\n', danceLine) - danceLine + 1) &&
+                  File.ReadAllBytes(noDancePath).AsSpan().SequenceEqual(noDance.Bytes),
+                  "缺少的跳舞開關自動補上且只補一次");
             var danceOff = LuaConfigService.Save(noDancePath, noDance, "filir", new Dictionary<string, int> { ["DanceEnabled"] = 0 });
             Check(LuaConfigService.Read(danceOff, "filir")["DanceEnabled"] == 0 &&
-                  LuaConfigService.Read(danceOff, "Vanilmirth")["DanceEnabled"] == 1 &&
-                  LuaConfigService.Read(LuaConfigService.Save(noDancePath, danceOff, "filir",
-                      new Dictionary<string, int> { ["DanceEnabled"] = 1 }), "filir")["DanceEnabled"] == 1,
-                  "缺少跳舞開關時可寫入並再修改");
+                  LuaConfigService.Read(danceOff, "Vanilmirth")["DanceEnabled"] == 1,
+                  "補上的跳舞開關可修改且不影響其他生命體");
             foreach (var name in new[] { "friends_list.lua", "enemies_list.lua" })
                 File.Copy(Path.Combine(Path.GetDirectoryName(fixturePath)!, name), Path.Combine(tempDir, name));
             File.AppendAllText(Path.Combine(tempDir, "friends_list.lua"), "\n-- 詳細操作說明\n");
