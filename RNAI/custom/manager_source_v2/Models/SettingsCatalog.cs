@@ -9,8 +9,9 @@ internal sealed record SettingDefinition(
 {
     internal bool IsBoolean => Key == "DanceEnabled";
     internal bool AppliesTo(string type) => (type is "eira" or "bayeri" or "sera" or "dieter" or "eleanor") ? Key != "PlayerASPD" : (Key != "ASPD" &&
-        (Key is not ("DanceEnabled" or "SkillThrottleMs")
-        || type is "lif" or "Vanilmirth"));
+        (Key != "SkillThrottleMs" || type is "lif" or "Vanilmirth"));
+    // HomCfg.lua turns dancing on for config blocks without DanceEnabled.
+    internal int? MissingValue => Key == "DanceEnabled" ? 1 : null;
     internal bool InLegacyProfile => LegacyProfileKeys.Contains(Key);
     internal int Scale => Key == "DancePhase" ? 100 : 1;
     // Lua keeps milliseconds; fields shown in seconds convert on display and input.

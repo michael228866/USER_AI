@@ -39,7 +39,7 @@ internal static class LuaConfigService
     internal static int ReadValue(string text, string type, SettingDefinition field)
     {
         var match = FindValue(text, type, field);
-        var value = ParseValue(match.Groups["value"].Value, field);
+        var value = match is null ? field.MissingValue!.Value : ParseValue(match.Groups["value"].Value, field);
         if (value < field.Min || value > field.Max)
             throw new FormatException($"{type}.{field.Key}={value} 超出允許範圍 {field.Min}–{field.Max}");
         return value;
@@ -55,6 +55,14 @@ internal static class LuaConfigService
             if (value < field.Min || value > field.Max)
                 throw new ArgumentOutOfRangeException(key, value, $"允許範圍 {field.Min}–{field.Max}");
             var match = FindValue(text, type, field);
+            if (match is null)
+            {
+                // Written only once the user changes it, at the top of the type block.
+                if (value != field.MissingValue)
+                    edits.Add((TypeRange(text, type).Start, 0, (text.Contains("\r\n") ? "\r\n" : "\n")
+                        + "    " + field.Key + " = " + FormatValue(value, field) + ","));
+                continue;
+            }
             var group = match.Groups["value"];
             if (ParseValue(group.Value, field) != value)
                 edits.Add((group.Index, group.Length, FormatValue(value, field)));
@@ -129,7 +137,7 @@ internal static class LuaConfigService
         }
     }
 
-    private static Match FindValue(string text, string type, SettingDefinition field)
+    private static Match? FindValue(string text, string type, SettingDefinition field)
     {
         var range = TypeRange(text, type);
         if (field.Parent is not null)
@@ -140,6 +148,7 @@ internal static class LuaConfigService
         var matches = NumberLine.Matches(text[range.Start..range.End]).Cast<Match>()
             .Where(m => m.Groups["key"].Value == field.Key && GetBraceDepth(text, range.Start, range.Start + m.Index) == 0)
             .ToArray();
+        if (matches.Length == 0 && field.MissingValue is not null) return null;
         if (matches.Length != 1) throw new FormatException($"找不到唯一的欄位：{type}.{field.Key}");
         var match = matches[0];
         var absolute = range.Start + match.Index;

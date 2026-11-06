@@ -55,7 +55,7 @@
 | `SmartMoveTimeout` | 3000/5000/5000/2000 | 繞路失敗後放棄目標的時間。 | Number | Numeric Input | 僅確認載入，未見直接引用 |
 | `AttackTimeoutEnabled` | 1/1/1/1 | 攻擊過久時放棄目標。 | Enum / 0-1 | Toggle | 僅確認載入，未見直接引用 |
 | `TemporarySkipDuration` | 1500/3000/3000/2000 | 放棄目標後重新鎖定前的等待時間。 | Number | Numeric Input | 僅確認載入，未見直接引用 |
-| `DanceEnabled` | true/—/—/true | 舞步系統總開關；Lua true/false。 | Boolean | Toggle | 程式碼引用候選 |
+| `DanceEnabled` | true/true/true/true | 唯一的跳舞開關，開啟用 Hop 舞步；設定檔沒寫時視為開啟。 | Boolean | Toggle | 程式碼引用候選 |
 | `ASPD` | —/—/—/— | 舞步節奏使用的攻速。 | Number | Numeric Input | 程式碼引用候選 |
 | `DancePhase` | 0.4/0.25/0.25/0.2 | 輸入 0.25 代表 25%；無設定時預設 0.25。這不是已驗證的最佳值。 | Number | Numeric Input | 程式碼引用候選 |
 | `SkillThrottleMs` | 90/—/—/90 | 最短技能施放間隔。 | Number | Numeric Input | 程式碼引用候選 |

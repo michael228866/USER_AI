@@ -110,6 +110,20 @@ internal static class SelfTests
                   "S 型加入原始技能後可讀回且不影響原始型態");
             CheckThrows<IOException>(() => SkillService.AddInherited(sSkillPath, "sera", "filir", 8009),
                 "同一技能不重複加入");
+            var noDancePath = Path.Combine(tempDir, "no-dance.lua");
+            var fixtureFilir = fixture.Text.IndexOf("  filir = {", StringComparison.Ordinal);
+            var danceLine = fixture.Text.IndexOf("    DanceEnabled = true,", fixtureFilir, StringComparison.Ordinal);
+            File.WriteAllText(noDancePath, fixture.Text.Remove(danceLine, fixture.Text.IndexOf('\n', danceLine) - danceLine + 1));
+            var noDance = LuaConfigService.Open(noDancePath);
+            Check(LuaConfigService.Read(noDance, "filir")["DanceEnabled"] == 1 &&
+                  LuaConfigService.Save(noDancePath, noDance, "filir", new Dictionary<string, int> { ["DanceEnabled"] = 1 }) == noDance,
+                  "缺少跳舞開關時視為開啟且不改檔");
+            var danceOff = LuaConfigService.Save(noDancePath, noDance, "filir", new Dictionary<string, int> { ["DanceEnabled"] = 0 });
+            Check(LuaConfigService.Read(danceOff, "filir")["DanceEnabled"] == 0 &&
+                  LuaConfigService.Read(danceOff, "Vanilmirth")["DanceEnabled"] == 1 &&
+                  LuaConfigService.Read(LuaConfigService.Save(noDancePath, danceOff, "filir",
+                      new Dictionary<string, int> { ["DanceEnabled"] = 1 }), "filir")["DanceEnabled"] == 1,
+                  "缺少跳舞開關時可寫入並再修改");
             foreach (var name in new[] { "friends_list.lua", "enemies_list.lua" })
                 File.Copy(Path.Combine(Path.GetDirectoryName(fixturePath)!, name), Path.Combine(tempDir, name));
             File.AppendAllText(Path.Combine(tempDir, "friends_list.lua"), "\n-- 詳細操作說明\n");

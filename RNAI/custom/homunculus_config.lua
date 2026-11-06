@@ -183,6 +183,7 @@ HomConfig = {
     SkillMinSP = 0,
 
     -- Dance Attack 設定
+    DanceEnabled = true,
     PlayerASPD = 188,
     DancePhase = 0.25,
     DanceMinSP = 0,
@@ -297,6 +298,7 @@ HomConfig = {
     SkillMinSP = 100,
 
     -- Dance Attack 設定
+    DanceEnabled = true,
     PlayerASPD = 193,
     DancePhase = 0.4,
     DanceMinSP = 0,
