@@ -529,7 +529,10 @@ local function DanceAllowed(myid,target,now)
     return false
   end
   if target~=DanceTarget then DanceTarget,DanceEngageTick=target,now end
-  if now-(AILoadTick or now)<(DanceActivationDelay or 0) then return false end
+  -- Map changes: hopping sends the most packets, so hold it while the owner
+  -- walks (toward a portal) and for at least 3s after the AI loads on a new map.
+  if SafeGetMotion(OwnerID)==MOTION_MOVE then return false end
+  if now-(AILoadTick or now)<math.max(DanceActivationDelay or 0,3000) then return false end
   if (SafeGetV(V_SP,myid) or 0)<(DanceMinSP or 0) then return false end
   return now-DanceEngageTick>=(DanceCombatDelay or 400) and not DanceResting(myid,now)
 end
