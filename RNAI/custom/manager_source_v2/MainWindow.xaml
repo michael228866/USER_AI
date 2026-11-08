@@ -134,7 +134,10 @@
                     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                     <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="230"/></Grid.ColumnDefinitions>
                     <StackPanel>
-                        <TextBlock Text="Homunculus AI Manager" FontSize="20" FontWeight="Bold"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Homunculus AI Manager" FontSize="20" FontWeight="Bold"/>
+                            <TextBlock x:Name="VersionText" Foreground="#9CA3AF" Margin="10,0,0,2" VerticalAlignment="Bottom"/>
+                        </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
                             <TextBlock x:Name="CurrentTypeText" Foreground="#A78BFA" FontWeight="SemiBold"/>
                             <TextBlock Text="  ·  " Foreground="#6B7280"/>

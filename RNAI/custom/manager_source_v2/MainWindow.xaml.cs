@@ -53,6 +53,7 @@ public partial class MainWindow : Window
         this.profilesPath = profilesPath;
         InitializeComponent();
         session = new EditorSession(configPath);
+        ShowVersion();
         SearchBox.Text = "";
         BuildNavigation();
         BuildTypes();
@@ -88,6 +89,11 @@ public partial class MainWindow : Window
 
     internal void DisablePlacementPersistence() => persistWindowPlacement = false;
 
+    private static string ShortRevision(string revision) => revision[..Math.Min(7, revision.Length)];
+
+    private void ShowVersion(string state = "") =>
+        VersionText.Text = "版本 " + ShortRevision(UpdateService.CurrentRevision) + state;
+
     private async Task<bool> CheckForUpdatesAsync()
     {
         if (checkingUpdates) return false;
@@ -101,6 +107,7 @@ public partial class MainWindow : Window
             UpdateButton.ToolTip = availableUpdate is null
                 ? "目前沒有可用的更新；按此重新檢查"
                 : $"GitHub 版本 {availableUpdate.Revision}；按此自動下載並更新";
+            ShowVersion(availableUpdate is null ? "（已是最新）" : $"（有新版 {ShortRevision(availableUpdate.Revision)}）");
             return true;
         }
         catch (Exception)
@@ -162,6 +169,7 @@ public partial class MainWindow : Window
                 UpdateButton.Content = "檢查更新";
                 UpdateButton.Background = Control;
                 UpdateButton.ToolTip = "目前沒有可用的更新；按此重新檢查";
+                ShowVersion("（已是最新）");
                 MessageBox.Show(this, $"已更新到 {update.Revision}（只更新 Lua 檔，管理器不需重開）。\n遊戲內的生命體會在幾秒內自動套用新 AI，不必重新召喚。",
                     "檢查更新", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
