@@ -694,6 +694,7 @@ function AI(myid)
   EPS_Tick(currentTick)
   -- AI_M.lua (mercenaries) loads this file without friends.lua.
   if SyncFriendsTick then SyncFriendsTick(currentTick) end
+  if SyncEnemiesTick then SyncEnemiesTick(currentTick) end
 
   local oid=SafeGetV(V_OWNER,myid)
   if not oid or oid==0 then

@@ -106,6 +106,26 @@ function saveEnemiesToFile()
     end
 end
 
+local enemiesSource, enemiesSyncTick
+
+-- The manager and other game windows write this file too; without this a list
+-- cleared in the manager comes back when the AI next saves its memory copy.
+local function syncEnemiesFromFile()
+    local file = io.open(enemiesFilePath, "r")
+    if not file then return end
+    local content = file:read("*all")
+    file:close()
+    if content and content ~= enemiesSource and content:find("enemies_data%s*=%s*{.-}") then
+        loadEnemiesFromFile()
+    end
+end
+
+function SyncEnemiesTick(now)
+    if enemiesSyncTick and now - enemiesSyncTick < 2000 then return end
+    enemiesSyncTick = now
+    syncEnemiesFromFile()
+end
+
 function loadEnemiesFromFile()
     local file = io.open(enemiesFilePath, "r")
     if not file then
@@ -119,6 +139,7 @@ function loadEnemiesFromFile()
         return false
     end
 
+    enemiesSource = content
     enemies_blacklist = {}  -- 重置黑名單
     enemies_lookup = {}  -- 重置查詢表
     enemies_details = {}  -- 重置詳細信息
@@ -173,6 +194,8 @@ function addEnemyToBlacklist(id, reason)
     if not id or id <= 0 then
         return false
     end
+
+    syncEnemiesFromFile()
 
     local actualId = id
     local idType = getIdType(id)
