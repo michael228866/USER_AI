@@ -74,7 +74,10 @@ public partial class MainWindow : Window
             WindowStartupLocation = WindowStartupLocation.Manual;
             Left = bounds.Left; Top = bounds.Top; Width = bounds.Width; Height = bounds.Height;
         };
-        Closed += (_, _) => { if (persistWindowPlacement) WindowPlacementService.Save(this); };
+        var listTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
+        listTimer.Tick += (_, _) => SyncLists();
+        listTimer.Start();
+        Closed += (_, _) => { listTimer.Stop(); if (persistWindowPlacement) WindowPlacementService.Save(this); };
         Closing += (_, e) =>
         {
             if (!restartingForUpdate && (session.IsDirty || ListsDirty || ProfilesDirty) && !Confirm("目前有未儲存修改，確定關閉嗎？")) e.Cancel = true;
@@ -503,6 +506,21 @@ public partial class MainWindow : Window
         enemies = ListService.Read(Path.Combine(dir, "enemies_list.lua"), "enemies_data").ToList();
         savedFriends = [.. friends];
         savedEnemies = [.. enemies];
+    }
+
+    // The game adds friends while the manager is open; unsaved edits here are never replaced.
+    private void SyncLists()
+    {
+        if (friends is null || ListsDirty) return;
+        try
+        {
+            var dir = Path.GetDirectoryName(configPath)!;
+            if (ListService.Read(Path.Combine(dir, "friends_list.lua"), "friends_data").SequenceEqual(savedFriends!) &&
+                ListService.Read(Path.Combine(dir, "enemies_list.lua"), "enemies_data").SequenceEqual(savedEnemies!)) return;
+            LoadLists();
+            if (page == "名單") RenderPage();
+        }
+        catch (Exception ex) when (ex is IOException or FormatException or ArgumentException or UnauthorizedAccessException) { } // file mid-write; next tick retries
     }
 
     private void RenderLists()

@@ -114,6 +114,26 @@ function saveFriendsToFile()
     end
 end
 
+local friendsSource, friendsSyncTick
+
+-- The manager and other game windows write this file too, so pick up their
+-- changes; a half-written file (no closing brace yet) waits for the next try.
+local function syncFriendsFromFile()
+    local file = io.open(friendsFilePath, "r")
+    if not file then return end
+    local content = file:read("*all")
+    file:close()
+    if content and content ~= friendsSource and content:find("friends_data%s*=%s*{.-}") then
+        loadFriendsFromFile()
+    end
+end
+
+function SyncFriendsTick(now)
+    if friendsSyncTick and now - friendsSyncTick < 2000 then return end
+    friendsSyncTick = now
+    syncFriendsFromFile()
+end
+
 function loadFriendsFromFile()
     local file = io.open(friendsFilePath, "r")
     if not file then
@@ -127,6 +147,7 @@ function loadFriendsFromFile()
         return false
     end
 
+    friendsSource = content
     friends = {}  -- 重置朋友列表
     friends_lookup = {}  -- 重置查詢表
     local loadedCount = 0
@@ -176,8 +197,8 @@ function addFriend(id)
         return false
     end
 
-    -- 不要在每次addFriend時都同步，這會清空剛加入的資料
-    -- quickSyncWithFile()
+    -- Merge first: saving writes the whole list and would drop another window's additions.
+    syncFriendsFromFile()
 
     -- 檢查是否為黑名單敵人（互斥邏輯）
     if isBlacklisted and isBlacklisted(id) then
