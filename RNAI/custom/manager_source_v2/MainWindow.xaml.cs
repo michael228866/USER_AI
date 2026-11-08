@@ -273,7 +273,7 @@ public partial class MainWindow : Window
         StatusText.Text = notice;
         StatusText.Foreground = notice.StartsWith("操作失敗", StringComparison.Ordinal) ? Brush("#EF4444") : Muted;
         ResetButton.IsEnabled = session.IsDirty;
-        SaveButton.IsEnabled = session.IsDirty;
+        SaveButton.IsEnabled = session.IsDirty || ListsDirty;
     }
 
     private void RenderPage()
@@ -1034,5 +1034,26 @@ public partial class MainWindow : Window
         RenderPage();
     }
 
-    private void SaveButton_Click(object sender, RoutedEventArgs e) => SaveLua();
+    private void SaveButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (ListsDirty) SaveLists();
+        SaveLua();
+    }
+
+    private void SaveLists()
+    {
+        if (!Confirm("確定寫入朋友列表與黑名單的修改嗎？")) return;
+        try
+        {
+            var dir = Path.GetDirectoryName(configPath)!;
+            ListService.Save(Path.Combine(dir, "friends_list.lua"), "friends_data", friends!, savedFriends);
+            savedFriends = [.. friends!];
+            ListService.Save(Path.Combine(dir, "enemies_list.lua"), "enemies_data", enemies!, savedEnemies);
+            savedEnemies = [.. enemies!];
+            notice = "名單已儲存。";
+            RefreshHeader();
+            RenderPage();
+        }
+        catch (Exception ex) { ShowError(ex); }
+    }
 }
