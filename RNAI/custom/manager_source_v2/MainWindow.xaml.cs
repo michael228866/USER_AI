@@ -89,10 +89,8 @@ public partial class MainWindow : Window
 
     internal void DisablePlacementPersistence() => persistWindowPlacement = false;
 
-    private static string ShortRevision(string revision) => revision[..Math.Min(7, revision.Length)];
-
     private void ShowVersion(string state = "") =>
-        VersionText.Text = "版本 " + ShortRevision(UpdateService.CurrentRevision) + state;
+        VersionText.Text = "版本 " + UpdateService.CurrentVersion + state;
 
     private async Task<bool> CheckForUpdatesAsync()
     {
@@ -107,7 +105,7 @@ public partial class MainWindow : Window
             UpdateButton.ToolTip = availableUpdate is null
                 ? "目前沒有可用的更新；按此重新檢查"
                 : $"GitHub 版本 {availableUpdate.Revision}；按此自動下載並更新";
-            ShowVersion(availableUpdate is null ? "（已是最新）" : $"（有新版 {ShortRevision(availableUpdate.Revision)}）");
+            ShowVersion(availableUpdate is null ? "（已是最新）" : $"（有新版 {availableUpdate.Revision}）");
             return true;
         }
         catch (Exception)

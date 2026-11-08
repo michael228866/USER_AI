@@ -7,9 +7,10 @@ using System.Text.Json;
 
 namespace HomunculusManager.Services;
 
-internal sealed record UpdateInfo(string Commit, string PackageUrl, string? LuaPackageUrl)
+internal sealed record UpdateInfo(string Commit, string PackageUrl, string? LuaPackageUrl, string? Version)
 {
-    internal string Revision => Commit[..7];
+    // Releases published before version numbers existed have only a commit.
+    internal string Revision => Version ?? Commit[..7];
 }
 
 internal static class UpdateService
@@ -32,6 +33,32 @@ internal static class UpdateService
             .InformationalVersion.Split('+').LastOrDefault() ?? "local";
 
     internal static string CurrentRevision => ReadRevision(AppContext.BaseDirectory, BuildRevision);
+
+    private const string VersionFile = "installed_version.txt";
+
+    private static string BuildVersion =>
+        typeof(UpdateService).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
+            .InformationalVersion.Split('+')[0] ?? "1.0.0";
+
+    // A file, like the revision, because a Lua-only update keeps the older exe.
+    internal static string CurrentVersion
+    {
+        get
+        {
+            try
+            {
+                var path = Path.Combine(AppContext.BaseDirectory, VersionFile);
+                return File.Exists(path) && ParseVersion("USER_AI " + File.ReadAllText(path).Trim()) is string text ? text : BuildVersion;
+            }
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException) { return BuildVersion; }
+        }
+    }
+
+    internal static string? ParseVersion(string releaseName)
+    {
+        var match = System.Text.RegularExpressions.Regex.Match(releaseName, @"^USER_AI (\d+\.\d+\.\d+)$");
+        return match.Success ? match.Groups[1].Value : null;
+    }
 
     internal static string ReadRevision(string installDir, string fallback)
     {
@@ -68,7 +95,7 @@ internal static class UpdateService
             return asset.ValueKind == JsonValueKind.Object ? asset.GetProperty("browser_download_url").GetString() : null;
         }
         var url = AssetUrl(PackageName);
-        return HasUpdate(tag, CurrentRevision, url is not null) ? new UpdateInfo(tag[6..], url!, AssetUrl(LuaPackageName)) : null;
+        return HasUpdate(tag, CurrentRevision, url is not null) ? new UpdateInfo(tag[6..], url!, AssetUrl(LuaPackageName), ParseVersion(root.GetProperty("name").GetString() ?? "")) : null;
     }
 
     // True only when GitHub confirms no manager source changed between the installed and the new build.
@@ -136,6 +163,7 @@ internal static class UpdateService
             var packageRoot = Path.Combine(extracted, "USER_AI");
             if (!Directory.Exists(packageRoot)) throw new InvalidDataException("更新包格式不正確：缺少 USER_AI 資料夾");
             var exe = Apply(packageRoot, installDir);
+            if (update.Version is not null) File.WriteAllText(Path.Combine(installDir, VersionFile), update.Version);
             File.WriteAllText(Path.Combine(installDir, RevisionFile), update.Commit);
             return exe;
         }
