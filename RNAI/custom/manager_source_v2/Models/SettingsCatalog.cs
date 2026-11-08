@@ -41,7 +41,7 @@ internal static class SettingsCatalog
     [
         new("AttackMonstersEnabled", "攻擊一般怪物", "關閉後不主動打怪，只會反擊或打主人指定的目標。", "戰鬥行為", SettingKind.Toggle, 0, 1, "exclude", Choices: ["關閉", "允許"]),
         new("CooperativeMode", "協同作戰模式", "決定生命體如何配合主人選擇攻擊目標。", "戰鬥行為", SettingKind.Choice, 0, 3, "combat", Choices: ["被動", "主動", "鎖定主人目標", "內掛鎖定"]),
-        new("ContinuousAttackMode", "連續戰鬥模式", "標準：離主人超過 9 格就返回，打完先回主人；連續：超過 13 格才返回；激進：不強制返回。", "戰鬥行為", SettingKind.Choice, 0, 2, "combat", Choices: ["標準", "連續戰鬥", "激進"]),
+        new("ContinuousAttackMode", "連續戰鬥模式", "標準：離主人超過 9 格就返回，打完先回主人；連續：超過 14 格才返回；激進：不強制返回。", "戰鬥行為", SettingKind.Choice, 0, 2, "combat", Choices: ["標準", "連續戰鬥", "激進"]),
         new("AutoCounterAttack", "自動反擊", "怪物或玩家攻擊主人或生命體時反擊，不受排除與協同模式限制。", "戰鬥行為", SettingKind.Toggle, 0, 1, "combat", Choices: ["關閉", "開啟"]),
         new("FollowMode", "跟隨模式", "0 一般跟隨；1 站在主人腳下，不追擊，只打已在攻擊範圍內或主人身邊 3 格內的怪。", "移動與跟隨", SettingKind.Choice, 0, 2, "combat", Choices: ["一般跟隨", "站在主人腳下", "站在主人腳下"]),
         new("SentryMode", "哨戒模式", "開啟後 Alt+右鍵點地面設為哨兵點，守在那裡攻擊哨戒半徑內的敵人；Alt+T 取消。", "戰鬥行為", SettingKind.Toggle, 0, 1, "combat", Choices: ["關閉", "開啟"]),

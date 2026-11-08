@@ -928,7 +928,7 @@ function AI(myid)
     end
 
   elseif (MyState==ST_ATTACK_PRE) then
-    local leash=(ContinuousAttackMode==0 and 9) or (ContinuousAttackMode==1 and 13) or nil
+    local leash=(ContinuousAttackMode==0 and 9) or (ContinuousAttackMode==1 and 14) or nil
     if(bestTarget<=0 or Mobs[bestTarget]==nil or Mobs[bestTarget][5]<0)then
       RemoveTarget(); MyState=ST_FOLLOW
       if ContinuousAttackMode==0 then ReturnToOwner=true end
