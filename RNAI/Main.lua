@@ -167,7 +167,7 @@ local function IsAttackableTarget(target)
   if not target or target==0 then return false end
   if IsPlayerTarget(target) then return true end
   -- AutoCounterAttack: a player hitting the owner or homunculus can be fought back
-  if AutoCounterAttack==1 and type(target)=="number" and target>=(AI_PLAYER_ID_MIN or 100000) then
+  if AutoCounterAttack==1 and type(target)=="number" and target>=(AI_PLAYER_ID_MIN or 100000) and not IsProtectedFriend(target) then
     local ok,tar=pcall(GetV,V_TARGET,target)
     if ok and tar and (tar==MyID or tar==OwnerID) then return true end
   end

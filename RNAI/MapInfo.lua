@@ -130,20 +130,21 @@ local function can_attack_players()
   return true
 end
 
+function IsProtectedFriend(id)
+  if not AttackAllExclude or AttackAllExclude.friends ~= 1 then return false end
+  return tb_exist(friends,id) or (isFriend and isFriend(id)) or false
+end
+
 local function is_attackable_player(id, myid, oid)
   if not is_player_id(id) then return false end
   if id==myid or id==oid then return false end
-  if AttackAllExclude and AttackAllExclude.friends == 1 then
-    if tb_exist(friends,id) then return false end
-    if isFriend and isFriend(id) then return false end
-  end
-  return true
+  return not IsProtectedFriend(id)
 end
 
 -- AutoCounterAttack lets a player who is hitting the owner or the
 -- homunculus be fought back even while players are excluded.
 local function is_counter_target(id, myid, oid)
-  if AutoCounterAttack~=1 then return false end
+  if AutoCounterAttack~=1 or IsProtectedFriend(id) then return false end
   local tar=safe_getv(V_TARGET,id)
   return tar==myid or tar==oid
 end
