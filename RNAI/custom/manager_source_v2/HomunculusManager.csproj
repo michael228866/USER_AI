@@ -8,7 +8,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <AssemblyName>生命體AI管理器</AssemblyName>
     <UpdateRevision Condition="'$(UpdateRevision)' == ''">local</UpdateRevision>
-    <UpdateVersion Condition="'$(UpdateVersion)' == ''">1.0.0</UpdateVersion>
+    <UpdateVersion Condition="'$(UpdateVersion)' == ''">1.0</UpdateVersion>
     <InformationalVersion>$(UpdateVersion)+$(UpdateRevision)</InformationalVersion>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
     <ApplicationManifest>app.manifest</ApplicationManifest>

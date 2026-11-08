@@ -38,7 +38,7 @@ internal static class UpdateService
 
     private static string BuildVersion =>
         typeof(UpdateService).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
-            .InformationalVersion.Split('+')[0] ?? "1.0.0";
+            .InformationalVersion.Split('+')[0] ?? "1.0";
 
     // A file, like the revision, because a Lua-only update keeps the older exe.
     internal static string CurrentVersion
@@ -56,7 +56,7 @@ internal static class UpdateService
 
     internal static string? ParseVersion(string releaseName)
     {
-        var match = System.Text.RegularExpressions.Regex.Match(releaseName, @"^USER_AI (\d+\.\d+\.\d+)$");
+        var match = System.Text.RegularExpressions.Regex.Match(releaseName, @"^USER_AI (\d+\.\d+)$");
         return match.Success ? match.Groups[1].Value : null;
     }
 

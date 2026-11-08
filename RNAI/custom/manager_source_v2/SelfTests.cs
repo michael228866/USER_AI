@@ -18,7 +18,7 @@ internal static class SelfTests
         Check(!UpdateService.HasUpdate(releaseTag, new string('a', 40), true) &&
               !UpdateService.HasUpdate(releaseTag, "local", false) &&
               !UpdateService.HasUpdate("invalid", "local", true), "相同版本或缺少更新包時不提示");
-        Check(UpdateService.ParseVersion("USER_AI 1.0.42") == "1.0.42" && UpdateService.ParseVersion("USER_AI eb912e6") is null, "版本號解析");
+        Check(UpdateService.ParseVersion("USER_AI 1.42") == "1.42" && UpdateService.ParseVersion("USER_AI eb912e6") is null, "版本號解析");
         CheckUpdateApply();
         var fixture = LuaConfigService.Open(fixturePath);
         var profilesFixture = Path.Combine(Path.GetDirectoryName(fixturePath)!, "manager_profiles.json");
