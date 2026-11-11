@@ -224,71 +224,37 @@ end
 
 -- 新增全視野添加朋友函數（專用於穿透模式）
 function addAllVisibleFriends(myid, oid)
-    local addedCount = 0
-    local scannedIds = {}  -- 記錄已掃描的ID，避免重複
-    -- 移除上限限制，允許添加所有視野內的玩家
-    -- local maxAddCount = 300  -- 原先的上限已移除
-
     if not myid or not oid then
         return 0
     end
-
-    -- 快速同步文件狀態
     syncFriendsFromFile()
 
-
-    -- 先嘗試使用 GetActors 獲取視野內的所有單位
-    local actors = GetActors()
-    if actors and #actors > 0 then
-        -- TraceAI(string.format("GetActors 返回 %d 個單位", #actors))
-        for _, id in ipairs(actors) do
-            if id ~= myid and id ~= oid and not scannedIds[id] then
-                scannedIds[id] = true
-
-                -- 檢查是否為怪物
-                local isMonster = false
-                local ok, monsterResult = pcall(function() return IsMonster(id) end)
-                if ok and monsterResult == 1 then
-                    isMonster = true
-                end
-
-                if not isMonster then
-                    -- 檢查是否已經是朋友
-                    if not isFriend(id) then
-                        if addFriend(id, true) then
-                            addedCount = addedCount + 1
-                            local px, py = GetV(V_POSITION, id)
-                            -- TraceAI(string.format("添加視野內朋友 ID:%d 位置:(%d,%d)", id, px or 0, py or 0))
-
-                            -- 已移除上限限制，可以添加所有視野內的玩家
-                        end
-                    end
-                end
+    -- Counts are logged so a short result can be explained from ai.log.
+    local actors = GetActors() or {}
+    local added, already, blocked, monsters, others = 0, 0, 0, 0, 0
+    for _, id in ipairs(actors) do
+        if id ~= myid and id ~= oid then
+            local ok, monster = pcall(IsMonster, id)
+            if ok and monster == 1 then
+                monsters = monsters + 1
+            elseif id < 100000 or id > 10000000 then
+                others = others + 1  -- homunculi, pets, NPCs
+            elseif isFriend(id) then
+                already = already + 1
+            elseif addFriend(id, true) then
+                added = added + 1
+            else
+                blocked = blocked + 1  -- blacklisted
             end
         end
-    else
-        -- GetActors 失敗時，使用有限範圍掃描
-        -- GetActors 失敗時，使用有限範圍掃描
-
-        -- 獲取生命體位置作為中心點
-        local myX, myY = GetV(V_POSITION, myid)
-        if not myX or not myY then
-            -- 無法獲取生命體位置，取消掃描
-            return 0
-        end
-
-        -- 改為使用更安全的掃描方式
-        -- GetActors失敗，無法進行全視野掃描
-        -- 請使用矩形範圍選擇或單個添加朋友
-
-        -- 不再進行ID範圍掃描，因為會產生大量無效ID
-        -- 只處理已經在 actors 列表中的單位
     end
 
     saveFriendsToFile()
-    -- TraceAI(string.format("全視野模式：總共添加了 %d 個朋友（當前總數：%d）", addedCount, #friends))
-
-    return addedCount
+    if AI_Log then
+        AI_Log(string.format("friends scan: actors=%d added=%d already=%d blacklisted=%d monsters=%d others=%d total=%d",
+            #actors, added, already, blocked, monsters, others, #friends))
+    end
+    return added
 end
 
 function showFriends()
