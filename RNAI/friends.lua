@@ -16,46 +16,8 @@ local function syncFriendsLookup()
     end
 end
 
--- 快速檢查並同步文件狀態（如果文件被清空則重置記憶體）
-local function quickSyncWithFile()
-    local file = io.open(friendsFilePath, "r")
-    if not file then
-        -- 文件不存在，清空記憶體
-        friends = {}
-        friends_lookup = {}
-        return true
-    end
-
-    local content = file:read("*all")
-    file:close()
-
-    -- 檢查多種空文件格式
-    -- 1. 完全空白
-    -- 2. 只有 friends_data = {}
-    -- 3. 有註釋但沒有實際資料（如 "-- 朋友列表為空"）
-    if not content or content == "" then
-        friends = {}
-        friends_lookup = {}
-        return true
-    end
-
-    -- 檢查是否只有空結構
-    local hasStructure = content:match("friends_data%s*=%s*{[^}]*}")
-    local hasData = content:match("%[%d+%]%s*=%s*%d+")
-
-    if hasStructure and not hasData then
-        friends = {}
-        friends_lookup = {}
-        TraceAI("檢測到朋友列表被外部清空，已同步清空記憶體")
-        return true  -- 返回 true 表示已清空
-    end
-
-    return false  -- 返回 false 表示文件有內容
-end
-
 function saveFriendsToFile()
     -- 保存時不需要同步，因為我們要寫入新資料
-    -- quickSyncWithFile() -- 移除這行，避免清空剛添加的資料
 
     local file = io.open(friendsFilePath, "w")
     if not file then
@@ -186,7 +148,7 @@ function clearFriends()
     saveFriendsToFile()
 end
 
-function addFriend(id)
+function addFriend(id, batch)
     if not id or id <= 0 then
         return false
     end
@@ -198,7 +160,8 @@ function addFriend(id)
     end
 
     -- Merge first: saving writes the whole list and would drop another window's additions.
-    syncFriendsFromFile()
+    -- A batch (whole screen or a box) syncs once before and saves once after instead.
+    if not batch then syncFriendsFromFile() end
 
     -- 檢查是否為黑名單敵人（互斥邏輯）
     if isBlacklisted and isBlacklisted(id) then
@@ -215,7 +178,7 @@ function addFriend(id)
     friends[#friends + 1] = id
     friends_lookup[id] = true  -- 更新查詢表
     -- TraceAI(string.format("已添加好友 ID:%d (好友總數: %d)", id, #friends))
-    saveFriendsToFile()
+    if not batch then saveFriendsToFile() end
     return true
 end
 
@@ -227,7 +190,7 @@ function addFriendsInRange(x1, y1, x2, y2, myid, oid)
     end
 
     -- 只在批量操作開始時同步一次
-    quickSyncWithFile()
+    syncFriendsFromFile()
 
     local Objs = GetActors()
     if not Objs then
@@ -246,7 +209,7 @@ function addFriendsInRange(x1, y1, x2, y2, myid, oid)
                 end
 
                 if not isMonster then
-                    if addFriend(v) then
+                    if addFriend(v, true) then
                         addedCount = addedCount + 1
                     end
                 end
@@ -271,7 +234,7 @@ function addAllVisibleFriends(myid, oid)
     end
 
     -- 快速同步文件狀態
-    quickSyncWithFile()
+    syncFriendsFromFile()
 
 
     -- 先嘗試使用 GetActors 獲取視野內的所有單位
@@ -292,7 +255,7 @@ function addAllVisibleFriends(myid, oid)
                 if not isMonster then
                     -- 檢查是否已經是朋友
                     if not isFriend(id) then
-                        if addFriend(id) then
+                        if addFriend(id, true) then
                             addedCount = addedCount + 1
                             local px, py = GetV(V_POSITION, id)
                             -- TraceAI(string.format("添加視野內朋友 ID:%d 位置:(%d,%d)", id, px or 0, py or 0))
