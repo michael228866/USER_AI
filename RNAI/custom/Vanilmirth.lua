@@ -83,8 +83,8 @@ HotkeySettings = {
   ALT_SHIFT_SecondPoint = 1,        -- ALT+SHIFT+右鍵：設定第二個角點，完成矩形框選添加
 
   -- 朋友管理類（全視野添加）
-  ALT_SHIFT_FullView_FirstPoint = 1,  -- ALT+SHIFT+右鍵第一次點地面：設定全視野添加第一個點
-  ALT_SHIFT_FullView_SecondPoint = 1, -- ALT+SHIFT+右鍵第二次點地面：完成全視野範圍添加（無上限）
+  ALT_SHIFT_FullView_FirstPoint = 1,  -- ALT+SHIFT+右鍵點一下空地：畫面內所有玩家加為朋友
+  ALT_SHIFT_FullView_SecondPoint = 1, -- （已不使用，按一下即完成）
 
   -- 朋友管理類（單個操作）
   ALT_SHIFT_SingleAdd = 1,          -- ALT+SHIFT+右鍵點擊玩家：添加單個朋友
@@ -161,7 +161,7 @@ TemporarySkipDuration = TemporarySkipDuration or 2000  -- 跳過2秒後重試
 --【白名單/朋友列表管理】
 -- ALT+SHIFT+右鍵點擊玩家 = 添加單個朋友到白名單
 -- ALT+SHIFT+右鍵點擊生命體(單擊) = 已移除此功能
--- ALT+SHIFT+右鍵點擊地面兩次 = 添加全視野內所有玩家為朋友（無上限）
+-- ALT+SHIFT+右鍵點一下空地 = 添加全視野內所有玩家為朋友（無上限）
 
 --【範圍選擇添加朋友】
 -- 方式一：矩形範圍選擇
@@ -170,7 +170,7 @@ TemporarySkipDuration = TemporarySkipDuration or 2000  -- 跳過2秒後重試
 --   結果：選取矩形範圍內所有玩家加為朋友
 --
 -- 方式二：全視野範圍添加
---   操作: ALT+SHIFT+右鍵點擊地面兩次
+--   操作: ALT+SHIFT+右鍵點一下空地
 --   結果：自動將全視野內所有玩家加為朋友（無上限）
 
 --========================================

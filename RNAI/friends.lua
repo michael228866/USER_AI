@@ -94,12 +94,12 @@ function saveFriendsToFile()
 
         file:write("【批量添加朋友（矩形範圍）】\n")
         file:write("  步驟1: ALT + 右鍵點擊第一個角點 (移動指令)\n")
-        file:write("  步驟2: ALT + 右鍵點擊第二個角點 (移動指令)\n")
+        file:write("  步驟2: ALT + SHIFT + 右鍵點擊第二個角點（生命體還在走向第一點時）\n")
         file:write("  說明: 會選取矩形範圍內所有玩家/生命體為朋友\n\n")
 
         file:write("【全視野範圍添加朋友】\n")
-        file:write("  操作: ALT+SHIFT+右鍵兩次點擊地面\n")
-        file:write("  說明: 第一次設定起始點，第二次完成添加視野內所有玩家為朋友（無上限）\n\n")
+        file:write("  操作: 生命體跟隨時，ALT+SHIFT+右鍵點一下空地\n")
+        file:write("  說明: 畫面內所有玩家立即加為朋友（無上限）；不要點到自己的生命體，那會清空名單\n\n")
 
         file:write("--]]\n")
     end)

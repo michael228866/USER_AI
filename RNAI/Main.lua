@@ -27,7 +27,7 @@ PriorityTargets = PriorityTargets or {}
 
 -- 開關功能的執行狀態（每次載入重設）
 SentryX,SentryY=nil,nil
-HoldSince,FullViewTick,ReturnToOwner=0,nil,false
+HoldSince,ReturnToOwner=0,false
 AILoadTick=nil
 
 -- ============（新增）ASPD/舞步/節流 變數 ============
@@ -867,13 +867,8 @@ function AI(myid)
         local actor=XYInMobs(rmsg[2],rmsg[3])
         if actor then
           rmsg[1]=ATTACK_OBJECT_CMD; rmsg[2]=actor
-        elseif FullViewTick and currentTick-FullViewTick<=5000 then
-          FullViewTick=nil
-          if addAllVisibleFriends then
-            AI_Log("friends added in view: "..tostring(addAllVisibleFriends(myid,oid)))
-          end
-        elseif Hotkey("ALT_SHIFT_FullView_FirstPoint") then
-          FullViewTick=currentTick
+        elseif Hotkey("ALT_SHIFT_FullView_FirstPoint") and addAllVisibleFriends then
+          AI_Log("friends added in view: "..tostring(addAllVisibleFriends(myid,oid)))
         end
       end
     end

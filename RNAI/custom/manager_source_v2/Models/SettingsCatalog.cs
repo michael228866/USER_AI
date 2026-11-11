@@ -74,7 +74,7 @@ internal static class SettingsCatalog
         ,new("mercenary", "排除傭兵", "目標排除表中的傭兵值。", "攻擊目標與優先權", SettingKind.Toggle, 0, 1, "exclude", "AttackAllExclude", Choices: ["允許", "排除"])
         ,new("ALT_RightClick_Move", "Alt 右鍵移動", "控制 Alt 右鍵移動快捷鍵。", "進階設定", SettingKind.Toggle, 0, 1, "hotkeys", "HotkeySettings", Choices: ["關閉", "開啟"])
         ,new("ALT_RightClick_FirstPoint", "框選加朋友", "Alt+右鍵點第一個角、Alt+Shift+右鍵點第二個角，把範圍內的玩家加為朋友。", "進階設定", SettingKind.Toggle, 0, 1, "hotkeys", "HotkeySettings", Choices: ["關閉", "開啟"])
-        ,new("ALT_SHIFT_FullView_FirstPoint", "全視野加朋友", "Alt+Shift+右鍵在地面連點兩次（5 秒內），把畫面內所有玩家加為朋友。", "進階設定", SettingKind.Toggle, 0, 1, "hotkeys", "HotkeySettings", Choices: ["關閉", "開啟"])
+        ,new("ALT_SHIFT_FullView_FirstPoint", "全視野加朋友", "Alt+Shift+右鍵在空地點一下，把畫面內所有玩家加為朋友。", "進階設定", SettingKind.Toggle, 0, 1, "hotkeys", "HotkeySettings", Choices: ["關閉", "開啟"])
         ,new("ALT_SHIFT_SingleAdd", "單一加入好友", "控制加入單一好友快捷鍵。", "進階設定", SettingKind.Toggle, 0, 1, "hotkeys", "HotkeySettings", Choices: ["關閉", "開啟"])
         ,new("ALT_SHIFT_CounterAttack", "反擊快捷鍵", "控制切換反擊快捷鍵。", "進階設定", SettingKind.Toggle, 0, 1, "hotkeys", "HotkeySettings", Choices: ["關閉", "開啟"])
         ,new("StuckDetectionEnabled", "卡住偵測", "移動卡住時嘗試恢復。", "移動與跟隨", SettingKind.Toggle, 0, 1, "parameters", Choices: ["關閉", "開啟"])
