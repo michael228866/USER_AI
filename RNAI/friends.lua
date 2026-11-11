@@ -202,16 +202,10 @@ function addFriendsInRange(x1, y1, x2, y2, myid, oid)
         if v ~= myid and v ~= oid then
             local x, y = GetV(V_POSITION, v)
             if x and y and x >= x1 and x <= x2 and y >= y1 and y <= y2 then
-                local isMonster = false
-                local ok, monsterResult = pcall(function() return IsMonster(v) end)
-                if ok and monsterResult == 1 then
-                    isMonster = true
-                end
-
-                if not isMonster then
-                    if addFriend(v, true) then
-                        addedCount = addedCount + 1
-                    end
+                -- addFriend keeps only player IDs; IsMonster is not asked because it
+                -- reports other guilds' players as monsters on siege maps.
+                if addFriend(v, true) then
+                    addedCount = addedCount + 1
                 end
             end
         end
@@ -230,15 +224,15 @@ function addAllVisibleFriends(myid, oid)
     syncFriendsFromFile()
 
     -- Counts are logged so a short result can be explained from ai.log.
+    -- Player IDs are judged by range like the attack code, not by IsMonster,
+    -- which reports other guilds' players as monsters on siege maps.
     local actors = GetActors() or {}
     local added, already, blocked, monsters, others = 0, 0, 0, 0, 0
     for _, id in ipairs(actors) do
         if id ~= myid and id ~= oid then
             local ok, monster = pcall(IsMonster, id)
-            if ok and monster == 1 then
-                monsters = monsters + 1
-            elseif id < 100000 or id > 10000000 then
-                others = others + 1  -- homunculi, pets, NPCs
+            if id < 100000 or id > 10000000 then
+                if ok and monster == 1 then monsters = monsters + 1 else others = others + 1 end  -- monsters; homunculi, pets, NPCs
             elseif isFriend(id) then
                 already = already + 1
             elseif addFriend(id, true) then
