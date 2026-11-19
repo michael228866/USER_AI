@@ -143,10 +143,13 @@ end
 
 -- AutoCounterAttack lets a player who is hitting the owner or the
 -- homunculus be fought back even while players are excluded.
+-- A buff or heal also sets the caster's target to us, so only an attack motion counts.
 local function is_counter_target(id, myid, oid)
   if AutoCounterAttack~=1 or IsProtectedFriend(id) then return false end
   local tar=safe_getv(V_TARGET,id)
-  return tar==myid or tar==oid
+  if tar~=myid and tar~=oid then return false end
+  local motion=safe_getv(V_MOTION,id)
+  return motion==MOTION_ATTACK or motion==MOTION_ATTACK2
 end
 
 local function blacklist_bonus(id)
@@ -422,7 +425,8 @@ function RefreshData(myid,oid) --更新戰場情報
   for i,v in ipairs(others)do
     if i > maxOtherTargetChecks then break end
     tar=safe_getv(V_TARGET,v) or 0
-    if AutoBlacklist==1 and addEnemyToBlacklist and is_player_id(v) and (tar==myid or tar==oid) then
+    if AutoBlacklist==1 and addEnemyToBlacklist and is_player_id(v) and (tar==myid or tar==oid)
+        and (safe_getv(V_MOTION,v)==MOTION_ATTACK or safe_getv(V_MOTION,v)==MOTION_ATTACK2) then
       addEnemyToBlacklist(v,"攻擊主人或生命體")
     end
     if(tar>0 and safe_ismonster(tar)==true)then
