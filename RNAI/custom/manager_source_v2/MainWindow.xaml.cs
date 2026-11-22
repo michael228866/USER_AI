@@ -280,7 +280,15 @@ public partial class MainWindow : Window
         StatusText.Foreground = notice.StartsWith("操作失敗", StringComparison.Ordinal) ? Brush("#EF4444") : Muted;
         ResetButton.IsEnabled = session.IsDirty;
         SaveButton.IsEnabled = session.IsDirty || ListsDirty;
+        // Read from the saved file so unsaved edits do not change the shown mode.
+        var players = SettingsCatalog.Types.Select(t => LuaConfigService.Read(session.Document, t.Key).GetValueOrDefault("players", 1)).Distinct().ToList();
+        ModeText.Text = players.Count > 1 ? "目前：各生命體不同" : players[0] == 0 ? "目前：城戰模式" : "目前：一般模式";
+        WoeModeButton.Background = players.SequenceEqual([0]) ? Brush("#8B5CF6") : Control;
+        NormalModeButton.Background = players.SequenceEqual([1]) ? Brush("#8B5CF6") : Control;
     }
+
+    private void WoeModeButton_Click(object sender, RoutedEventArgs e) => ApplyWoeMode(true);
+    private void NormalModeButton_Click(object sender, RoutedEventArgs e) => ApplyWoeMode(false);
 
     private void RenderPage()
     {
@@ -496,22 +504,6 @@ public partial class MainWindow : Window
 
     private void RenderOverview()
     {
-        var woe = session.Values.GetValueOrDefault("players", 1) == 0;
-        var modeCard = Card();
-        var modeBody = new StackPanel();
-        modeBody.Children.Add(new TextBlock { Text = "目前模式：" + (woe ? "城戰模式" : "一般模式"), FontSize = 16, FontWeight = FontWeights.SemiBold });
-        modeBody.Children.Add(new TextBlock { Text = "城戰模式：所有生命體會攻擊玩家，但不打好友，並自動下載共用好友名單。一般模式：不打玩家。",
-            Foreground = Muted, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 5, 0, 10) });
-        var modeRow = new WrapPanel();
-        foreach (var (label, on) in new[] { ("城戰模式", true), ("一般模式", false) })
-        {
-            var button = ActionButton(label, () => ApplyWoeMode(on));
-            button.Margin = new Thickness(0, 0, 8, 0);
-            modeRow.Children.Add(button);
-        }
-        modeBody.Children.Add(modeRow);
-        modeCard.Child = modeBody;
-        PageStack.Children.Add(modeCard);
         var type = SettingsCatalog.Types.Single(x => x.Key == session.Type);
         PageStack.Children.Add(NoticeCard(type.Name,
             $"目前載入 {SettingsCatalog.ForType(session.Type).Count()} 個可編輯欄位。{session.ChangedCount} 項修改尚未寫入 Lua。"));

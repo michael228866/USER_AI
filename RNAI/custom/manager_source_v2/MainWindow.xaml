@@ -157,6 +157,14 @@
             </Border>
             <Border Grid.Row="1" Background="#111827" Padding="18,12,18,10">
                 <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                        <TextBlock Text="戰鬥模式（所有生命體）" Foreground="#9CA3AF" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <Button x:Name="WoeModeButton" Content="城戰模式" Style="{StaticResource ModernButton}" Padding="12,6"
+                                Click="WoeModeButton_Click" ToolTip="所有生命體攻擊玩家但不打好友，並下載共用好友名單"/>
+                        <Button x:Name="NormalModeButton" Content="一般模式" Style="{StaticResource ModernButton}" Padding="12,6" Margin="8,0,0,0"
+                                Click="NormalModeButton_Click" ToolTip="所有生命體不攻擊玩家"/>
+                        <TextBlock x:Name="ModeText" Foreground="#A78BFA" FontWeight="SemiBold" VerticalAlignment="Center" Margin="12,0,0,0"/>
+                    </StackPanel>
                     <TextBlock Text="選擇生命體" Foreground="#9CA3AF" FontSize="12" Margin="0,0,0,10"/>
                     <UniformGrid x:Name="TypePanel" Columns="5"/>
                 </StackPanel>
