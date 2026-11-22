@@ -21,6 +21,22 @@ internal static class SelfTests
         Check(UpdateService.ParseVersion("USER_AI 1.42") == "1.42" && UpdateService.ParseVersion("USER_AI eb912e6") is null, "版本號解析");
         CheckUpdateApply();
         var fixture = LuaConfigService.Open(fixturePath);
+        var woePath = Path.Combine(Path.GetTempPath(), "woe-" + Guid.NewGuid().ToString("N") + ".lua");
+        try
+        {
+            File.WriteAllBytes(woePath, fixture.Bytes);
+            foreach (var type in SettingsCatalog.Types)
+                LuaConfigService.Save(woePath, LuaConfigService.Open(woePath), type.Key, new Dictionary<string, int> { ["players"] = 0, ["friends"] = 1 });
+            var woeDoc = LuaConfigService.Open(woePath);
+            Check(SettingsCatalog.Types.All(t =>
+            {
+                var before = LuaConfigService.Read(fixture, t.Key);
+                var after = LuaConfigService.Read(woeDoc, t.Key);
+                return after["players"] == 0 && after["friends"] == 1 &&
+                       before.Where(x => x.Key is not "players" and not "friends").All(x => after[x.Key] == x.Value);
+            }), "城戰模式只改每種生命體的玩家與好友排除");
+        }
+        finally { File.Delete(woePath); }
         var profilesFixture = Path.Combine(Path.GetDirectoryName(fixturePath)!, "manager_profiles.json");
         LuaConfigService.Check(fixturePath);
         foreach (var type in SettingsCatalog.Types)

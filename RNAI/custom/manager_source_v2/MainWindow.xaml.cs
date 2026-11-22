@@ -496,6 +496,22 @@ public partial class MainWindow : Window
 
     private void RenderOverview()
     {
+        var woe = session.Values.GetValueOrDefault("players", 1) == 0;
+        var modeCard = Card();
+        var modeBody = new StackPanel();
+        modeBody.Children.Add(new TextBlock { Text = "目前模式：" + (woe ? "城戰模式" : "一般模式"), FontSize = 16, FontWeight = FontWeights.SemiBold });
+        modeBody.Children.Add(new TextBlock { Text = "城戰模式：所有生命體會攻擊玩家，但不打好友，並自動下載共用好友名單。一般模式：不打玩家。",
+            Foreground = Muted, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 5, 0, 10) });
+        var modeRow = new WrapPanel();
+        foreach (var (label, on) in new[] { ("城戰模式", true), ("一般模式", false) })
+        {
+            var button = ActionButton(label, () => ApplyWoeMode(on));
+            button.Margin = new Thickness(0, 0, 8, 0);
+            modeRow.Children.Add(button);
+        }
+        modeBody.Children.Add(modeRow);
+        modeCard.Child = modeBody;
+        PageStack.Children.Add(modeCard);
         var type = SettingsCatalog.Types.Single(x => x.Key == session.Type);
         PageStack.Children.Add(NoticeCard(type.Name,
             $"目前載入 {SettingsCatalog.ForType(session.Type).Count()} 個可編輯欄位。{session.ChangedCount} 項修改尚未寫入 Lua。"));
@@ -1046,6 +1062,25 @@ public partial class MainWindow : Window
             notice = "儲存成功。";
             RefreshHeader();
             RenderPage();
+        }
+        catch (Exception ex) { ShowError(ex); }
+    }
+
+    // WoE mode lets every homunculus type attack players except friends; normal
+    // mode excludes players again. The AI reloads the config within seconds.
+    private void ApplyWoeMode(bool on)
+    {
+        if (session.IsDirty) { notice = "請先儲存或重設目前的修改，再切換模式。"; RefreshHeader(); return; }
+        try
+        {
+            var changes = new Dictionary<string, int> { ["players"] = on ? 0 : 1, ["friends"] = 1 };
+            foreach (var type in SettingsCatalog.Types)
+                LuaConfigService.Save(configPath, LuaConfigService.Open(configPath), type.Key, changes);
+            session.ReloadFromDisk();
+            notice = on ? "已切換為城戰模式：會打玩家，不打好友。" : "已切換為一般模式：不打玩家。";
+            RefreshHeader();
+            RenderPage();
+            if (on) DownloadSharedFriends();
         }
         catch (Exception ex) { ShowError(ex); }
     }
