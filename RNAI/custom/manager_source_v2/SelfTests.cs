@@ -332,6 +332,7 @@ internal static class SelfTests
             Check(!UpdateService.TouchesManager(["RNAI/Main.lua", "RNAI/custom/homunculus_config.lua"]) &&
                   UpdateService.TouchesManager(["RNAI/Main.lua", "RNAI/custom/manager_source_v2/Program.cs"]) &&
                   UpdateService.TouchesManager([".github/workflows/release.yml"]), "判斷管理器是否有變更");
+            Check(ListService.ParseShared("# 共用\n150000\r\n150000\n99999\n 200000 # 隊長\nabc\n").SequenceEqual([150000, 200000]), "共用好友名單解析");
         }
         finally { Directory.Delete(dir, true); }
     }

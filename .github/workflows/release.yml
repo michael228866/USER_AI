@@ -3,6 +3,7 @@ name: Build Windows manager release
 on:
   push:
     branches: [main]
+    paths-ignore: [shared_friends.txt, publish_shared_friends.bat]
   workflow_dispatch:
 
 permissions:

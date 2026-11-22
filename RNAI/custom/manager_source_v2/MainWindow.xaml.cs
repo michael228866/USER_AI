@@ -578,8 +578,42 @@ public partial class MainWindow : Window
             row.Children.Add(button);
         }
         body.Children.Add(row);
+        if (variable == "friends_data")
+        {
+            var shared = ActionButton("下載共用名單", DownloadSharedFriends);
+            shared.Margin = new Thickness(0, 10, 0, 0);
+            shared.HorizontalAlignment = HorizontalAlignment.Left;
+            shared.ToolTip = "下載公會共用好友名單並加入你的朋友列表；不會刪除你原本的朋友。";
+            body.Children.Add(shared);
+        }
         card.Child = body;
         return card;
+    }
+
+    // Adds the shared list to the friends list and saves it; nothing is removed,
+    // and IDs on this player's blacklist are skipped like the AI skips them.
+    private async void DownloadSharedFriends()
+    {
+        if (ListsDirty) { notice = "請先儲存或重新載入名單，再下載共用名單。"; RefreshHeader(); return; }
+        try
+        {
+            var shared = ListService.ParseShared(await ListService.FetchShared());
+            LoadLists();
+            var added = shared.Where(id => !friends!.Contains(id) && !enemies!.Contains(id)).ToList();
+            var blocked = shared.Count(id => enemies!.Contains(id) && !friends!.Contains(id));
+            if (added.Count > 0)
+            {
+                friends!.AddRange(added);
+                ListService.Save(Path.Combine(Path.GetDirectoryName(configPath)!, "friends_list.lua"), "friends_data", friends, savedFriends);
+                savedFriends = [.. friends];
+            }
+            notice = $"共用名單 {shared.Count} 個：新增 {added.Count} 個" + (blocked > 0 ? $"，{blocked} 個在你的黑名單已略過" : "") + "。";
+            RenderPage();
+            RefreshHeader();
+        }
+        catch (System.Net.Http.HttpRequestException ex) { notice = "下載共用名單失敗：" + ex.Message; RefreshHeader(); }
+        catch (TaskCanceledException) { notice = "下載共用名單逾時，請稍後再試。"; RefreshHeader(); }
+        catch (Exception ex) { ShowError(ex); }
     }
 
     private void RenderSkills()

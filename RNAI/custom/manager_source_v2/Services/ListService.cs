@@ -1,3 +1,4 @@
+using System.Net.Http;
 using System.Text.RegularExpressions;
 
 namespace HomunculusManager.Services;
@@ -54,6 +55,26 @@ internal static class ListService
         var updated = original.Text[..start] + body + original.Text[end..];
         if (updated == original.Text) return;
         AtomicWrite(path, original, updated);
+    }
+
+    internal const string SharedFriendsUrl = "https://raw.githubusercontent.com/michael228866/USER_AI/main/shared_friends.txt";
+
+    // shared_friends.txt: one ID per line, # starts a comment. IDs outside the
+    // range the AI accepts as players are dropped like the AI drops them.
+    private static readonly HttpClient Http = new() { Timeout = TimeSpan.FromSeconds(10) };
+
+    // A query string skips the raw CDN cache so a list just pushed is seen.
+    internal static Task<string> FetchShared() => Http.GetStringAsync(SharedFriendsUrl + "?t=" + DateTime.UtcNow.Ticks);
+
+    internal static List<int> ParseShared(string text)
+    {
+        var result = new List<int>();
+        foreach (var raw in text.Split('\n'))
+        {
+            var line = raw.Split('#')[0].Trim();
+            if (int.TryParse(line, out var id) && id >= 100000 && id <= 10000000 && !result.Contains(id)) result.Add(id);
+        }
+        return result;
     }
 
     private static (int Start, int End) Locate(string text, string variable)

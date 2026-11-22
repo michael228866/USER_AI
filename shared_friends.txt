@@ -1,0 +1,1 @@
+# Shared friends list: one player ID per line. Managers merge it with the button on the list page.
