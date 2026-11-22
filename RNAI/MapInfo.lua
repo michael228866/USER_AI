@@ -211,6 +211,9 @@ local function is_mercenary_type(t)
 end
 
 local EMPERIUM=1288
+-- Castle guardians (archer, knight, soldier; WoE SE sword and bow) are never chosen;
+-- the AI only wastes time on them. A manual attack command still works.
+local GUARDIANS={[1285]=true,[1286]=true,[1287]=true,[1899]=true,[1900]=true}
 
 -- CooperativeMode: 0 passive and 1 active use SearchSetting (Main.lua picks
 -- it per mode), 2 attacks only the owner's target ignoring every filter, and
@@ -224,6 +227,7 @@ local function monster_score(v,t,myid,oid,otar,mtar,d1,d2,radius)
     if v[1]~=otar then return -1 end
     return 100000000+30-d2
   end
+  if GUARDIANS[mobType] then return -1 end
   if mobType==EMPERIUM and exclude.emperium==0 then return -1 end
   local counter=AutoCounterAttack==1 and (v[2]==myid or v[2]==oid)
   if not counter then
