@@ -11,7 +11,7 @@ internal sealed record SettingDefinition(
     internal bool AppliesTo(string type) => (type is "eira" or "bayeri" or "sera" or "dieter" or "eleanor") ? Key != "PlayerASPD" : (Key != "ASPD" &&
         (Key != "SkillThrottleMs" || type is "lif" or "Vanilmirth"));
     // HomCfg.lua turns dancing on for config blocks without DanceEnabled.
-    internal int? MissingValue => Key == "DanceEnabled" ? 1 : null;
+    internal int? MissingValue => Key == "DanceEnabled" ? 1 : Key == "SkillOnlyMode" ? 0 : null;
     internal bool InLegacyProfile => LegacyProfileKeys.Contains(Key);
     internal int Scale => Key == "DancePhase" ? 100 : 1;
     // Lua keeps milliseconds; fields shown in seconds convert on display and input.
@@ -91,6 +91,7 @@ internal static class SettingsCatalog
         ,new("AttackTimeoutEnabled", "攻擊逾時偵測", "攻擊過久時放棄目標。", "戰鬥行為", SettingKind.Toggle, 0, 1, "parameters", Choices: ["關閉", "開啟"])
         ,new("TemporarySkipDuration", "暫時跳過目標", "放棄目標後重新鎖定前的等待時間。", "戰鬥行為", SettingKind.Number, 0, 120000, "parameters", Unit: "毫秒")
         ,new("DanceEnabled", "跳舞攻擊", "開啟後用 Hop 舞步：跳出去、普攻、跳回來；關閉就站著打。每種生命體獨立儲存。", "移動與跟隨", SettingKind.Toggle, 0, 1, "parameters", Choices: ["關閉", "開啟"])
+        ,new("SkillOnlyMode", "遠距技能模式", "開啟後不普攻、不跳舞，停在技能最遠距離一直放技能，不會貼近敵人。每種生命體獨立儲存。", "戰鬥行為", SettingKind.Toggle, 0, 1, "parameters", Choices: ["關閉", "開啟"])
         ,new("ASPD", "舞步 ASPD", "舞步節奏使用的攻速。", "移動與跟隨", SettingKind.Number, 0, 200, "parameters", Unit: "ASPD")
         ,new("DancePhase", "舞步比例（進階）", "輸入 0.25 代表 25%；無設定時預設 0.25。這不是已驗證的最佳值。", "移動與跟隨", SettingKind.Number, 1, 49, "parameters")
         ,new("SkillThrottleMs", "技能節流", "最短技能施放間隔。", "技能管理", SettingKind.Number, 0, 60000, "parameters", Unit: "秒")

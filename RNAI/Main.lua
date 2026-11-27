@@ -33,6 +33,8 @@ AILoadTick=nil
 -- ============（新增）ASPD/舞步/節流 變數 ============
 -- 這些會由 HomCfg.lua 覆蓋或給定
 DanceEnabled  = (DanceEnabled ~= false)
+-- SkillOnlyMode 1: no normal attack or dancing; stay at skill range and cast.
+SkillOnlyMode = SkillOnlyMode or 0
 ASPD          = ASPD or 190
 DancePhase    = DancePhase or 0.46
 DanceKeepRange= DanceKeepRange or 1
@@ -380,7 +382,7 @@ function MoveToDest(id,x,y)
 end
 
 function isWeakTarget(t)
-  if(#WeakTargets==0)then return false end
+  if(#WeakTargets==0 or SkillOnlyMode==1)then return false end
   for i,v in ipairs(WeakTargets)do
     if(SafeGetV(V_HOMUNTYPE,t)==v)then return true end
   end
@@ -524,6 +526,7 @@ end
 -- DanceCombatDelay, so it does not start while still walking up to it.
 local DanceTarget,DanceEngageTick=0,0
 local function DanceAllowed(myid,target,now)
+  if SkillOnlyMode==1 then return false end
   if SafeRectDistance(myid,target)>math.max(AtkDis or 1,DanceMaxRadius or 2) then
     DanceTarget=0
     return false
@@ -639,6 +642,16 @@ function GetAutoSkill(myid)
   return skill_id,min_r
 end
 
+-- Farthest enabled attack skill, so standing there waiting for a cooldown does
+-- not count as a stalled chase.
+function SkillOnlyRange()
+  local r=AtkDis or 1
+  for _,sk in ipairs(Skill or {}) do
+    if sk.id~=0 and sk.target==0 and sk.range and IsSkillAutoEnabled(sk) then r=math.max(r,sk.range) end
+  end
+  return r
+end
+
 function autoUseSkill(myId, ownerId, mobId, excludeWhen)
   local minRadius = 100
   local r = {
@@ -654,7 +667,7 @@ function autoUseSkill(myId, ownerId, mobId, excludeWhen)
   local sp = currentSP / maxsp * 100
   local usedFlag = false
   for i, sk in ipairs(Skill) do
-    if IsSkillAutoEnabled(sk) and sk.when ~= excludeWhen and t - sk.stemp >= sk.delay and sk.sp[1] <= sp and sp <= sk.sp[2] and
+    if IsSkillAutoEnabled(sk) and not (sk.id==0 and SkillOnlyMode==1) and sk.when ~= excludeWhen and t - sk.stemp >= sk.delay and sk.sp[1] <= sp and sp <= sk.sp[2] and
        nOwnerEnemy >= sk.nOwnerEnemy and nMyEnemy >= sk.nMyEnemy and nRangeEnemy >= sk.nRangeEnemy and
        CanUseSkillOnTarget(sk, targets[sk.target]) and CanAutoCastBySP(sk,currentSP) then
       if usedFlag==false and r[sk.target] <= sk.range then
@@ -947,7 +960,7 @@ function AI(myid)
         end
       else
         local chaseDis = autoUseSkill(myid, oid, Target, 2)
-        ChaseRange=tonumber(chaseDis) or AtkDis or 1
+        ChaseRange=tonumber(chaseDis) or (SkillOnlyMode==1 and SkillOnlyRange()) or AtkDis or 1
         if((FollowMode or 0)<1 and chaseDis~=false and Target>0 and SafeRectDistance(oid,Target)<15)then
           local x,y=SafeFreeObjRectPos(Target,myid,chaseDis,oid)
           gaveUp=ChaseMove(myid,x,y,currentTick)

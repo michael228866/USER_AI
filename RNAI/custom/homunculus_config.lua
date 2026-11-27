@@ -12,6 +12,7 @@ AI_WOE_PLAYER_SCAN_ENABLED = 1
 
 HomConfig = {
   lif = {
+    SkillOnlyMode = 0,
     FollowDis = 3,
     FollowMode = 0,
     MoveDelay = 150,
@@ -156,6 +157,7 @@ HomConfig = {
   },
 
   amistr = {
+    SkillOnlyMode = 0,
     FollowDis = 3,
     FollowMode = 0,
     MoveDelay = 150,
@@ -271,6 +273,7 @@ HomConfig = {
   },
 
   filir = {
+    SkillOnlyMode = 0,
     FollowDis = 3,
     FollowMode = 0,
     MoveDelay = 150,
@@ -403,6 +406,7 @@ HomConfig = {
   },
 
   Vanilmirth = {
+    SkillOnlyMode = 0,
     FollowDis = 1,
     FollowMode = 0,
     MoveDelay = 200,
@@ -534,6 +538,7 @@ HomConfig = {
 
   -- 生命體 S：獨立設定；S 技能預設不自動施放。
   eira = {
+    SkillOnlyMode = 0,
     FollowDis = 3,
     FollowMode = 0,
     MoveDelay = 150,
@@ -663,6 +668,7 @@ HomConfig = {
     SmartAttackPriorityOrder = {},
   },
   bayeri = {
+    SkillOnlyMode = 0,
     FollowDis = 3,
     FollowMode = 0,
     MoveDelay = 150,
@@ -792,6 +798,7 @@ HomConfig = {
     SmartAttackPriorityOrder = {}
   },
   sera = {
+    SkillOnlyMode = 0,
     FollowDis = 1,
     FollowMode = 0,
     MoveDelay = 200,
@@ -922,6 +929,7 @@ HomConfig = {
     SmartAttackPriorityOrder = {},
   },
   dieter = {
+    SkillOnlyMode = 0,
     FollowDis = 3,
     FollowMode = 0,
     MoveDelay = 150,
@@ -1051,6 +1059,7 @@ HomConfig = {
     SmartAttackPriorityOrder = {}
   },
   eleanor = {
+    SkillOnlyMode = 0,
     FollowDis = 3,
     FollowMode = 0,
     MoveDelay = 150,
